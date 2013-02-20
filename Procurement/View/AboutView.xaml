@@ -35,7 +35,7 @@
                     <StackPanel Grid.Row="2" >
                         <TextBlock Foreground="#FFAB9066" TextWrapping="Wrap" FontSize="14" Text="This software is provided free of charge!" />
                         <TextBlock />
-                        <TextBlock Foreground="#FFAB9066" TextWrapping="Wrap" FontSize="14" Text="For the latest updates, bug reports or feature requests, contact Stickymaddness or TheTDev on the official GGG forums!" />
+                        <TextBlock Foreground="#FFAB9066" TextWrapping="Wrap" FontSize="14" Text="For the latest updates, bug reports or feature requests, please visit : http://code.google.com/p/procurement/!" />
                     </StackPanel>
                     <StackPanel Grid.Row="3" VerticalAlignment="Bottom">
                         <TextBlock Foreground="#FFAB9066" TextWrapping="Wrap" Text="Legal :" FontSize="11" />
