@@ -45,6 +45,7 @@
     <Compile Include="CacheService.cs" />
     <Compile Include="DPAPI.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="LogonFailedException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

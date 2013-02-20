@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Text;
 using System;
+using POEApi.Infrastructure;
 
 namespace Procurement
 {
@@ -13,8 +14,8 @@ namespace Procurement
 
         void Current_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
-            System.IO.File.AppendAllText("DebugInfo.log", getEnvironementDetails());
-            System.IO.File.AppendAllText("DebugInfo.log", e.Exception.ToString());
+            Logger.Log(getEnvironementDetails());
+            Logger.Log(e.Exception.ToString());
             MessageBox.Show("There was an unhandled error - Sorry! Please send the debuginfo.log to one of us devs :)");
         }
 

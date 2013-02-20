@@ -102,7 +102,7 @@ namespace Procurement.ViewModel
 
                 updateView("\nDone!");
                 OnLoginCompleted();
-            }).ContinueWith((t) => updateView("ERROR: " + t.Exception.InnerException.Message), TaskContinuationOptions.OnlyOnFaulted);
+            }).ContinueWith((t) => { Logger.Log(t.Exception.InnerException.ToString()); updateView("ERROR: " + t.Exception.InnerException.Message); }, TaskContinuationOptions.OnlyOnFaulted);
         }
 
         private void saveSettings(SecureString password)
