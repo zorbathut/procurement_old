@@ -365,7 +365,6 @@
     <Resource Include="Images\TabControl\stash-dropdown.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Avatars\duelest.png" />
     <Resource Include="Images\Avatars\marauder.png" />
     <Resource Include="Images\Avatars\ranger.png" />
     <Resource Include="Images\Avatars\shadow.png" />
@@ -386,6 +385,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\sticky and thetdev.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Avatars\duelist.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
