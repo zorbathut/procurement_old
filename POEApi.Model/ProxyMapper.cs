@@ -30,7 +30,7 @@ namespace POEApi.Model
             { "Alteration", OrbType.Alteration },
             { "Chance", OrbType.Chance },
             { "Regret", OrbType.Regret },
-            { "Exalted", OrbType.Exhaulted },
+            { "Exalted", OrbType.Exhalted },
             { "Armourer's Scrap", OrbType.ArmourersScrap },
             { "Blessed", OrbType.Blessed},
             { "Blacksmith's Whetstone", OrbType.BlacksmithsWhetstone },
