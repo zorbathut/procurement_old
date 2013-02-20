@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Xml.Linq;
 using POEApi.Infrastructure;
+using System;
 
 namespace POEApi.Model
 {
@@ -43,7 +44,14 @@ namespace POEApi.Model
                 update.Attribute("gcpamount").SetValue(CurrencyRatios[key].GCPAmount.ToString());
             }
 
-            originalDoc.Save(location);
+            try
+            {
+                originalDoc.Save(location);
+            }
+            catch (Exception ex)
+            {
+                Logger.Log("Couldn't save settings: " + ex.ToString());
+            }
         }
     }
 }
