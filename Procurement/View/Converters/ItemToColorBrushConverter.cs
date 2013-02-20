@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows.Data;
 using POEApi.Model;
 using System.Windows.Media;
+using System.Globalization;
 
 namespace Procurement.View
 {
@@ -15,7 +16,7 @@ namespace Procurement.View
             Gear gear = value as Gear;
             double opacity = 1;
             if (parameter != null)
-                opacity = double.Parse(parameter.ToString());
+                opacity = double.Parse(parameter.ToString(), CultureInfo.InvariantCulture);
             if (gear != null)
             {
                 switch (gear.Quality)
