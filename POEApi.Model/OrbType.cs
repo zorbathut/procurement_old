@@ -2,7 +2,7 @@
 {
     public enum OrbType
     {
-        Exhalted,
+        Exalted,
         Divine,
         GemCutterPrism,
         Regal,
