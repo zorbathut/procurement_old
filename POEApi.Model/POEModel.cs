@@ -69,9 +69,17 @@ namespace POEApi.Model
 
             using (Stream stream = transport.GetStash(index, league, forceRefresh))
             {
-                proxy = (JSONProxy.Stash)serialiser.ReadObject(stream);
-                if (proxy == null)
-                    logNullStash(stream);
+                try
+                {
+                    proxy = (JSONProxy.Stash)serialiser.ReadObject(stream);
+                    if (proxy == null)
+                        logNullStash(stream, "Proxy was null");
+                }
+                catch (Exception ex)
+                {
+                    Logger.Log(ex);
+                    logNullStash(stream, "JSON Serialization Failed");
+                }
             }
 
             onStashLoaded(POEEventState.AfterEvent, index, proxy.NumTabs);
@@ -79,13 +87,13 @@ namespace POEApi.Model
             return new Stash(proxy);
         }
 
-        private void logNullStash(Stream stream)
+        private void logNullStash(Stream stream, string errorPrefix)
         {
             try
             {
                 MemoryStream ms = stream as MemoryStream;
                 ms.Seek(0, SeekOrigin.Begin);
-                Logger.Log("Proxy was null: base64 bytes:");
+                Logger.Log(errorPrefix + ": base64 bytes:");
                 Logger.Log(Convert.ToBase64String(ms.ToArray()));
                 Logger.Log("END");
             }
