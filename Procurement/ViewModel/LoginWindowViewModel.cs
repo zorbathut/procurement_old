@@ -228,7 +228,8 @@ namespace Procurement.ViewModel
 
         void model_Throttled(object sender, ThottledEventArgs e)
         {
-            update("Configured server limit hit - thottling activated. Resume in " + e.WaitTime.Seconds + " seconds", new POEEventArgs(POEEventState.BeforeEvent));
+            if (e.WaitTime.TotalSeconds > 4)
+                update(string.Format("GGG Server request limit hit, throttling activated. Please wait {0} seconds", e.WaitTime.Seconds), new POEEventArgs(POEEventState.BeforeEvent));
         }
 
         private void update(string message, POEEventArgs e)
