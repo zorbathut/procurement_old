@@ -70,7 +70,7 @@ namespace POEApi.Model
                                    "Strapped Leather","Coat","Copper Plate","War Plate", "Wild Leather", "Full Scale Armor", "Full Plate", "Full Leather", "Sun Leather", "Arena Plate",
                                    "Lamellar", "Bronze Plate", "Battle Plate", "Frontier Leather", "Sun Plate", "Colosseum Plate", "Hauberk", "Battle Lamellar", "Crypt Armor", "Necromancer Silks",
                                    "Crusader Plate", "Gladiator Plate", "Carnal Armor", "Majestic Plate", "Coronal Leather", "Glorious Leather", "Silken Wrap", "Regalia", "Holy Chainmail", "Devout Chainmail", 
-                                   "Crusader Chainmail", "Conquest Chainmail", "Saintly Chainmail", "Golden Plate", "Exquisite Leather", "Astral Plate", "Full Dragonscale", "Destiny Leather")
+                                   "Crusader Chainmail", "Conquest Chainmail", "Saintly Chainmail", "Golden Plate", "Exquisite Leather", "Astral Plate", "Full Dragonscale", "Destiny Leather", "Glorious plate")
         { }
     }
 
