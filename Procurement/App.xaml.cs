@@ -14,6 +14,7 @@ namespace Procurement
 
         void Current_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
+            Logger.Log("Application Version: " + ApplicationState.Version);
             Logger.Log(getEnvironementDetails());
             Logger.Log(e.Exception.ToString());
             MessageBox.Show("There was an unhandled error - Sorry! Please send the debuginfo.log to one of us devs :)");
