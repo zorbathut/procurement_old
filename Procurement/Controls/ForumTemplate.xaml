@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="Procurement.Controls.ForumTemplate"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid Width="950">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="60*"/>
+            <ColumnDefinition Width="40*"/>
+        </Grid.ColumnDefinitions>
+        <DataGrid Grid.Column="0" Width="500" AutoGenerateColumns="False" ItemsSource="{Binding Filters}" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Category" Width="150" Binding="{Binding Category}" />
+                <DataGridTextColumn Header="Filters" IsReadOnly="True" Width="450" Binding="{Binding Filters}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Button Content="Add Filter" Grid.Row="0" Style="{Binding}" Width="120" Height="20" HorizontalAlignment="Left"/>
+            <ListBox Grid.Row="1">
+                <ListBox.Items>
+                    <ListBoxItem Content="4 Link" />
+                    <ListBoxItem Content="White Quality" />
+                </ListBox.Items>
+            </ListBox>
+
+        </Grid>
+    </Grid>
+</UserControl>

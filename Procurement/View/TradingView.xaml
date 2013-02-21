@@ -6,7 +6,8 @@
              xmlns:poe="clr-namespace:Procurement.Controls"
              mc:Ignorable="d" 
              Height="600" Width="990">
-    <Grid x:Name="ViewContent" Width="990">            
+    <Grid x:Name="ViewContent" Width="990">
         <poe:ForumExport />
+        <!--<poe:ForumTemplate />-->
     </Grid>
 </UserControl>

@@ -99,6 +99,9 @@
     <Compile Include="Controls\ForumExport.xaml.cs">
       <DependentUpon>ForumExport.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ForumTemplate.xaml.cs">
+      <DependentUpon>ForumTemplate.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Inventory.xaml.cs">
       <DependentUpon>Inventory.xaml</DependentUpon>
     </Compile>
@@ -121,6 +124,15 @@
     <Compile Include="ViewModel\DisplayModeStrategy\NamePlusValueStrategy.cs" />
     <Compile Include="ViewModel\DisplayModeStrategy\StringFormatStrategy.cs" />
     <Compile Include="ViewModel\DisplayModeStrategy\ValuesPlusNameStrategy.cs" />
+    <Compile Include="ViewModel\ForumExportFilter\FiveLink.cs" />
+    <Compile Include="ViewModel\ForumExportFilter\FourLink.cs" />
+    <Compile Include="ViewModel\ForumExportFilter\Link.cs" />
+    <Compile Include="ViewModel\ForumExportFilter\IFilter.cs" />
+    <Compile Include="ViewModel\ForumExportFilter\MagicQuality.cs" />
+    <Compile Include="ViewModel\ForumExportFilter\QualityFilter.cs" />
+    <Compile Include="ViewModel\ForumExportFilter\RareQuality.cs" />
+    <Compile Include="ViewModel\ForumExportFilter\UniqueQuality.cs" />
+    <Compile Include="ViewModel\ForumExportFilter\WhiteQuality.cs" />
     <Compile Include="ViewModel\ForumExportRunners\ForumExportRunnerBase.cs" />
     <Compile Include="ViewModel\ForumExportRunners\ForumExportRunnerFactory.cs" />
     <Compile Include="ViewModel\ForumExportRunners\GearRunner.cs" />
@@ -213,6 +225,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\ForumExport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ForumTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -388,6 +404,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Avatars\duelist.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ViewModel\ForumExportRunners\TextFile1.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
