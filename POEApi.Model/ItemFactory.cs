@@ -1,4 +1,5 @@
 ﻿using POEApi.Infrastructure;
+using System;
 
 namespace POEApi.Model
 {
@@ -6,16 +7,26 @@ namespace POEApi.Model
     {
         public static Item Get(JSONProxy.Item item)
         {
-            if (item.frameType == 4)
-                return new Gem(item);
-            
-            if (item.frameType == 5)
-                return new Currency(item);
+            try
+            {
+                if (item.frameType == 4)
+                    return new Gem(item);
 
-            if (item.TypeLine.Contains("Map") && item.DescrText.Contains("Travel to this Map"))
-                return new Map(item);
+                if (item.frameType == 5)
+                    return new Currency(item);
 
-            return new Gear(item);
+                if (item.TypeLine.Contains("Map") && item.DescrText != null && item.DescrText.Contains("Travel to this Map"))
+                    return new Map(item);
+
+                return new Gear(item);
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(ex);
+                var errorMessage = "ItemFactory unable to instanciate type : " + item.TypeLine;
+                Logger.Log(errorMessage);
+                throw new Exception(errorMessage);
+            }
         }
     }
 }
