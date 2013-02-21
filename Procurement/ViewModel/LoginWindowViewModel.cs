@@ -10,6 +10,7 @@ using POEApi.Model.Events;
 using Procurement.View;
 using System.Security;
 using POEApi.Infrastructure;
+using POEApi.Infrastructure.Events;
 
 namespace Procurement.ViewModel
 {
@@ -63,6 +64,7 @@ namespace Procurement.ViewModel
             ApplicationState.Model.Authenticating += new POEModel.AuthenticateEventHandler(model_Authenticating);
             ApplicationState.Model.StashLoading += new POEModel.StashLoadEventHandler(model_StashLoading);
             ApplicationState.Model.ImageLoading += new POEModel.ImageLoadEventHandler(model_ImageLoading);
+            ApplicationState.Model.Throttled += new ThottledEventHandler(model_Throttled);
         }
 
         void txtPassword_PasswordChanged(object sender, System.Windows.RoutedEventArgs e)
@@ -222,6 +224,11 @@ namespace Procurement.ViewModel
         void model_Authenticating(POEModel sender, AuthenticateEventArgs e)
         {
             update("Authenticating " + e.Email, e);
+        }
+
+        void model_Throttled(object sender, ThottledEventArgs e)
+        {
+            update("Configured server limit hit - thottling activated. Resume in " + e.WaitTime.Seconds + " seconds", new POEEventArgs(POEEventState.BeforeEvent));
         }
 
         private void update(string message, POEEventArgs e)

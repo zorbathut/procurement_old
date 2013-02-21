@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using POEApi.Infrastructure;
 using System.Security;
+using POEApi.Infrastructure.Events;
 
 namespace POEApi.Transport
 {
@@ -11,11 +12,20 @@ namespace POEApi.Transport
         private CacheService userCacheService;
         private CacheService commonCacheService;
 
+        public event ThottledEventHandler Throttled;
+
         public CachedTransport(string email, ITransport innerTranport)
         {
             userCacheService = new CacheService(email);
             commonCacheService = new CacheService();
             this.innerTranport = innerTranport;
+            this.innerTranport.Throttled += instance_Throttled;
+        }
+
+        private void instance_Throttled(object sender, ThottledEventArgs e)
+        {
+            if (Throttled != null)
+                Throttled(sender, e);
         }
 
         public bool Authenticate(string email, SecureString password)

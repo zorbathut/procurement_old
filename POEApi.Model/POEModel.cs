@@ -7,6 +7,7 @@ using POEApi.Model.Events;
 using POEApi.Transport;
 using System.Security;
 using System;
+using POEApi.Infrastructure.Events;
 
 namespace POEApi.Model
 {
@@ -24,6 +25,8 @@ namespace POEApi.Model
         public delegate void ImageLoadEventHandler(POEModel sender, ImageLoadedEventArgs e);
         public event ImageLoadEventHandler ImageLoading;
 
+        public event ThottledEventHandler Throttled;
+
         public bool Offline { get; private set; }
 
         public POEModel()
@@ -38,6 +41,7 @@ namespace POEApi.Model
             if (offline)
                 return true;
 
+            transport.Throttled += new ThottledEventHandler(instance_Throttled);
             onAuthenticate(POEEventState.BeforeEvent, email);
 
             transport.Authenticate(email, password);
@@ -45,6 +49,12 @@ namespace POEApi.Model
             onAuthenticate(POEEventState.AfterEvent, email);
 
             return true;
+        }
+
+        void instance_Throttled(object sender, ThottledEventArgs e)
+        {
+            if (Throttled != null)
+                Throttled(sender, e);
         }
 
         private ITransport getTransport(string email, SecureString password)

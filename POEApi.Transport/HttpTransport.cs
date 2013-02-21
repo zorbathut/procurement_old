@@ -4,6 +4,7 @@ using System.Net;
 using System.Text;
 using POEApi.Infrastructure;
 using System.Security;
+using POEApi.Infrastructure.Events;
 
 namespace POEApi.Transport
 {
@@ -25,6 +26,8 @@ namespace POEApi.Transport
         private const string stashURL = @"http://www.pathofexile.com/character-window/get-stash-items?league={0}&tabs=1&tabIndex={1}";
         private const string inventoryURL = @"http://www.pathofexile.com/character-window/get-items?character={0}";
 
+        public event ThottledEventHandler Throttled;
+
         public HttpTransport(string login, SecureString password)
         {
             credentialCookies = new CookieContainer();
@@ -39,6 +42,13 @@ namespace POEApi.Transport
             this.proxyPassword = proxyPassword;
             this.proxyDomain = proxyDomain;
             this.useProxy = true;
+            RequestThrottle.Instance.Throttled += new ThottledEventHandler(instance_Throttled);
+        }
+
+        private void instance_Throttled(object sender, ThottledEventArgs e)
+        {
+            if (Throttled != null)
+                Throttled(this, e);
         }
 
         public bool Authenticate(string email, SecureString password)

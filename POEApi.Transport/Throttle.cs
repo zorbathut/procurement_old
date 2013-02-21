@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
 using System.Threading;
+using POEApi.Infrastructure.Events;
 
 namespace POEApi.Transport
 {
@@ -39,6 +40,8 @@ namespace POEApi.Transport
         private int _outstandingRequests;
 
         private readonly Queue<DateTime> _requestTimes = new Queue<DateTime>();
+
+        public event ThottledEventHandler Throttled;
 
         private RequestThrottle()
         {
@@ -142,6 +145,9 @@ namespace POEApi.Transport
                         Trace.WriteLine("waiting:\t" + waitTime + "\t" + uri.AbsoluteUri);
                         using (var throttleGate = new AutoResetEvent(false))
                         {
+                            if (Throttled != null)
+                                Throttled(this, new ThottledEventArgs(waitTime));
+
                             Debug.WriteLine("Approaching Threshold, Just Chillin for a few seconds " + waitTime.TotalSeconds);
                             throttleGate.WaitOne(waitTime);
                         }

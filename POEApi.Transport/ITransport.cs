@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Security;
+using POEApi.Infrastructure.Events;
 
 namespace POEApi.Transport
 {
@@ -11,5 +12,6 @@ namespace POEApi.Transport
         Stream GetImage(string url);
         Stream GetCharacters();
         Stream GetInventory(string characterName);
+        event ThottledEventHandler Throttled;
     }
 }
