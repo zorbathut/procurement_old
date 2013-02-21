@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Settings>
     <Ratios>
-        <Orb type="GemCutterPrism" orbamount="1" gcpamount="1"/>
+        <Orb type="Mirror" orbamount="100" gcpamount="1"/>
         <Orb type="Exalted" orbamount="1" gcpamount="6"/>
         <Orb type="Divine" orbamount="1" gcpamount="3"/>
+        <Orb type="GemCutterPrism" orbamount="1" gcpamount="1"/> 
         <Orb type="Chisel" orbamount="48" gcpamount="5"/>
         <Orb type="Regal" orbamount="3" gcpamount="1"/>
         <Orb type="Chaos" orbamount="3" gcpamount="1"/>
@@ -13,10 +14,10 @@
         <Orb type="Fusing" orbamount="6" gcpamount="1"/>
         <Orb type="Alchemy" orbamount="6" gcpamount="1"/>
         <Orb type="AlchemyShard" orbamount="120" gcpamount="1"/>
-      <Orb type="Chance" orbamount="48" gcpamount="1"/>
+        <Orb type="Chance" orbamount="48" gcpamount="1"/>
         <Orb type="JewelersOrb" orbamount="24" gcpamount="1"/>
         <Orb type="Alteration" orbamount="48" gcpamount="1"/>
-        <Orb type="Chromatic" orbamount="60" gcpamount="1"/>      
+        <Orb type="Chromatic" orbamount="60" gcpamount="1"/>
     </Ratios>
     <UserSettings>
         <Setting name="AccountLogin" value="" />

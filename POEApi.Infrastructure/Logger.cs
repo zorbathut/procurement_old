@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
 
 namespace POEApi.Infrastructure
@@ -13,9 +10,9 @@ namespace POEApi.Infrastructure
         {
             Log(e.ToString());
         }
-        public static void Log(string s)
+        public static void Log(string message)
         {
-            File.AppendAllText(OUTPUT, s);
+            File.AppendAllText(OUTPUT, message);
         }
     }
 }

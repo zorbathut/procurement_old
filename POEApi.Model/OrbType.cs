@@ -27,6 +27,7 @@
         ScrollFragment,
         ScrollofWisdom,
         AlbinaRhoaFeather,
-        AlchemyShard
+        AlchemyShard,
+        Mirror
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using POEApi.Infrastructure;
 
 namespace POEApi.Model
 {
@@ -39,7 +40,8 @@ namespace POEApi.Model
             { "Scroll of Wisdom", OrbType.ScrollofWisdom },
             { "Orb of Fusing", OrbType.Fusing },
             { "Portal Scroll", OrbType.PortalScroll },
-            { "Albino Rhoa Feather", OrbType.AlbinaRhoaFeather}
+            { "Albino Rhoa Feather", OrbType.AlbinaRhoaFeather},
+            { "Mirror", OrbType.Mirror }
             
         };
         #endregion
@@ -56,7 +58,17 @@ namespace POEApi.Model
         
         internal static OrbType GetOrbType(JSONProxy.Item item)
         {
-            return orbMap.First(m => item.TypeLine.Contains(m.Key)).Value;
+            try
+            {
+                return orbMap.First(m => item.TypeLine.Contains(m.Key)).Value;
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(ex);
+                var message = "ProxyMapper.GetOrbType Failed! ItemType = " + item.TypeLine;
+                Logger.Log(message);
+                throw new Exception(message);
+            }
         }
 
         internal static List<Property> GetProperties(List<JSONProxy.Property> properties)

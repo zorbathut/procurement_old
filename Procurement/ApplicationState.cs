@@ -48,7 +48,7 @@ namespace Procurement
         public static void SetDefaults()
         {
             string defaultCharacter = Settings.UserSettings["FavoriteCharacter"];
-            if (defaultCharacter != string.Empty)
+            if (defaultCharacter != string.Empty && Characters.Count(c => c.Name == defaultCharacter) == 1)
             {
                 CurrentCharacter = Characters.First(c => c.Name == defaultCharacter);
                 CurrentLeague = CurrentCharacter.League;

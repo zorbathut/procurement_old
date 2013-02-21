@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using POEApi.Model;
+using System.Windows.Input;
+using System.Windows;
 
 namespace Procurement.ViewModel
 {
@@ -41,6 +43,15 @@ namespace Procurement.ViewModel
         private List<int> selected = new List<int>();
         private string text;
 
+        private DelegateCommand copyCommand;
+
+        public DelegateCommand CopyCommand
+        {
+            get { return copyCommand; }
+            set { copyCommand = value; }
+        }
+        
+
         public List<ExportStashInfo> StashItems
         {
             get { return stashItems; }
@@ -63,8 +74,14 @@ namespace Procurement.ViewModel
         
         public ForumExportViewModel()
         {
+            copyCommand = new DelegateCommand(copy);
             updateForLeague();
             ApplicationState.LeagueChanged += new PropertyChangedEventHandler(ApplicationState_LeagueChanged);
+        }
+
+        private void copy(object parameter)
+        {
+            Clipboard.SetText(text);
         }
 
         void ApplicationState_LeagueChanged(object sender, PropertyChangedEventArgs e)

@@ -19,11 +19,13 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30" />
                     <RowDefinition Height="20" />
+                    <RowDefinition Height="25" />
                     <RowDefinition />
                 </Grid.RowDefinitions>
                 <Label Content="Stash Tabs" Grid.Row="0"  Foreground="#FFAB9066" FontSize="14" FontWeight="Bold"/>
                 <CheckBox Grid.Row="1" Foreground="#FFAB9066" Content="Select All" Checked="ToggleAll" Unchecked="ToggleAll" Margin="10,0,0,0"/>
-                <ScrollViewer Grid.Row="2" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
+                <Button Grid.Row="2" Content="Copy To Clipboard" Height="22" Width="120" Style="{Binding}" HorizontalAlignment="Left" Margin="10,0,0,0" Command="{Binding CopyCommand}"/>
+                <ScrollViewer Grid.Row="3" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
                    <ItemsControl ItemsSource="{Binding StashItems}" Margin="10,10,10,10" x:Name="CheckBoxList">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>

@@ -6,6 +6,7 @@ using POEApi.Infrastructure;
 using POEApi.Model.Events;
 using POEApi.Transport;
 using System.Security;
+using System;
 
 namespace POEApi.Model
 {
@@ -67,11 +68,33 @@ namespace POEApi.Model
             onStashLoaded(POEEventState.BeforeEvent, index, -1);
 
             using (Stream stream = transport.GetStash(index, league, forceRefresh))
+            {
                 proxy = (JSONProxy.Stash)serialiser.ReadObject(stream);
+                if (proxy == null)
+                    logNullStash(stream);
+            }
 
             onStashLoaded(POEEventState.AfterEvent, index, proxy.NumTabs);
 
             return new Stash(proxy);
+        }
+
+        private void logNullStash(Stream stream)
+        {
+            try
+            {
+                MemoryStream ms = stream as MemoryStream;
+                ms.Seek(0, SeekOrigin.Begin);
+                Logger.Log("Proxy was null: base64 bytes:");
+                Logger.Log(Convert.ToBase64String(ms.ToArray()));
+                Logger.Log("END");
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(ex);
+            }
+
+            throw new Exception(@"Downloading stash, details logged to DebugLog.log, please open a ticket at https://code.google.com/p/procurement/issues/list");
         }
 
         public Stash GetStash(string league)
