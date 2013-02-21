@@ -33,6 +33,7 @@ namespace POEApi.Transport
             credentialCookies = new CookieContainer();
             this.email = login;
             this.password = password;
+            RequestThrottle.Instance.Throttled += new ThottledEventHandler(instance_Throttled);
         }
 
         public HttpTransport(string login, SecureString password, string proxyUser, string proxyPassword, string proxyDomain)
