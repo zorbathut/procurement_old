@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using POEApi.Model;
-namespace Procurement.ViewModel.ForumExportFilter
+namespace Procurement.ViewModel.Filters
 {
-    internal interface IFilter
+    public interface IFilter
     {
+        bool CanFormCategory { get; }
         string Keyword { get; }
         string Help { get; }
         bool Applicable(Item item);

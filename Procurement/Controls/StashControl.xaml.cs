@@ -8,6 +8,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using POEApi.Model;
 using Procurement.ViewModel;
+using Procurement.ViewModel.Filters;
 
 namespace Procurement.Controls
 {
@@ -21,15 +22,15 @@ namespace Procurement.Controls
         public List<Item> Stash { get; set; }
         public int FilterResults { get; private set; }
 
-        public string Filter
+        public IEnumerable<IFilter> Filter
         {
-            get { return (string)GetValue(FilterProperty); }
+            get { return (IEnumerable<IFilter>)GetValue(FilterProperty); }
             set { SetValue(FilterProperty, value); }
         }
 
         public void ForceUpdate()
         {
-            FilterResults = string.IsNullOrEmpty(Filter) ? -1 : 0;
+            FilterResults = Filter.Count() == 0 ? -1 : 0;
             foreach (var item in Stash)
             {
                 borderByLocation[Tuple.Create<int, int>(item.X, item.Y)].BorderBrush = Brushes.Transparent;
@@ -49,7 +50,7 @@ namespace Procurement.Controls
         }
 
         public static readonly DependencyProperty FilterProperty =
-            DependencyProperty.Register("Filter", typeof(string), typeof(StashControl), null);
+            DependencyProperty.Register("Filter", typeof(IEnumerable<IFilter>), typeof(StashControl), null);
 
         public StashControl()
         {
@@ -158,25 +159,14 @@ namespace Procurement.Controls
 
             
             childGrid.Background.Opacity = 0.3;
-
         }
 
         private bool search(Item item)
         {
-            if (string.IsNullOrEmpty(Filter))
+            if (Filter.Count() == 0)
                 return false;
 
-            return item.TypeLine.ToLower().Contains(Filter.ToLower()) || item.Name.ToLower().Contains(Filter.ToLower()) || isMatchedGear(item);
-        }
-
-        private bool isMatchedGear(Item item)
-        {
-            Gear gear = item as Gear;
-
-            if (gear == null)
-                return false;
-
-            return gear.GearType.ToString().ToLower().Contains(Filter.ToLower());
+            return Filter.All(filter => filter.Applicable(item));
         }
     }
 }

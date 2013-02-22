@@ -136,16 +136,43 @@
                     <Grid Margin="5,5,5,5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="55"/>
-                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="Auto" />
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
-                        <poe:LeagueSelection Grid.Row="0" Width="320" Height="55" VerticalAlignment="Top" HorizontalAlignment="Left" />          
-                        <StackPanel Orientation="Horizontal" Background="Black" Grid.Row="2">
-                            <Label Content="Search :" Foreground="#FFAB9066"/>
-                            <!--<TextBox Background="Black" Width="270" Height="20" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Filter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" BorderBrush="#FF76591B" Foreground="#FFAB9066" SelectionBrush="#FFCABE9F" />-->
-                            <toolkit:AutoCompleteBox x:Name="autoComplete" MinimumPopulateDelay="100" MinimumPrefixLength="2" FilterMode="Contains" Background="Black" Width="270" Height="25" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Filter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" BorderBrush="#FF76591B" Foreground="#FFAB9066" ItemsSource="{Binding AvailableItems}" />
-                        </StackPanel>
+                        <poe:LeagueSelection Grid.Row="0" Width="320" Height="55" VerticalAlignment="Top" HorizontalAlignment="Left" />
+                        <Grid Grid.Row="2">
+                            <StackPanel Orientation="Horizontal" Background="Black" >
+                                <Label Content="Search :" Foreground="#FFAB9066"/>
+                                <toolkit:AutoCompleteBox x:Name="autoComplete" MinimumPopulateDelay="100" MinimumPrefixLength="2" FilterMode="Contains" Background="Black" Width="270" Height="25" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Filter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" BorderBrush="#FF76591B" Foreground="#FFAB9066" ItemsSource="{Binding AvailableItems}" />
+                            </StackPanel>
+                        </Grid>
+                        <Expander Header="Category Search" ExpandDirection="Down" Foreground="#FFAB9066" Background="Black" Grid.Row="3">
+                            <Grid>
+                                <StackPanel>
+                                    <RadioButton Content="None" IsChecked="True" GroupName="Group" Foreground="#FFAB9066" Background="Black" Checked="RadioButton_Checked" />
+                                    <ItemsControl ItemsSource="{Binding AvailableCategories}">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <StackPanel Orientation="Vertical"/>
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <RadioButton Content="{Binding Key}" GroupName="Group" Foreground="#FFAB9066" Background="Black" ToolTipService.Placement="Right" Checked="RadioButton_Checked">
+                                                    <RadioButton.ToolTip>
+                                                        <Border Background="Black" BorderBrush="#FFAB9066" BorderThickness="1">
+                                                            <TextBlock Text="{Binding Value}" Foreground="#FFAB9066" />
+                                                        </Border>
+                                                    </RadioButton.ToolTip>
+                                                </RadioButton>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </StackPanel>
+                            </Grid>
+                        </Expander>
                     </Grid>
                 </Border>
 

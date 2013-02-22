@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using Procurement.ViewModel;
 
-namespace Procurement.ViewModel.ForumExportFilter
+namespace Procurement.ViewModel.Filters
 {
-    internal class FourLink : Link
+    internal class FiveLink : Link
     {
-        public FourLink()
-            : base(4)
+        public FiveLink()
+            : base(5)
         { }
     }
 }

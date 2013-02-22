@@ -9,6 +9,7 @@ using System.Windows.Media.Imaging;
 using POEApi.Model;
 using Procurement.Controls;
 using Procurement.View;
+using Procurement.ViewModel.Filters;
 
 namespace Procurement.ViewModel
 {
@@ -29,6 +30,7 @@ namespace Procurement.ViewModel
 
         private List<WhatsInTheBox> tabsAndContent;
         private StashView stashView;
+        private List<IFilter> categoryFilter;
         private TabItem selectedTab { get; set; }
 
         private string filter;
@@ -45,9 +47,12 @@ namespace Procurement.ViewModel
 
         private void processFilter()
         {
+            List<IFilter> allfilters = getUserFilter(filter);
+            allfilters.AddRange(categoryFilter);
+
             foreach (var item in tabsAndContent)
             {
-                item.Stash.SetValue(StashControl.FilterProperty, filter);
+                item.Stash.SetValue(StashControl.FilterProperty, allfilters);
                 item.Stash.ForceUpdate();
                 if (item.Stash.FilterResults == 0)
                 {
@@ -63,9 +68,20 @@ namespace Procurement.ViewModel
             var first = tabsAndContent.Find(w => w.TabItem.Visibility == Visibility.Visible);
             if (first != null)
                 first.TabItem.IsSelected = true;
-        }        
+        }
+
+        public void SetCategoryFilter(string category)
+        {
+            categoryFilter.Clear();
+            if (category != "None")
+                categoryFilter.AddRange(CategoryManager.GetCategory(category));
+
+            processFilter();
+        }
 
         public ICommand GetTabs { get; set; }
+
+        public Dictionary<string, string> AvailableCategories { get; private set; }
 
         public List<string> Leagues
         {
@@ -93,6 +109,8 @@ namespace Procurement.ViewModel
         public StashViewModel(StashView stashView)
         {
             this.stashView = stashView;
+            categoryFilter = new List<IFilter>();
+            AvailableCategories = CategoryManager.GetAvailableCategories();
             tabsAndContent = new List<WhatsInTheBox>();
             stashView.Loaded += new System.Windows.RoutedEventHandler(stashView_Loaded);
             GetTabs = new DelegateCommand(GetTabList);
@@ -196,8 +214,7 @@ namespace Procurement.ViewModel
                 item.BorderBrush = Brushes.Transparent;
                 StashControl itemStash = new StashControl();
 
-                itemStash.SetValue(StashControl.FilterProperty, filter);
-
+                itemStash.SetValue(StashControl.FilterProperty, getUserFilter(filter));
                 item.Content = itemStash;
                 itemStash.TabNumber = i - 1;
 
@@ -216,6 +233,15 @@ namespace Procurement.ViewModel
             }
 
             stashView.Loaded -= new System.Windows.RoutedEventHandler(stashView_Loaded);
+        }
+
+        private static List<IFilter> getUserFilter(string filter)
+        {
+            if (string.IsNullOrEmpty(filter))
+                return new List<IFilter>();
+
+            UserSearchFilter searchCriteria = new UserSearchFilter(filter);
+            return new List<IFilter>() { searchCriteria };
         }
 
         void refresh_Click(object sender, RoutedEventArgs e)

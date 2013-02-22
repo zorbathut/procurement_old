@@ -1,5 +1,5 @@
 ﻿using POEApi.Model;
-namespace Procurement.ViewModel.ForumExportFilter
+namespace Procurement.ViewModel.Filters
 {
     internal class UniqueQuality : QualityFilter
     {
