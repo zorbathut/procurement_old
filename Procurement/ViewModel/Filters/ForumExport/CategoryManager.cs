@@ -35,13 +35,13 @@ namespace Procurement.ViewModel.Filters
         private static void initializeUserCategories()
         {
             //For Testing and Illustration
-            categories.Add("Craftables", new List<IFilter>() { new WhiteQuality(), new FourLink(), new FiveLink() });
+            categories.Add("Craftables", new List<IFilter>() { new WhiteQuality(), new OrFilter(new FourLink(), new FiveLink()) });
         }
 
         private static List<IFilter> getAvailableFilters()
         {
             return Assembly.GetExecutingAssembly().GetTypes()
-                                                  .Where(t => !(t.IsAbstract || t.IsInterface) && typeof(IFilter).IsAssignableFrom(t))
+                                                  .Where(t => !(t.IsAbstract || t.IsInterface) && typeof(IFilter).IsAssignableFrom(t) && t.Name != typeof(OrFilter).Name)
                                                   .Where(t => t.GetConstructor(new Type[] { }) != null)
                                                   .Select(t => Activator.CreateInstance(t) as IFilter)
                                                   .ToList();

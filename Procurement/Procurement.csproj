@@ -128,6 +128,7 @@
     <Compile Include="ViewModel\Filters\ForumExport\FiveLink.cs" />
     <Compile Include="ViewModel\Filters\ForumExport\FourLink.cs" />
     <Compile Include="ViewModel\Filters\ForumExport\Link.cs" />
+    <Compile Include="ViewModel\Filters\ForumExport\OrFilter.cs" />
     <Compile Include="ViewModel\Filters\IFilter.cs" />
     <Compile Include="ViewModel\Filters\ForumExport\MagicQuality.cs" />
     <Compile Include="ViewModel\Filters\ForumExport\QualityFilter.cs" />
