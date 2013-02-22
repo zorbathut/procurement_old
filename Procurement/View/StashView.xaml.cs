@@ -19,6 +19,10 @@ namespace Procurement.View
         private void RadioButton_Checked(object sender, System.Windows.RoutedEventArgs e)
         {
             var vm = this.DataContext as StashViewModel;
+
+            if (vm == null)
+                return;
+
             vm.SetCategoryFilter((sender as RadioButton).Content.ToString());
         }
     }
