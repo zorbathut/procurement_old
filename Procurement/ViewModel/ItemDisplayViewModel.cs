@@ -42,9 +42,10 @@ namespace Procurement.ViewModel
                 img.Source = bitmap;
             }
 
-            var itemhover = new ItemHover() { DataContext = new ItemHoverViewModel(Item) };
+            var itemhover = new ItemHover() { DataContext = ItemHoverViewModelFactory.Create(Item) };
 
             Popup popup = new Popup();
+            popup.AllowsTransparency = true;
             popup.PopupAnimation = PopupAnimation.Fade;
             popup.StaysOpen = true;
             popup.Child = itemhover;
@@ -215,7 +216,7 @@ namespace Procurement.ViewModel
 
         private Image getMouseOverImage(Image img, Item item)
         {
-            var itemhover = new ItemHover() { DataContext = new ItemHoverViewModel(item) };
+            var itemhover = new ItemHover() { DataContext = ItemHoverViewModelFactory.Create(item)};
 
             Popup popup = new Popup();
             popup.PopupAnimation = PopupAnimation.Fade;

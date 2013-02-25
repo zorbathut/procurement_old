@@ -5,8 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:vm="clr-namespace:Procurement.ViewModel"
              xmlns:v="clr-namespace:Procurement.View"
+             xmlns:local="clr-namespace:Procurement.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="150" d:DesignWidth="150" Background="Black" Opacity="0.7">
+             d:DesignHeight="150" d:DesignWidth="150">
 
     <UserControl.Resources>
         <v:ItemToColorBrushConverter x:Key="vc" />
@@ -16,25 +17,19 @@
         <v:VisibilityConverter x:Key="bc" />
         
     </UserControl.Resources>
-    <Grid Background="Black" Opacity="1">
+    <Grid>
     <Grid.RowDefinitions>
         <RowDefinition Height="Auto"/>
     </Grid.RowDefinitions>
     <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
     </Grid.ColumnDefinitions>
-        <DockPanel x:Name="grid" Grid.Row="0" Grid.Column="0" Background="Black" Height="Auto" LastChildFill="True">
-            <Border Background="{Binding Item, Converter={StaticResource vc}, ConverterParameter=0.3}" x:Name="HeyYouThereCommaWithTheWidth" DockPanel.Dock="Top">
-                <Grid Margin="30,0,30,0" MinWidth="200">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Text="{Binding Name}" FontSize="20" Foreground="{Binding Item, Converter={StaticResource vc}}" FontWeight="Bold" Visibility="{Binding HasName, Converter={StaticResource bc}, ConverterParameter=CollapseWhenFalse}" HorizontalAlignment="Center"/>
-                    <TextBlock Grid.Row="1" Text="{Binding TypeLine}" FontSize="20" Foreground="{Binding Item, Converter={StaticResource vc}}" FontWeight="Bold" HorizontalAlignment="Center"/>
-                </Grid>
-            </Border>
-            <Border Background="Black" Opacity="1" Height="400" DockPanel.Dock="Bottom">
+        <DockPanel x:Name="grid" Grid.Row="0" Grid.Column="0" Height="Auto" LastChildFill="True">
+            <local:ItemHoverHeader  DockPanel.Dock="Top" x:Name="HeyYouThereCommaWithTheWidth" Content="{Binding }" />
+            <Border DockPanel.Dock="Bottom">
+                <Border.Background>
+                    <SolidColorBrush Color="Black" Opacity="0.85" />
+                </Border.Background>
                 <StackPanel>
                     <ItemsControl ItemsSource="{Binding Properties}">
                         <ItemsControl.ItemsPanel>
@@ -45,7 +40,7 @@
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel>
-                                    <v:BindableRichTextBox Document="{Binding Path=., Converter={StaticResource pc}}" Background="Black" BorderBrush="Transparent" Width="{Binding Path=ActualWidth, ElementName=HeyYouThereCommaWithTheWidth, Mode=OneWay}">
+                                    <v:BindableRichTextBox Document="{Binding Path=., Converter={StaticResource pc}}" Background="Transparent" BorderBrush="Transparent" Width="{Binding Path=ActualWidth, ElementName=HeyYouThereCommaWithTheWidth, Mode=OneWay}">
                                         <v:BindableRichTextBox.Resources>
                                             <Style TargetType="{x:Type Paragraph}">
                                                 <Setter Property="Margin" Value="0"/>
@@ -67,7 +62,7 @@
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel>
-                                    <v:BindableRichTextBox Document="{Binding Path=., Converter={StaticResource rc}}" Background="Black" BorderBrush="Transparent" Width="{Binding Path=ActualWidth, ElementName=HeyYouThereCommaWithTheWidth, Mode=OneWay}">
+                                    <v:BindableRichTextBox Document="{Binding Path=., Converter={StaticResource rc}}" Background="Transparent" BorderBrush="Transparent" Width="{Binding Path=ActualWidth, ElementName=HeyYouThereCommaWithTheWidth, Mode=OneWay}">
                                         <v:BindableRichTextBox.Resources>
                                             <Style TargetType="{x:Type Paragraph}">
                                                 <Setter Property="Margin" Value="0"/>
@@ -89,7 +84,7 @@
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel>
-                                    <v:BindableRichTextBox Document="{Binding Path=., Converter={StaticResource ec}}" Background="Black" BorderBrush="Transparent" Width="{Binding Path=ActualWidth, ElementName=HeyYouThereCommaWithTheWidth, Mode=OneWay}">
+                                    <v:BindableRichTextBox Document="{Binding Path=., Converter={StaticResource ec}}"  Background="Transparent" BorderBrush="Transparent" Width="{Binding Path=ActualWidth, ElementName=HeyYouThereCommaWithTheWidth, Mode=OneWay}">
                                         <v:BindableRichTextBox.Resources>
                                             <Style TargetType="{x:Type Paragraph}">
                                                 <Setter Property="Margin" Value="0"/>
@@ -111,7 +106,7 @@
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel>
-                                    <v:BindableRichTextBox Document="{Binding Path=., Converter={StaticResource ec}}" Background="Black" BorderBrush="Transparent" Width="{Binding Path=ActualWidth, ElementName=HeyYouThereCommaWithTheWidth, Mode=OneWay}">
+                                    <v:BindableRichTextBox Document="{Binding Path=., Converter={StaticResource ec}}" Background="Transparent" BorderBrush="Transparent" Width="{Binding Path=ActualWidth, ElementName=HeyYouThereCommaWithTheWidth, Mode=OneWay}">
                                         <v:BindableRichTextBox.Resources>
                                             <Style TargetType="{x:Type Paragraph}">
                                                 <Setter Property="Margin" Value="0"/>
@@ -123,8 +118,8 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
 
-                    <Border BorderBrush="Gray" BorderThickness="1" Opacity="0.7" />
-                    <v:BindableRichTextBox Document="{Binding Path=DescriptionText, Converter={StaticResource ec}}" Background="Black" BorderBrush="Transparent" Width="{Binding Path=ActualWidth, ElementName=HeyYouThereCommaWithTheWidth, Mode=OneWay}">
+                    <Border BorderBrush="Gray" BorderThickness="1" />
+                    <v:BindableRichTextBox Document="{Binding Path=DescriptionText, Converter={StaticResource ec}}" Background="Transparent" BorderBrush="Transparent" Width="{Binding Path=ActualWidth, ElementName=HeyYouThereCommaWithTheWidth, Mode=OneWay}">
                         <v:BindableRichTextBox.Resources>
                             <Style TargetType="{x:Type Paragraph}">
                                 <Setter Property="Margin" Value="0"/>

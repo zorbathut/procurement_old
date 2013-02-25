@@ -111,6 +111,9 @@
     <Compile Include="Controls\ItemHover.xaml.cs">
       <DependentUpon>ItemHover.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ItemHoverHeader.xaml.cs">
+      <DependentUpon>ItemHoverHeader.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\LeagueSelection.xaml.cs">
       <DependentUpon>LeagueSelection.xaml</DependentUpon>
     </Compile>
@@ -149,6 +152,7 @@
       <DependentUpon>StashControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\ItemDisplayViewModel.cs" />
+    <Compile Include="ViewModel\ItemHoverViewModelFactory.cs" />
     <Compile Include="ViewModel\LoginWindowViewModel.cs" />
     <Compile Include="ViewModel\MainPageViewModel.cs" />
     <Compile Include="ViewModel\ScreenController.cs" />
@@ -244,6 +248,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ItemHover.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ItemHoverHeader.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -407,6 +415,31 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Avatars\duelist.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ItemHover\ItemHeaderWhiteLeft.png" />
+    <Resource Include="Images\ItemHover\ItemHeaderWhiteMiddle.png" />
+    <Resource Include="Images\ItemHover\ItemHeaderWhiteRight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ItemHover\ItemHeaderCurrencyLeft.png" />
+    <Resource Include="Images\ItemHover\ItemHeaderCurrencyMiddle.png" />
+    <Resource Include="Images\ItemHover\ItemHeaderCurrencyRight.png" />
+    <Resource Include="Images\ItemHover\ItemHeaderGemLeft.png" />
+    <Resource Include="Images\ItemHover\ItemHeaderGemMiddle.png" />
+    <Resource Include="Images\ItemHover\ItemHeaderGemRight.png" />
+    <Resource Include="Images\ItemHover\ItemHeaderMagicLeft.png" />
+    <Resource Include="Images\ItemHover\ItemHeaderMagicMiddle.png" />
+    <Resource Include="Images\ItemHover\ItemHeaderMagicRight.png" />
+    <Resource Include="Images\ItemHover\ItemHeaderQuestLeft.png" />
+    <Resource Include="Images\ItemHover\ItemHeaderQuestMiddle.png" />
+    <Resource Include="Images\ItemHover\ItemHeaderQuestRight.png" />
+    <Resource Include="Images\ItemHover\ItemHeaderRareLeft.png" />
+    <Resource Include="Images\ItemHover\ItemHeaderRareMiddle.png" />
+    <Resource Include="Images\ItemHover\ItemHeaderRareRight.png" />
+    <Resource Include="Images\ItemHover\ItemHeaderUniqueLeft.png" />
+    <Resource Include="Images\ItemHover\ItemHeaderUniqueMiddle.png" />
+    <Resource Include="Images\ItemHover\ItemHeaderUniqueRight.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
