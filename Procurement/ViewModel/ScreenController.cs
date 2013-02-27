@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Procurement.View;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
-using Procurement.View;
 
 namespace Procurement.ViewModel
 {
@@ -28,9 +28,9 @@ namespace Procurement.ViewModel
         {
             var key = obj.ToString();
 
-            if (key == "Exit")
-                Application.Current.Shutdown();
-            else
+            //if (key == "Exit")
+            //    Application.Current.Shutdown();
+            //else
                 loadView(screens[key]);
         }
 
@@ -44,6 +44,7 @@ namespace Procurement.ViewModel
                 screens.Add("Trading", new TradingView());
                 screens.Add("Settings", new SettingsView());
                 screens.Add("About", new AboutView());
+                screens.Add("Exit", new RecipeView());
             }));
         }
 

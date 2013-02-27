@@ -30,6 +30,8 @@ namespace Procurement.Controls
 
         public void ForceUpdate()
         {
+            if (initialized == false && Stash == null)
+                refresh();
             FilterResults = Filter.Count() == 0 ? -1 : 0;
             foreach (var item in Stash)
             {

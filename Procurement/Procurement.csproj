@@ -117,6 +117,9 @@
     <Compile Include="Controls\LeagueSelection.xaml.cs">
       <DependentUpon>LeagueSelection.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\RecipeResults.xaml.cs">
+      <DependentUpon>RecipeResults.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -138,6 +141,7 @@
     <Compile Include="ViewModel\Filters\ForumExport\RareQuality.cs" />
     <Compile Include="ViewModel\Filters\ForumExport\UniqueQuality.cs" />
     <Compile Include="ViewModel\Filters\ForumExport\WhiteQuality.cs" />
+    <Compile Include="ViewModel\Filters\ItemFilter.cs" />
     <Compile Include="ViewModel\Filters\UserSearchFilter.cs" />
     <Compile Include="ViewModel\ForumExportRunners\ForumExportRunnerBase.cs" />
     <Compile Include="ViewModel\ForumExportRunners\ForumExportRunnerFactory.cs" />
@@ -155,6 +159,12 @@
     <Compile Include="ViewModel\ItemHoverViewModelFactory.cs" />
     <Compile Include="ViewModel\LoginWindowViewModel.cs" />
     <Compile Include="ViewModel\MainPageViewModel.cs" />
+    <Compile Include="ViewModel\RecipeResultViewModel.cs" />
+    <Compile Include="ViewModel\Recipes\ChromaticRecipe.cs" />
+    <Compile Include="ViewModel\Recipes\OneChoasRecipe.cs" />
+    <Compile Include="ViewModel\Recipes\Recipe.cs" />
+    <Compile Include="ViewModel\Recipes\RecipeManager.cs" />
+    <Compile Include="ViewModel\Recipes\RecipeResult.cs" />
     <Compile Include="ViewModel\ScreenController.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="ViewModel\StashViewModel.cs" />
@@ -168,6 +178,7 @@
     </Compile>
     <Compile Include="View\Converters\CharacterToImageConverter.cs" />
     <Compile Include="View\Converters\CharacterToLevelConverter.cs" />
+    <Compile Include="View\Converters\ItemDisplayConverter.cs" />
     <Compile Include="View\Converters\ItemExplicitModsToFormattedRunConverter.cs" />
     <Compile Include="View\Converters\ItemPropertyToFormattedRunConverter.cs" />
     <Compile Include="View\Converters\ItemRequirementToFormattedRunConverter.cs" />
@@ -182,6 +193,9 @@
     </Compile>
     <Compile Include="View\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\RecipeView.xaml.cs">
+      <DependentUpon>RecipeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
@@ -259,6 +273,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\RecipeResults.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\StashControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -288,6 +306,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\LoginView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\RecipeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

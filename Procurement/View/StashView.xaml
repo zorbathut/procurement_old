@@ -160,7 +160,7 @@
                                         </ItemsControl.ItemsPanel>
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
-                                                <RadioButton Content="{Binding Key}" GroupName="Group" Foreground="#FFAB9066" Background="Black" ToolTipService.Placement="Right" Checked="RadioButton_Checked">
+                                                <RadioButton Content="{Binding Key}" GroupName="Group" Foreground="#FFAB9066" Background="Black" Checked="RadioButton_Checked">
                                                     <RadioButton.ToolTip>
                                                         <Border Background="Black" BorderBrush="#FFAB9066" BorderThickness="1">
                                                             <TextBlock Text="{Binding Value}" Foreground="#FFAB9066" />
