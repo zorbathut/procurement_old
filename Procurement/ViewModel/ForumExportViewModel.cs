@@ -81,7 +81,8 @@ namespace Procurement.ViewModel
 
         private void copy(object parameter)
         {
-            Clipboard.SetText(text);
+            if (text != null)
+                Clipboard.SetText(text);
         }
 
         void ApplicationState_LeagueChanged(object sender, PropertyChangedEventArgs e)
