@@ -8,6 +8,7 @@ namespace Procurement.ViewModel.Recipes
 {
     public abstract class Recipe
     {
+        public abstract string Name { get; }
         protected bool ReturnsPartialMatches { get; private set; }
         protected decimal ReturnMatchesGreaterThan { get; private set; }
 

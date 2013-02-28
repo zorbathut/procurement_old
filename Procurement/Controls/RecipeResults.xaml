@@ -4,88 +4,96 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:v="clr-namespace:Procurement.View"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             mc:Ignorable="d">
     <UserControl.Resources>
         <v:TabIDToStashControlFiltered x:Key="tc" />
-        <v:ItemDisplayConverter x:Key="idc" />
+        <v:RecipeDescriptionConverter x:Key="rd" />
     </UserControl.Resources>
     <Grid>
-        <ItemsControl ItemsSource="{Binding Results}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Vertical"/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Border Background="Black" BorderBrush="#FFAB9066" BorderThickness="1">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="30"/>
-                                <RowDefinition />
-                            </Grid.RowDefinitions>
-                            <Label Content="{Binding Key}" FontWeight="Bold" FontSize="18" Grid.Row="0" Foreground="#FFAB9066"/>
-                            <ItemsControl ItemsSource="{Binding Value}" Grid.Row="1">
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <StackPanel Orientation="Vertical"/>
-                                    </ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel>
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <Border Background="Black" BorderBrush="#FFAB9066" BorderThickness="1">
-                                            <Expander IsExpanded="True">
-                                            <Grid>
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="30"/>
-                                                    <RowDefinition />
-                                                </Grid.RowDefinitions>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="50*" />
-                                                    <ColumnDefinition Width="50*" />
-                                                </Grid.ColumnDefinitions>
-                                                <Label Content="Match Percentage" FontWeight="Bold" FontSize="18" Grid.Row="0" Grid.Column="0" Foreground="#FFAB9066"/>
-                                                <Label Content="{Binding PercentMatch}" FontWeight="Bold" FontSize="18" Grid.Row="0" Grid.Column="1" Foreground="#FFAB9066"/>
-                                                <ItemsControl ItemsSource="{Binding MatchedItems}" Grid.Row="1" Grid.Column="0">
-                                                    <ItemsControl.ItemsPanel>
-                                                        <ItemsPanelTemplate>
-                                                            <StackPanel Orientation="Vertical"/>
-                                                        </ItemsPanelTemplate>
-                                                    </ItemsControl.ItemsPanel>
-                                                    <ItemsControl.ItemTemplate>
-                                                        <DataTemplate>
-                                                            <StackPanel>
-                                                                    <Label Content="{Binding TypeLine}" Foreground="#FFAB9066" ToolTip="{Binding ., Converter={StaticResource tc}}" />
-                                                                    <ContentControl Content="{Binding ., Converter={StaticResource idc}}" />
-                                                                </StackPanel>
-                                                        </DataTemplate>
-                                                    </ItemsControl.ItemTemplate>
-                                                </ItemsControl>
-                                                <ItemsControl ItemsSource="{Binding Missing}" Grid.Row="1" Grid.Column="1">
-                                                    <ItemsControl.ItemsPanel>
-                                                        <ItemsPanelTemplate>
-                                                            <StackPanel Orientation="Vertical"/>
-                                                        </ItemsPanelTemplate>
-                                                    </ItemsControl.ItemsPanel>
-                                                    <ItemsControl.ItemTemplate>
-                                                        <DataTemplate>
-                                                            <StackPanel>
-                                                                <Label Content="{Binding }" Foreground="#FFAB9066" />
-                                                            </StackPanel>
-                                                        </DataTemplate>
-                                                    </ItemsControl.ItemTemplate>
-                                                </ItemsControl>
-                                            </Grid>
-                                            </Expander>
-                                        </Border>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                        </Grid>
-                    </Border>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Border Grid.Column="0" BorderBrush="#FF76591B" BorderThickness="2" VerticalAlignment="Top" Margin="7,10,0,0" Background="Black" Height="610" Width="390">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden">
+                <ItemsControl ItemsSource="{Binding Results}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Background="Black" BorderBrush="#FFAB9066" BorderThickness="1">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Expander IsExpanded="True" Grid.Row="0">
+                                        <Expander.Header>
+                                            <Label Content="{Binding Converter={StaticResource rd}}" FontWeight="Bold" FontSize="14" Foreground="#FFAB9066" />
+                                        </Expander.Header>
+                                    <ItemsControl ItemsSource="{Binding Value}" Grid.Row="1">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <StackPanel Orientation="Vertical"/>
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Border Background="Black" BorderBrush="#FFAB9066" BorderThickness="1">
+                                                        <Grid>
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition Height="30"/>
+                                                                <RowDefinition />
+                                                                <RowDefinition />
+                                                            </Grid.RowDefinitions>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="50*" />
+                                                                <ColumnDefinition Width="50*" />
+                                                            </Grid.ColumnDefinitions>
+                                                            
+                                                            <Label Content="Match Percentage" FontWeight="Bold" FontSize="14" Grid.Row="0" Grid.Column="0" Foreground="#FFAB9066"/>
+                                                            <Label Content="{Binding PercentMatch}" FontWeight="Bold" FontSize="14" Grid.Row="0" Grid.Column="1" Foreground="#FFAB9066"/>
+                                                            <ItemsControl ItemsSource="{Binding MatchedItems}" Grid.Row="1" Grid.Column="0">
+                                                                <ItemsControl.ItemsPanel>
+                                                                    <ItemsPanelTemplate>
+                                                                        <StackPanel Orientation="Vertical"/>
+                                                                    </ItemsPanelTemplate>
+                                                                </ItemsControl.ItemsPanel>
+                                                                <ItemsControl.ItemTemplate>
+                                                                    <DataTemplate>
+                                                                        <RadioButton Tag="{Binding }" GroupName="Items" Content="{Binding TypeLine}" Foreground="#FFAB9066" Checked="RadioButton_Checked" Margin="5,0,0,0" />
+                                                                    </DataTemplate>
+                                                                </ItemsControl.ItemTemplate>
+                                                            </ItemsControl>
+                                                            <ItemsControl ItemsSource="{Binding Missing}" Grid.Row="2" Grid.Column="0" >
+                                                                <ItemsControl.ItemsPanel>
+                                                                    <ItemsPanelTemplate>
+                                                                        <StackPanel Orientation="Vertical"/>
+                                                                    </ItemsPanelTemplate>
+                                                                </ItemsControl.ItemsPanel>
+                                                                <ItemsControl.ItemTemplate>
+                                                                    <DataTemplate>
+                                                                        <StackPanel>
+                                                                            <Label Content="{Binding }" Foreground="#FFAB9066" />
+                                                                        </StackPanel>
+                                                                    </DataTemplate>
+                                                                </ItemsControl.ItemTemplate>
+                                                            </ItemsControl>
+                                                        </Grid>
+                                                </Border>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                    </Expander>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Border>
+        <ContentControl Grid.Column="1" Content="{Binding SelectedItem, Converter={StaticResource tc}}" VerticalAlignment="Top" />
     </Grid>
 </UserControl>

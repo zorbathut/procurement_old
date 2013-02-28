@@ -12,6 +12,11 @@ namespace Procurement.ViewModel.Recipes
             : base()
         { }
 
+        public override string Name
+        {
+            get { return "1 Chromatic - 3 Link RGB Sockets"; }
+        }
+
         public override IEnumerable<RecipeResult> Matches(IEnumerable<Item> items)
         {
             return items.OfType<Gear>()

@@ -5,10 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:poe="clr-namespace:Procurement.Controls"
              mc:Ignorable="d" 
-              Height="600" Width="990">
-    <Grid x:Name="ViewContent" Width="990">
-        <ScrollViewer>
+             Height="630" Width="1012">
+    <Grid x:Name="ViewContent" Width="1012">
         <poe:RecipeResults />
-        </ScrollViewer>
     </Grid>
 </UserControl>

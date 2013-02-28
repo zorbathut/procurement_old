@@ -183,6 +183,7 @@
     <Compile Include="View\Converters\ItemPropertyToFormattedRunConverter.cs" />
     <Compile Include="View\Converters\ItemRequirementToFormattedRunConverter.cs" />
     <Compile Include="View\Converters\ItemToColorBrushConverter.cs" />
+    <Compile Include="View\Converters\RecipeDescriptionConverter.cs" />
     <Compile Include="View\Converters\TabIDToStashControlConverter.cs" />
     <Compile Include="View\InventoryView.xaml.cs">
       <DependentUpon>InventoryView.xaml</DependentUpon>

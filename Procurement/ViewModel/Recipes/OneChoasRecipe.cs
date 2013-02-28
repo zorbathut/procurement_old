@@ -51,6 +51,11 @@ namespace Procurement.ViewModel.Recipes
             }
         }
 
+        public override string Name
+        {
+            get { return "1 Chaos - Full Rare Set"; }
+        }
+
         private List<MatchedSet> sets = new List<MatchedSet>();
         public OneChoasRecipe()
             : base(80)

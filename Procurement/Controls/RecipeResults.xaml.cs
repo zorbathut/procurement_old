@@ -11,6 +11,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Procurement.ViewModel;
+using POEApi.Model;
 
 namespace Procurement.Controls
 {
@@ -22,6 +24,14 @@ namespace Procurement.Controls
         public RecipeResults()
         {
             InitializeComponent();
+        }
+
+        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            RecipeResultViewModel vm = this.DataContext as RecipeResultViewModel;
+            RadioButton button = sender as RadioButton;
+            Item item = button.Tag as Item;
+            vm.RadioButtonSelected(item);
         }
     }
 }
