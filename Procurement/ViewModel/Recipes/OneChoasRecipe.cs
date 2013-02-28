@@ -64,7 +64,8 @@ namespace Procurement.ViewModel.Recipes
         public override IEnumerable<RecipeResult> Matches(IEnumerable<Item> items)
         {
             List<Gear> allGear = items.OfType<Gear>().ToList();
-            Dictionary<string, List<Gear>> buckets = allGear.GroupBy(g => g.GearType)
+            Dictionary<string, List<Gear>> buckets = allGear.Where(g => g.Quality == Quality.Rare)
+                                                            .GroupBy(g => g.GearType)
                                                             .ToDictionary(g => g.Key.ToString(), g => g.ToList());
 
             mergeKeys(buckets, "One Handed", g => g.Properties.Any(pr => pr.Name.Contains("One Handed")), GearType.Axe, GearType.Bow, GearType.Claw, GearType.Dagger, GearType.Mace, GearType.Sceptre, GearType.Staff, GearType.Sword, GearType.Wand);
@@ -95,7 +96,7 @@ namespace Procurement.ViewModel.Recipes
             set.RingLeft = pullValue(buckets, GearType.Ring.ToString());
             set.RingRight = pullValue(buckets, GearType.Ring.ToString());
 
-            if (buckets["One Handed"].Count > 0 && buckets[GearType.Shield.ToString()].Count > 0)
+            if (buckets["One Handed"].Count > 0 && buckets.ContainsKey(GearType.Shield.ToString()) && buckets[GearType.Shield.ToString()].Count > 0)
             {
                 set.Weapon = pullValue(buckets, "One Handed");
                 set.Offhand = pullValue(buckets, GearType.Shield.ToString());
@@ -121,6 +122,9 @@ namespace Procurement.ViewModel.Recipes
 
         private Gear pullValue(Dictionary<string, List<Gear>> buckets, string fromBucket)
         {
+            if (!buckets.ContainsKey(fromBucket))
+                return null;
+
             List<Gear> bucket = buckets[fromBucket];
             if (bucket.Count == 0)
                 return null;
@@ -136,13 +140,15 @@ namespace Procurement.ViewModel.Recipes
         {
             buckets.Add(intoKey, new List<Gear>());
             foreach (GearType keyToMerge in toMerge)
-                buckets[intoKey].AddRange(buckets[keyToMerge.ToString()]);
+                if (buckets.ContainsKey(keyToMerge.ToString()))
+                    buckets[intoKey].AddRange(buckets[keyToMerge.ToString()]);
         }
 
         private void removeKeys(Dictionary<string, List<Gear>> buckets, params GearType[] keys)
         {
             foreach (GearType keyToMerge in keys)
-                buckets.Remove(keyToMerge.ToString());
+                if (buckets.ContainsKey(keyToMerge.ToString()))
+                    buckets.Remove(keyToMerge.ToString());
         }
     }
 }
