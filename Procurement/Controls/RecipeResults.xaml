@@ -8,6 +8,7 @@
     <UserControl.Resources>
         <v:TabIDToStashControlFiltered x:Key="tc" />
         <v:RecipeDescriptionConverter x:Key="rd" />
+        <v:ResultMatchConverter x:Key="rmc" />
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -52,9 +53,7 @@
                                                                 <ColumnDefinition Width="50*" />
                                                                 <ColumnDefinition Width="50*" />
                                                             </Grid.ColumnDefinitions>
-                                                            
-                                                            <Label Content="Match Percentage" FontWeight="Bold" FontSize="14" Grid.Row="0" Grid.Column="0" Foreground="#FFAB9066"/>
-                                                            <Label Content="{Binding PercentMatch}" FontWeight="Bold" FontSize="14" Grid.Row="0" Grid.Column="1" Foreground="#FFAB9066"/>
+                                                            <ContentControl Grid.Row="0" Grid.ColumnSpan="2" Content="{Binding PercentMatch, Converter={StaticResource rmc}}" HorizontalAlignment="Stretch" />
                                                             <ItemsControl ItemsSource="{Binding MatchedItems}" Grid.Row="1" Grid.Column="0">
                                                                 <ItemsControl.ItemsPanel>
                                                                     <ItemsPanelTemplate>
