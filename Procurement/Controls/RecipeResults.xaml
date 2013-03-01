@@ -25,6 +25,50 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
+                            <DataTemplate.Resources>
+                                <DataTemplate x:Key="nestedA">
+                                    <Border Background="Black" BorderBrush="#FFAB9066" BorderThickness="1">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="30"/>
+                                                <RowDefinition />
+                                                <RowDefinition />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="50*" />
+                                                <ColumnDefinition Width="50*" />
+                                            </Grid.ColumnDefinitions>
+                                            <ContentControl Grid.Row="0" Grid.ColumnSpan="2" Content="{Binding PercentMatch, Converter={StaticResource rmc}}" HorizontalAlignment="Stretch" />
+                                            <ItemsControl ItemsSource="{Binding MatchedItems}" Grid.Row="1" Grid.Column="0">
+                                                <ItemsControl.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <StackPanel Orientation="Vertical"/>
+                                                    </ItemsPanelTemplate>
+                                                </ItemsControl.ItemsPanel>
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <RadioButton Tag="{Binding }" GroupName="Items" Content="{Binding TypeLine}" Foreground="#FFAB9066" Checked="RadioButton_Checked" Margin="5,0,0,0" />
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                            <ItemsControl ItemsSource="{Binding Missing}" Grid.Row="2" Grid.Column="0" >
+                                                <ItemsControl.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <StackPanel Orientation="Vertical"/>
+                                                    </ItemsPanelTemplate>
+                                                </ItemsControl.ItemsPanel>
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel>
+                                                            <Label Content="{Binding }" Foreground="#FFAB9066" />
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </DataTemplate.Resources>
                             <Border Background="Black" BorderBrush="#FFAB9066" BorderThickness="1">
                                 <Grid>
                                     <Grid.RowDefinitions>
@@ -34,57 +78,13 @@
                                         <Expander.Header>
                                             <Label Content="{Binding Converter={StaticResource rd}}" FontWeight="Bold" FontSize="14" Foreground="#FFAB9066" />
                                         </Expander.Header>
-                                    <ItemsControl ItemsSource="{Binding Value}" Grid.Row="1">
-                                        <ItemsControl.ItemsPanel>
-                                            <ItemsPanelTemplate>
-                                                <StackPanel Orientation="Vertical"/>
-                                            </ItemsPanelTemplate>
-                                        </ItemsControl.ItemsPanel>
-                                        <ItemsControl.ItemTemplate>
-                                            <DataTemplate>
-                                                <Border Background="Black" BorderBrush="#FFAB9066" BorderThickness="1">
-                                                        <Grid>
-                                                            <Grid.RowDefinitions>
-                                                                <RowDefinition Height="30"/>
-                                                                <RowDefinition />
-                                                                <RowDefinition />
-                                                            </Grid.RowDefinitions>
-                                                            <Grid.ColumnDefinitions>
-                                                                <ColumnDefinition Width="50*" />
-                                                                <ColumnDefinition Width="50*" />
-                                                            </Grid.ColumnDefinitions>
-                                                            <ContentControl Grid.Row="0" Grid.ColumnSpan="2" Content="{Binding PercentMatch, Converter={StaticResource rmc}}" HorizontalAlignment="Stretch" />
-                                                            <ItemsControl ItemsSource="{Binding MatchedItems}" Grid.Row="1" Grid.Column="0">
-                                                                <ItemsControl.ItemsPanel>
-                                                                    <ItemsPanelTemplate>
-                                                                        <StackPanel Orientation="Vertical"/>
-                                                                    </ItemsPanelTemplate>
-                                                                </ItemsControl.ItemsPanel>
-                                                                <ItemsControl.ItemTemplate>
-                                                                    <DataTemplate>
-                                                                        <RadioButton Tag="{Binding }" GroupName="Items" Content="{Binding TypeLine}" Foreground="#FFAB9066" Checked="RadioButton_Checked" Margin="5,0,0,0" />
-                                                                    </DataTemplate>
-                                                                </ItemsControl.ItemTemplate>
-                                                            </ItemsControl>
-                                                            <ItemsControl ItemsSource="{Binding Missing}" Grid.Row="2" Grid.Column="0" >
-                                                                <ItemsControl.ItemsPanel>
-                                                                    <ItemsPanelTemplate>
-                                                                        <StackPanel Orientation="Vertical"/>
-                                                                    </ItemsPanelTemplate>
-                                                                </ItemsControl.ItemsPanel>
-                                                                <ItemsControl.ItemTemplate>
-                                                                    <DataTemplate>
-                                                                        <StackPanel>
-                                                                            <Label Content="{Binding }" Foreground="#FFAB9066" />
-                                                                        </StackPanel>
-                                                                    </DataTemplate>
-                                                                </ItemsControl.ItemTemplate>
-                                                            </ItemsControl>
-                                                        </Grid>
-                                                </Border>
-                                            </DataTemplate>
-                                        </ItemsControl.ItemTemplate>
-                                    </ItemsControl>
+                                        <ItemsControl ItemsSource="{Binding Value}" Grid.Row="1" ItemTemplate="{StaticResource nestedA}">
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <StackPanel Orientation="Vertical"/>
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                        </ItemsControl>
                                     </Expander>
                                 </Grid>
                             </Border>
