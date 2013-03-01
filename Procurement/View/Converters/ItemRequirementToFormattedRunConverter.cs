@@ -18,7 +18,7 @@ namespace Procurement.View
             Requirement requirement = value as Requirement;
 
             Run name = new Run(requirement.Name) { Foreground = Brushes.Gray };
-            Run v = new Run(requirement.Value) { Foreground = Brushes.White, FontWeight = FontWeights.Bold };
+            Run v = new Run(requirement.Value) { Foreground = Brushes.White };
 
             Paragraph paragraph = new Paragraph();
 

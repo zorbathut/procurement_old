@@ -17,13 +17,13 @@ namespace Procurement.ViewModel
 
             var parts = property.Name.Split('%');
             ret.Inlines.Add(new Run(parts[0]) { Foreground = Brushes.Gray });
-            ret.Inlines.Add(new Run(property.Values[0].Item1) { FontWeight = FontWeights.Bold, Foreground = Brushes.White } );
+            ret.Inlines.Add(new Run(property.Values[0].Item1) { Foreground = Brushes.White } );
             ret.Inlines.Add(new Run(parts[1].Substring(1)) { Foreground = Brushes.Gray });
 
             if (property.Values.Count == 1)
                 return ret;
 
-            ret.Inlines.Add(new Run(property.Values[1].Item1) { FontWeight = FontWeights.Bold, Foreground = Brushes.White } );
+            ret.Inlines.Add(new Run(property.Values[1].Item1) { Foreground = Brushes.White } );
             ret.Inlines.Add(new Run(parts[2].Substring(1)) { Foreground = Brushes.Gray });
 
             return ret;

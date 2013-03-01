@@ -28,8 +28,8 @@
                     <RowDefinition Height="130"/>
                 </Grid.RowDefinitions>
 
-                <Label Content="Email" Grid.Row="1" Grid.Column="0" FontFamily="Verdana" Foreground="#FFAB9066" FontSize="14" VerticalAlignment="Top" FontWeight="Bold"></Label>
-                <Label Content="Password" Grid.Row="2" Grid.Column="0" FontFamily="Verdana" Foreground="#FFAB9066" FontSize="14" VerticalAlignment="Top" FontWeight="Bold"></Label>
+                <Label x:Name="lblEmail" Content="Email" Grid.Row="1" Grid.Column="0" FontFamily="../Resources/#Fontin" Foreground="#FFAB9066" FontSize="14" VerticalAlignment="Top" ></Label>
+                <Label Content="Password" Grid.Row="2" Grid.Column="0" FontFamily="../Resources/#Fontin" Foreground="#FFAB9066" FontSize="14" VerticalAlignment="Top" ></Label>
 
                 <TextBox Name="txtLogin" Text="{Binding Email}" Grid.Row="1" Grid.Column="1" Height="22" Width="330" HorizontalAlignment="Left" VerticalAlignment="Top" Background="Black" BorderBrush="#FF76591B" Foreground="#FFAB9066" SelectionBrush="#FFCABE9F"></TextBox>
                 <PasswordBox Name="txtPassword" Grid.Row="2" Grid.Column="1" Height="22" Width="330" Background="Black" BorderBrush="#FF76591B" HorizontalAlignment="Left" VerticalAlignment="Top"  Foreground="#FFAB9066" SelectionBrush="#FFCABE9F"/>

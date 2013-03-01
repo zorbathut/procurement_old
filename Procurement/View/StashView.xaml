@@ -50,7 +50,7 @@
                                 </Border>
                             </Border>
                         </Border>
-                        <ScrollViewer x:Name="HeaderPanel" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled">
+                        <ScrollViewer x:Name="HeaderPanel" Grid.Row="0" Grid.Column="0"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled">
                             <ScrollViewer.Style>
                                 <Style TargetType="{x:Type ScrollViewer}">
                                     <Setter Property="Template">
@@ -82,7 +82,7 @@
                                                         </Image>
                                                     </Button>
 
-                                                    <ScrollContentPresenter Grid.Column="1" Content="{TemplateBinding ScrollViewer.Content}" />
+                                                    <ScrollContentPresenter Grid.Column="1" Content="{TemplateBinding ScrollViewer.Content}"  />
                                                     <Button Grid.Column="2" Command="ScrollBar.LineRightCommand" Background="Transparent">
                                                         <Image>
                                                             <Image.Style>
