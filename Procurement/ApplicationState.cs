@@ -47,17 +47,19 @@ namespace Procurement
 
         public static void SetDefaults()
         {
+            string favoriteLeague = Settings.UserSettings["FavoriteLeague"];
+            if (!string.IsNullOrEmpty(favoriteLeague))
+                CurrentLeague = favoriteLeague;
+
             string defaultCharacter = Settings.UserSettings["FavoriteCharacter"];
             if (defaultCharacter != string.Empty && Characters.Count(c => c.Name == defaultCharacter) == 1)
             {
                 CurrentCharacter = Characters.First(c => c.Name == defaultCharacter);
-                CurrentLeague = CurrentCharacter.League;
+                return;
             }
-            else
-            {
-                CurrentCharacter = Characters.First();
-                CurrentLeague = CurrentCharacter.League;
-            }
+
+            CurrentCharacter = Characters.First();
+            CurrentLeague = CurrentCharacter.League;
         }
     }
 }
