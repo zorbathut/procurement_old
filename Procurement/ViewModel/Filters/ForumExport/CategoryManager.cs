@@ -43,6 +43,7 @@ namespace Procurement.ViewModel.Filters
             return Assembly.GetExecutingAssembly().GetTypes()
                                                   .Where(t => !(t.IsAbstract || t.IsInterface) && typeof(IFilter).IsAssignableFrom(t) && t.Name != typeof(OrFilter).Name)
                                                   .Where(t => t.GetConstructor(new Type[] { }) != null)
+                                                  .OrderBy(t => t.Name)
                                                   .Select(t => Activator.CreateInstance(t) as IFilter)
                                                   .ToList();
         }

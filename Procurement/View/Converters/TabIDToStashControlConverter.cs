@@ -30,12 +30,19 @@ namespace Procurement.View
 
     public class TabIDToStashControlFiltered : IValueConverter
     {
+        public static Dictionary<string, Grid> cache;
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             if (value == null)
                 return null;
 
+            cache = cache ?? new Dictionary<string, Grid>();
+
             Item item = value as Item;
+            string key = getKey(item);
+            if (cache.ContainsKey(key))
+                return cache[key];
+
             int inventoryId = int.Parse(item.inventoryId.Replace("Stash", "")) - 1;
             Grid g = new Grid();
 
@@ -54,8 +61,15 @@ namespace Procurement.View
             control.SetValue(Grid.RowProperty, 1);
             g.Children.Add(tabImage);
             g.Children.Add(control);
+            cache.Add(key, g);
 
             return g;
+        }
+
+        private string getKey(Item item)
+        {
+            return string.Concat(item.inventoryId, ":", item.X, ":", item.Y, ":", ApplicationState.CurrentLeague);
+                    
         }
 
         private Image getImage(Tab tab, bool mouseOver)
