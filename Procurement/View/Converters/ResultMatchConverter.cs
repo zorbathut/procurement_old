@@ -53,7 +53,7 @@ namespace Procurement.View
 
         private LinearGradientBrush getBrush(decimal match)
         {
-            List<GradientStop> stops = match == 100 ? gradientStops["Perfect"] : gradientStops["Partial"];
+            List<GradientStop> stops = match >= 100 ? gradientStops["Perfect"] : gradientStops["Partial"];
             return new LinearGradientBrush(new GradientStopCollection(stops), new Point(0, 0), new Point(1, 0));
         }
 

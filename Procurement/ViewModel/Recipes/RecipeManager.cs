@@ -11,7 +11,7 @@ namespace Procurement.ViewModel.Recipes
         private List<Recipe> known;
         public RecipeManager()
         {
-            known = new List<Recipe>() { new OneChoasRecipe(), new Chromatic() };
+            known = new List<Recipe>() { new OneChoasRecipe(), new Chromatic(), new GCPRecipe() };
         }
 
         public Dictionary<string, List<RecipeResult>> Run(IEnumerable<Item> items)
