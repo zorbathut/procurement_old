@@ -80,14 +80,12 @@ namespace Procurement.ViewModel.Recipes
             if (current == target)
             {
                 combinations.Add(new Combination() { Match = new List<Gem>(workingSet), Perfect = true, Total = 40 });
-                Console.WriteLine("Perfect: sum(" + string.Join(",", workingSet.Select(n => n.Quality.ToString()).ToArray()) + ")=" + target);
                 stop = true;
                 return;
             }
             if (current >= target)
             {
                 combinations.Add(new Combination() { Match = new List<Gem>(workingSet), Perfect = false, Total = current });
-                Console.WriteLine("Over: " + current + " sum(" + string.Join(",", workingSet.Select(n => n.Quality.ToString()).ToArray()) + ")=" + target);
                 return;
             }
             for (int i = 0; i < pool.Count; i++)
