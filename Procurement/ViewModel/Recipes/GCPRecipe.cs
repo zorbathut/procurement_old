@@ -16,10 +16,11 @@ namespace Procurement.ViewModel.Recipes
         }
 
         private List<Combination> combinations;
+        private bool stop;
         private const int REQUIREDQUALITY = 40;
         
         public GCPRecipe()
-            : base(1)
+            : base(70)
         { }
 
         public override string Name
@@ -52,7 +53,7 @@ namespace Procurement.ViewModel.Recipes
                 if (leastOver != null)
                 {
                     leastOver.Match.ForEach(g => gems.Remove(g));
-                    yield return getResult(perfect);
+                    yield return getResult(leastOver);
                     continue;
                 }
 
@@ -68,6 +69,9 @@ namespace Procurement.ViewModel.Recipes
 
         private void getCombinations(List<Gem> pool, int target, List<Gem> workingSet)
         {
+            if (stop)
+                return;
+
             int current = 0;
             foreach (Gem x in workingSet)
             {
@@ -77,6 +81,8 @@ namespace Procurement.ViewModel.Recipes
             {
                 combinations.Add(new Combination() { Match = new List<Gem>(workingSet), Perfect = true, Total = 40 });
                 Console.WriteLine("Perfect: sum(" + string.Join(",", workingSet.Select(n => n.Quality.ToString()).ToArray()) + ")=" + target);
+                stop = true;
+                return;
             }
             if (current >= target)
             {
@@ -100,6 +106,7 @@ namespace Procurement.ViewModel.Recipes
         private void getCombinations(List<Gem> pool, int target)
         {
             combinations = new List<Combination>();
+            stop = false;
             getCombinations(pool, target, new List<Gem>());
         }
 
