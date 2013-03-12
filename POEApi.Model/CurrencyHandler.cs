@@ -5,7 +5,7 @@ namespace POEApi.Model
 {
     internal class CurrencyHandler
     {
-        internal static float GetGCPValue(OrbType type)
+        internal static double GetGCPValue(OrbType type)
         {
             if (!Settings.CurrencyRatios.ContainsKey(type))
                 return 0;
@@ -18,9 +18,9 @@ namespace POEApi.Model
             return ratio.OrbAmount * ratio.GCPAmount;
         }
 
-        public static float GetTotalGCP(IEnumerable<Currency> currency)
+        public static double GetTotalGCP(IEnumerable<Currency> currency)
         {
-            float total = 0;
+            double total = 0;
 
             foreach (var orb in currency)
                 total += orb.StackInfo.Amount * orb.GCPValue;
@@ -28,7 +28,7 @@ namespace POEApi.Model
             return total;
         }
 
-        public static Dictionary<OrbType, float> GetTotalGCPDistribution(IEnumerable<Currency> currency)
+        public static Dictionary<OrbType, double> GetTotalGCPDistribution(IEnumerable<Currency> currency)
         {
             return currency.Where(o => !o.TypeLine.Contains("Shard"))
                            .GroupBy(orb => orb.Type)

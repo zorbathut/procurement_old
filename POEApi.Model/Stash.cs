@@ -55,12 +55,12 @@ namespace POEApi.Model
                         .ToList();
         }
 
-        public float GetTotalGCP()
+        public double GetTotalGCP()
         {
             return CurrencyHandler.GetTotalGCP(Get<Currency>());
         }
 
-        public Dictionary<OrbType, float> GetTotalGCPDistribution()
+        public Dictionary<OrbType, double> GetTotalGCPDistribution()
         {
             return CurrencyHandler.GetTotalGCPDistribution(Get<Currency>());
         }

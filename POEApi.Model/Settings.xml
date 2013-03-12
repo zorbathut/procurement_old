@@ -24,6 +24,7 @@
         <Setting name="AccountPassword" value="" />
         <Setting name="FavoriteLeague" value="" />
         <Setting name="FavoriteCharacter" value="" />
+        <Setting name="UpdateRatesOnStartUp" value="false" />
     </UserSettings>
     <ProxySettings>
         <Setting name="Enabled" value="False" />

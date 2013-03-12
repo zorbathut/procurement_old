@@ -98,7 +98,7 @@ namespace Procurement.ViewModel
             get { return "Total GCP in Orbs : " + ApplicationState.Stash[ApplicationState.CurrentLeague].GetTotalGCP().ToString(); }
         }
 
-        public Dictionary<OrbType, float> TotalGCPDistibution
+        public Dictionary<OrbType, double> TotalGCPDistibution
         {
             get { return ApplicationState.Stash[ApplicationState.CurrentLeague].GetTotalGCPDistribution(); }
         }
@@ -158,6 +158,10 @@ namespace Procurement.ViewModel
         void ApplicationState_LeagueChanged(object sender, PropertyChangedEventArgs e)
         {
             getAvailableItems();
+            stashView.tabControl.SelectionChanged -= new SelectionChangedEventHandler(tabControl_SelectionChanged);
+            stashView.tabControl.Items.Clear();
+            stashView.tabControl.SelectionChanged += new SelectionChangedEventHandler(tabControl_SelectionChanged);
+            stashView_Loaded(sender, null);
             raisePropertyChanged("AvailableItems");
             raisePropertyChanged("TotalGCP");
             raisePropertyChanged("TotalGCPDistibution");

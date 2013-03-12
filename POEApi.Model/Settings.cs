@@ -17,7 +17,7 @@ namespace POEApi.Model
         static Settings()
         {
             originalDoc = XElement.Load(location);
-            CurrencyRatios = originalDoc.Elements("Ratios").Descendants().ToDictionary(orb => orb.Attribute("type").GetEnum<OrbType>(), orb => new CurrencyRatio(orb.Attribute("type").GetEnum<OrbType>(), (int)orb.Attribute("orbamount"), (int)orb.Attribute("gcpamount")));
+            CurrencyRatios = originalDoc.Elements("Ratios").Descendants().ToDictionary(orb => orb.Attribute("type").GetEnum<OrbType>(), orb => new CurrencyRatio(orb.Attribute("type").GetEnum<OrbType>(), (double)orb.Attribute("orbamount"), (double)orb.Attribute("gcpamount")));
 
             UserSettings = getStandardNameValue("UserSettings");
             ProxySettings = getStandardNameValue("ProxySettings");

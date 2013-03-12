@@ -57,11 +57,13 @@
     <Compile Include="ImageComparer.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="ItemFactory.cs" />
+    <Compile Include="JSONProxy\POEEx.cs" />
     <Compile Include="JSONProxy\Stash.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="OrbType.cs" />
     <Compile Include="Events\POEEventArgs.cs" />
     <Compile Include="Events\POEEventState.cs" />
+    <Compile Include="POEExRates.cs" />
     <Compile Include="POEModel.cs" />
     <Compile Include="Property.cs" />
     <Compile Include="ProxyMapper.cs" />

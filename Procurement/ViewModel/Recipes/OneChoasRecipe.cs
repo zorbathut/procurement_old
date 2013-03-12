@@ -57,8 +57,10 @@ namespace Procurement.ViewModel.Recipes
         }
 
         private List<MatchedSet> sets = new List<MatchedSet>();
+        
+        //Disabled until we have a way of getting ilvl
         public OneChoasRecipe()
-            : base(80)
+            : base(200)
         { }
 
         public override IEnumerable<RecipeResult> Matches(IEnumerable<Item> items)

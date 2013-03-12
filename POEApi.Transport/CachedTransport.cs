@@ -2,6 +2,8 @@
 using POEApi.Infrastructure;
 using System.Security;
 using POEApi.Infrastructure.Events;
+using System.Net;
+using System.Drawing;
 
 namespace POEApi.Transport
 {
@@ -53,11 +55,23 @@ namespace POEApi.Transport
 
         public Stream GetImage(string url)
         {
-            string key = string.Concat(url.GetHash(), ".png");
-            if (!commonCacheService.Exists(key))
-                commonCacheService.Set(key, innerTranport.GetImage(url));
+            Stream ms;
+            try
+            {
+                string key = string.Concat(url.GetHash(), ".png");
+                if (!commonCacheService.Exists(key))
+                    commonCacheService.Set(key, innerTranport.GetImage(url));
 
-            return commonCacheService.Get(key);
+                ms = commonCacheService.Get(key);
+            }
+            catch (WebException)
+            {
+                ms = new MemoryStream();
+                SystemIcons.Error.Save(ms);
+                ms.Seek(0, SeekOrigin.Begin);
+            }
+
+            return ms;
         }
 
         public Stream GetCharacters()
@@ -76,6 +90,11 @@ namespace POEApi.Transport
                 userCacheService.Set(characterName, innerTranport.GetInventory(characterName));
 
             return userCacheService.Get(characterName);
+        }
+
+        public Stream GetPOEExInfoRates()
+        {
+            return innerTranport.GetPOEExInfoRates();
         }
     }
 }

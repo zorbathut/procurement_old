@@ -3,6 +3,8 @@ using System.ComponentModel;
 using System.Linq;
 using POEApi.Model;
 using Procurement.View;
+using System.Windows.Input;
+using System.Threading.Tasks;
 
 namespace Procurement.ViewModel
 {
@@ -12,7 +14,8 @@ namespace Procurement.ViewModel
 
         private string currentCharacter;
         private string currentLeague;
-
+        private bool updateRatesOnStartUp;
+        private bool isBusy;
         public string CurrentLeague
         {
             get { return currentLeague; }
@@ -28,6 +31,17 @@ namespace Procurement.ViewModel
             }
         }
 
+        public bool IsBusy
+        {
+            get { return isBusy; }
+            set
+            {
+                isBusy = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("IsBusy"));
+            }
+        }
+
         public string CurrentCharacter
         {
             get { return currentCharacter; }
@@ -37,6 +51,19 @@ namespace Procurement.ViewModel
                     return;
                 currentCharacter = value;
                 Settings.UserSettings["FavoriteCharacter"] = value;
+                Settings.Save();
+            }
+        }
+
+        public bool UpdateRatesOnStartUp
+        {
+            get { return updateRatesOnStartUp; }
+            set
+            {
+                if (updateRatesOnStartUp == value)
+                    return;
+                updateRatesOnStartUp = value;
+                Settings.UserSettings["UpdateRatesOnStartUp"] = value.ToString();
                 Settings.Save();
             }
         }
@@ -50,6 +77,8 @@ namespace Procurement.ViewModel
             get { return Settings.CurrencyRatios.Values.ToList(); }
         }
 
+        public ICommand UpdateRates { get; private set; }
+
         public SettingsViewModel(SettingsView view)
         {
             this.view = view;
@@ -58,7 +87,24 @@ namespace Procurement.ViewModel
             refreshCharacters();
             this.CurrentCharacter = Settings.UserSettings["FavoriteCharacter"];
             
-            
+            this.updateRatesOnStartUp = false;
+            if (Settings.UserSettings.ContainsKey("UpdateRatesOnStartUp"))
+                this.updateRatesOnStartUp = bool.Parse(Settings.UserSettings["UpdateRatesOnStartUp"]);
+
+            UpdateRates = new DelegateCommand(updateCurrencyFromPOEEx);
+            isBusy = false;
+        }
+
+        private void updateCurrencyFromPOEEx(object o)
+        {
+            IsBusy = true;
+            Task.Factory.StartNew(() => ApplicationState.Model.UpdateCurrenyRatiosFromPOEEx())
+                        .ContinueWith(t =>
+                        {
+                            if (PropertyChanged != null)
+                                PropertyChanged(this, new PropertyChangedEventArgs("CurrencyRatios"));
+                            IsBusy = false;
+                        });
         }
 
         private void refreshCharacters()

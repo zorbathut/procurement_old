@@ -99,6 +99,46 @@
                         </Grid>
                     </Border>
                 </DataTemplate>
+                <DataTemplate DataType="{x:Type vm:CurrencyItemHoverViewModel}">
+                    <Border Background="{Binding Item, Converter={StaticResource vc}, ConverterParameter=0.3}" HorizontalAlignment="Stretch" >
+                        <Grid  MinWidth="300" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Image HorizontalAlignment="Left" Source="/Images/ItemHover/ItemHeaderCurrencyLeft.png" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" />
+                            <Image Source="/Images/ItemHover/ItemHeaderCurrencyMiddle.png" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Stretch="Fill" Canvas.ZIndex="0" />
+                            <Image HorizontalAlignment="Right" Source="/Images/ItemHover/ItemHeaderCurrencyRight.png" Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" />
+                            <TextBlock Margin="0,5,0,0"  FontFamily="../Resources/#Fontin SmallCaps" Grid.Column="1" Grid.Row="0" Text="{Binding Name}" FontSize="18" Foreground="#AA9E82" Visibility="{Binding HasName, Converter={StaticResource bc}, ConverterParameter=CollapseWhenFalse}" HorizontalAlignment="Center"/>
+                            <TextBlock FontFamily="../Resources/#Fontin SmallCaps" Grid.Column="1" Grid.Row="1" Text="{Binding TypeLine}" FontSize="18" Foreground="White"   HorizontalAlignment="Center"/>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vm:GemItemHoverViewModel}">
+                    <Border Background="{Binding Item, Converter={StaticResource vc}, ConverterParameter=0.3}" HorizontalAlignment="Stretch" >
+                        <Grid  MinWidth="200" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Image HorizontalAlignment="Left" Source="/Images/ItemHover/ItemHeaderGemLeft.png" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" />
+                            <Image Source="/Images/ItemHover/ItemHeaderGemMiddle.png" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Stretch="Fill" Canvas.ZIndex="0" />
+                            <Image HorizontalAlignment="Right" Source="/Images/ItemHover/ItemHeaderGemRight.png" Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" />
+                            <TextBlock Margin="0,5,0,0"  FontFamily="../Resources/#Fontin SmallCaps" Grid.Column="1" Grid.Row="0" Text="{Binding Name}" FontSize="18" Foreground="#19A29B" Visibility="{Binding HasName, Converter={StaticResource bc}, ConverterParameter=CollapseWhenFalse}" HorizontalAlignment="Center"/>
+                            <TextBlock FontFamily="../Resources/#Fontin SmallCaps" Grid.Column="1" Grid.Row="1" Text="{Binding TypeLine}" FontSize="18" Foreground="White"   HorizontalAlignment="Center"/>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
                 <DataTemplate DataType="{x:Type vm:ItemHoverViewModel}">
                     <Border Background="{Binding Item, Converter={StaticResource vc}, ConverterParameter=0.3}" >
                         <Grid Margin="30,0,30,0" MinWidth="200">

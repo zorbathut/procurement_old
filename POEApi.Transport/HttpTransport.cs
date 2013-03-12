@@ -25,6 +25,7 @@ namespace POEApi.Transport
         private const string characterURL = @"http://www.pathofexile.com/character-window/get-characters";
         private const string stashURL = @"http://www.pathofexile.com/character-window/get-stash-items?league={0}&tabs=1&tabIndex={1}";
         private const string inventoryURL = @"http://www.pathofexile.com/character-window/get-items?character={0}";
+        private const string poeexInfoRates = @"http://www.poeex.info/index.json";
 
         public event ThottledEventHandler Throttled;
 
@@ -130,6 +131,12 @@ namespace POEApi.Transport
             return new MemoryStream(client.DownloadData(url));
         }
 
+        public Stream GetPOEExInfoRates()
+        {
+            WebClient client = new WebClient();
+            client.Proxy = processProxySettings();
+            return new MemoryStream(client.DownloadData(poeexInfoRates));
+        }
 
         public Stream GetInventory(string characterName)
         {

@@ -56,5 +56,10 @@ namespace POEApi.Transport
         {
             return transport.GetInventory(characterName);
         }
+
+        public Stream GetPOEExInfoRates()
+        {
+            return transport.GetPOEExInfoRates();
+        }
     }
 }

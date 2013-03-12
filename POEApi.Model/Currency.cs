@@ -3,7 +3,7 @@
     public class Currency : Item
     {
         public OrbType Type { get; private set; }
-        public float GCPValue { get; private set; }
+        public double GCPValue { get; private set; }
         public StackInfo StackInfo { get; private set; }
 
         public Currency(JSONProxy.Item item) : base(item)

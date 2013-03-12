@@ -58,14 +58,19 @@ namespace POEApi.Model
         
         internal static OrbType GetOrbType(JSONProxy.Item item)
         {
+            return GetOrbType(item.TypeLine);
+        }
+
+        internal static OrbType GetOrbType(string name)
+        {
             try
             {
-                return orbMap.First(m => item.TypeLine.Contains(m.Key)).Value;
+                return orbMap.First(m => name.Contains(m.Key)).Value;
             }
             catch (Exception ex)
             {
                 Logger.Log(ex);
-                var message = "ProxyMapper.GetOrbType Failed! ItemType = " + item.TypeLine;
+                var message = "ProxyMapper.GetOrbType Failed! ItemType = " + name;
                 Logger.Log(message);
                 throw new Exception(message);
             }

@@ -3,19 +3,27 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:v="clr-namespace:Procurement.View"
              mc:Ignorable="d" 
              Height="630" Width="1012">
     <UserControl.Resources>
         <ResourceDictionary Source="/Procurement;component/Controls/ExpressionDark.xaml" />
     </UserControl.Resources>
     <Grid x:Name="ViewContent" Width="1012">
+        <Grid.Resources>
+            <v:VisibilityConverter x:Key="vc" />
+        </Grid.Resources>
+
+        <Border Canvas.ZIndex="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Black"  Opacity="0.79" Visibility="{Binding IsBusy, Converter={StaticResource vc}, ConverterParameter=IsBusy}">
+            <v:LoadingAnimation HorizontalAlignment="Center" VerticalAlignment="Center" />
+        </Border>
+
         <Grid Margin="15,0,15,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="100"/>
                 <RowDefinition Height="5"/>
                 <RowDefinition Height="500"/>
             </Grid.RowDefinitions>
-
             <Border Grid.Row="0" BorderBrush="#FF76591B" BorderThickness="2" Grid.Column="2" Background="Black" Margin="0,15,0,0">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -43,8 +51,17 @@
                         <RowDefinition Height="30"/>
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    
-                    <Label Grid.Row="0" Content="Currency Ratios" Foreground="#FFAB9066" FontSize="14" FontWeight="Bold"/>
+
+                    <Grid Grid.Row="0" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Content="Currency Ratios" Foreground="#FFAB9066" FontSize="14" FontWeight="Bold"/>
+                        <CheckBox Grid.Column="1" IsChecked="{Binding UpdateRatesOnStartUp}"  Content="Update Rates on startup" Foreground="#FFAB9066" FontSize="14" FontWeight="Bold"/>
+                        <Button Grid.Column="2" Command="{Binding UpdateRates}" Content="Update Now" Foreground="#FFAB9066" FontSize="14" FontWeight="Bold" Style="{Binding }"/>
+                    </Grid>
 
                     <DataGrid Grid.Row="1" Name="CurrencyGrid" Background="Black" ItemsSource="{Binding CurrencyRatios}" SelectionMode="Single" AutoGenerateColumns="False" RowEditEnding="CurrencyGrid_RowEditEnding" Width="460" HorizontalAlignment="Left" Margin="5,0,0,0" BorderThickness="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden">
                         <DataGrid.Columns>

@@ -89,9 +89,15 @@ namespace Procurement.ViewModel
                     ApplicationState.Model.ForceRefresh();
 
                 updateView("Loading characters...");
-
                 var chars = ApplicationState.Model.GetCharacters();
                 updateView("[OK]");
+
+                if (Settings.UserSettings.ContainsKey("UpdateRatesOnStartUp") && bool.Parse(Settings.UserSettings["UpdateRatesOnStartUp"]) == true)
+                {
+                    updateView("Downloading POEEx Rates...");
+                    ApplicationState.Model.UpdateCurrenyRatiosFromPOEEx();
+                    updateView("[OK]");
+                }
 
                 foreach (var character in chars)
                 {

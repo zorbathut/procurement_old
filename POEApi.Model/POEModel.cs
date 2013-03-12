@@ -208,6 +208,26 @@ namespace POEApi.Model
             return stash.CalculateFreeSpace();   
         }
 
+        public void UpdateCurrenyRatiosFromPOEEx()
+        {
+            DataContractJsonSerializer serialiser = new DataContractJsonSerializer(typeof(JSONProxy.POEExRates));
+            JSONProxy.POEExRates rates;
+
+            using (Stream stream = transport.GetPOEExInfoRates())
+                rates = (JSONProxy.POEExRates)serialiser.ReadObject(stream);
+
+            POEExRates latest = new POEExRates(rates);
+
+            foreach (OrbType orbType in latest.CurrencyRatios.Keys)
+            {
+                if (!Settings.CurrencyRatios.ContainsKey(orbType))
+                    continue;
+
+                Settings.CurrencyRatios[orbType] = latest.CurrencyRatios[orbType];
+            }
+
+            Settings.Save();
+        }
         private void onStashLoaded(POEEventState state, int index, int numberOfTabs)
         {
             if (StashLoading != null)

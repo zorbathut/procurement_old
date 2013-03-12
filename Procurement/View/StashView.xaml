@@ -10,6 +10,36 @@
     <UserControl.Resources>
         <SolidColorBrush x:Key="TabControlNormalBorderBrush" Color="#AA9072" />
         <SolidColorBrush x:Key="ButtonNormalBackground" Color="#2D1D13" />
+        <Style TargetType="{x:Type TabItem}" x:Key="NonImages">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TabItem}">
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Foreground" Value="#E7C892" />
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="False">
+                                <Setter Property="Foreground" Value="#795D42" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                        <Grid>
+                            <Border 
+                                  Name="Border"
+                                  Background="#2D1C13"
+                                  BorderBrush="Black" 
+                                  BorderThickness="1,1,1,1" 
+                                  CornerRadius="6,6,0,0" >
+                                <ContentPresenter x:Name="ContentSite"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    ContentSource="Header"
+                    Margin="12,2,12,2"/>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </UserControl.Resources>
     <Grid x:Name="ViewContent" Width="1012">
         <Grid.ColumnDefinitions>
@@ -150,7 +180,7 @@
                 </Border>
 
                 <TabControl Grid.Row="1" Grid.Column="2" >
-                    <TabItem Header="Currency Breakdown    ">
+                    <TabItem Header="Currency Breakdown    " Style="{StaticResource NonImages}">
                         <Border BorderBrush="#FF76591B" BorderThickness="2" VerticalAlignment="Top" Background="Black" Margin="0,0,0,0">
                             <Grid Margin="5,5,5,5">
                                 <Grid.RowDefinitions>
@@ -188,7 +218,7 @@
                             </Grid>
                         </Border>
                     </TabItem>
-                    <TabItem Header="Advanced Search">
+                    <TabItem Header="Advanced Search" Style="{StaticResource NonImages}">
                         <Border BorderBrush="#FF76591B" BorderThickness="2" VerticalAlignment="Top" Background="Black" Margin="0,0,0,0">
                             <Grid>
                                 <StackPanel>
