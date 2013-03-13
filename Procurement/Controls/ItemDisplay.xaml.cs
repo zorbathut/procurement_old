@@ -25,11 +25,11 @@ namespace Procurement.Controls
             ItemDisplayViewModel vm = this.DataContext as ItemDisplayViewModel;
             Image i = vm.getImage();
             UIElement socket = vm.getSocket();
-            
+
             this.MainGrid.Children.Add(i);
 
             if (socket != null)
-                    doSocketOnHover(socket, i);
+                doSocketOnHover(socket, i);
 
             this.Height = i.Height;
             this.Width = i.Width;
@@ -43,7 +43,7 @@ namespace Procurement.Controls
 
         private void doSocketOnHover(UIElement socket, Image i)
         {
-            Popup popup = new Popup();
+            NonTopMostPopup popup = new NonTopMostPopup();
             popup.PopupAnimation = PopupAnimation.Fade;
             popup.StaysOpen = true;
             popup.Child = socket;

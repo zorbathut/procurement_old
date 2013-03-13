@@ -117,6 +117,7 @@
     <Compile Include="Controls\LeagueSelection.xaml.cs">
       <DependentUpon>LeagueSelection.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\NonTopMostPopup.cs" />
     <Compile Include="Controls\RecipeResults.xaml.cs">
       <DependentUpon>RecipeResults.xaml</DependentUpon>
     </Compile>
