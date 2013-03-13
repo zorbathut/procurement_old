@@ -121,7 +121,7 @@
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type vm:GemItemHoverViewModel}">
                     <Border Background="{Binding Item, Converter={StaticResource vc}, ConverterParameter=0.3}" HorizontalAlignment="Stretch" >
-                        <Grid  MinWidth="200" >
+                        <Grid  MinWidth="300" >
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />

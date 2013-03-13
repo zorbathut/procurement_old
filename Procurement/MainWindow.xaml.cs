@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 using Procurement.ViewModel;
+using Procurement.Controls;
 
 namespace Procurement
 {
@@ -16,6 +17,7 @@ namespace Procurement
 
         void MainWindow_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            ItemDisplay.ClosePopups();
             DragMove();
         }
     }

@@ -53,14 +53,13 @@ namespace Procurement.ViewModel.Recipes
 
         public override string Name
         {
-            get { return "1 Chaos - Full Rare Set"; }
+            get { return "1 Chance/Chaos - Full Rare Set"; }
         }
 
         private List<MatchedSet> sets = new List<MatchedSet>();
         
-        //Disabled until we have a way of getting ilvl
         public OneChoasRecipe()
-            : base(200)
+            : base(80)
         { }
 
         public override IEnumerable<RecipeResult> Matches(IEnumerable<Item> items)

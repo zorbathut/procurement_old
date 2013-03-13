@@ -20,6 +20,11 @@ namespace Procurement.Controls
             this.Loaded += new RoutedEventHandler(ItemDisplay_Loaded);
         }
 
+        public static void ClosePopups()
+        {
+            closeOthersButNot(new Popup());
+        }
+
         void ItemDisplay_Loaded(object sender, RoutedEventArgs e)
         {
             ItemDisplayViewModel vm = this.DataContext as ItemDisplayViewModel;

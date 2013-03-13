@@ -16,6 +16,8 @@ namespace Procurement.ViewModel
 {
     public class LoginWindowViewModel : INotifyPropertyChanged
     {
+        private static bool authOffLine;       
+        
         private UserControl view;
         private Brush brush;
         private static RichTextBox statusBox;
@@ -72,12 +74,10 @@ namespace Procurement.ViewModel
             this.usePasswordBoxPassword = true;
         }
 
-        private static bool authOffLine;
         public void Login(bool offline)
         {
             authOffLine = offline;
             toggleControls();
-
 
             Task.Factory.StartNew(() =>
             {
@@ -92,12 +92,7 @@ namespace Procurement.ViewModel
                 var chars = ApplicationState.Model.GetCharacters();
                 updateView("[OK]");
 
-                if (Settings.UserSettings.ContainsKey("UpdateRatesOnStartUp") && bool.Parse(Settings.UserSettings["UpdateRatesOnStartUp"]) == true)
-                {
-                    updateView("Downloading POEEx Rates...");
-                    ApplicationState.Model.UpdateCurrenyRatiosFromPOEEx();
-                    updateView("[OK]");
-                }
+                getExchangeRates();
 
                 foreach (var character in chars)
                 {
@@ -111,6 +106,19 @@ namespace Procurement.ViewModel
                 updateView("\nDone!");
                 OnLoginCompleted();
             }).ContinueWith((t) => { Logger.Log(t.Exception.InnerException.ToString()); updateView("ERROR: " + t.Exception.InnerException.Message); }, TaskContinuationOptions.OnlyOnFaulted);
+        }
+
+        private void getExchangeRates()
+        {
+            if (authOffLine)
+                return;
+
+            if (!Settings.UserSettings.ContainsKey("UpdateRatesOnStartUp") || !bool.Parse(Settings.UserSettings["UpdateRatesOnStartUp"]) == true)
+                return;
+
+            updateView("Loading Orb Ratios from poeex.info...");
+            ApplicationState.Model.UpdateCurrenyRatiosFromPOEEx();
+            updateView("[OK]");
         }
 
         private void saveSettings(SecureString password)

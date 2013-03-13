@@ -26,12 +26,7 @@ namespace Procurement.ViewModel
 
         private void execute(object obj)
         {
-            var key = obj.ToString();
-
-            //if (key == "Exit")
-            //    Application.Current.Shutdown();
-            //else
-                loadView(screens[key]);
+            loadView(screens[obj.ToString()]);
         }
 
         private void initScreens()
