@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using POEApi.Model;
+using System.Text.RegularExpressions;
 
 namespace Procurement.ViewModel.Filters
 {
@@ -10,13 +11,13 @@ namespace Procurement.ViewModel.Filters
     {
         private string keyword;
         private string help;
-        private List<string> stats;
+        private List<Regex> stats;
 
         public StatFilter(string keyword, string help, params string[] stats)
         {
             this.keyword = keyword;
             this.help = help;
-            this.stats = new List<string>(stats);
+            this.stats = stats.Select(stat => new Regex(stat, RegexOptions.Singleline | RegexOptions.IgnoreCase)).ToList();
         }
         public bool CanFormCategory
         {
@@ -39,18 +40,18 @@ namespace Procurement.ViewModel.Filters
             if (gear == null)
                 return false;
 
-            List<string> pool = new List<string>(stats);
+            List<Regex> pool = new List<Regex>(stats);
             List<string> all = new List<string>();
 
             if (gear.Implicitmods != null)
-                all.AddRange(gear.Implicitmods.Select(s => s.ToUpper()));
+                all.AddRange(gear.Implicitmods.Select(s => s));
 
             if (gear.Explicitmods != null)
-                all.AddRange(gear.Explicitmods.Select(s => s.ToUpper()));
+                all.AddRange(gear.Explicitmods.Select(s => s));
 
             foreach (string stat in all)
             {
-                string result = pool.Find(s => stat.Contains(s));
+                Regex result = pool.Find(s => s.IsMatch(stat));
                 pool.Remove(result);
             }
 
