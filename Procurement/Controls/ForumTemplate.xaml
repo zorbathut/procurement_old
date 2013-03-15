@@ -10,12 +10,16 @@
             <ColumnDefinition Width="60*"/>
             <ColumnDefinition Width="40*"/>
         </Grid.ColumnDefinitions>
-        <DataGrid Grid.Column="0" Width="500" AutoGenerateColumns="False" ItemsSource="{Binding Filters}" >
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Category" Width="150" Binding="{Binding Category}" />
-                <DataGridTextColumn Header="Filters" IsReadOnly="True" Width="450" Binding="{Binding Filters}" />
-            </DataGrid.Columns>
-        </DataGrid>
+
+        <StackPanel Grid.Column="0">
+            <Button Content="Add Category" Style="{Binding}" Width="120" Height="20" HorizontalAlignment="Left"/>
+            <DataGrid Width="500" AutoGenerateColumns="False" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Category" Width="150" Binding="{Binding Category}" />
+                    <DataGridTextColumn Header="Filters" IsReadOnly="True" Width="450" Binding="{Binding Filters}" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="25"/>
@@ -23,13 +27,13 @@
             </Grid.RowDefinitions>
 
             <Button Content="Add Filter" Grid.Row="0" Style="{Binding}" Width="120" Height="20" HorizontalAlignment="Left"/>
-            <ListBox Grid.Row="1">
-                <ListBox.Items>
-                    <ListBoxItem Content="4 Link" />
-                    <ListBoxItem Content="White Quality" />
-                </ListBox.Items>
+            <ListBox Grid.Row="1" ItemsSource="{Binding Filters}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Label Content="{Binding Keyword}" ToolTip="{Binding Help}" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
             </ListBox>
-
         </Grid>
     </Grid>
 </UserControl>

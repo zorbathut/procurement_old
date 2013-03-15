@@ -5,8 +5,13 @@ using System.Text;
 
 namespace Procurement.ViewModel.Filters
 {
-    internal class OrFilter : IFilter
+    public class OrFilter : IFilter
     {
+        public FilterGroup Group
+        {
+            get { return FilterGroup.Default; }
+        }
+
         List<IFilter> filters;
 
         public OrFilter(params IFilter[] filters)

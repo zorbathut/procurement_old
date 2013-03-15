@@ -4,8 +4,13 @@ using POEApi.Model;
 
 namespace Procurement.ViewModel.Filters
 {
-    internal abstract class QualityFilter : IFilter
+    public abstract class QualityFilter : IFilter
     {
+        public FilterGroup Group
+        {
+            get { return FilterGroup.Quality; }
+        }
+
         private Quality quality;
         public QualityFilter(Quality quality)
         {
@@ -29,5 +34,7 @@ namespace Procurement.ViewModel.Filters
         {
             get { return true; }
         }
+
+
     }
 }

@@ -1,26 +1,23 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using Procurement.ViewModel.Filters;
+
 namespace Procurement.ViewModel
 {
-    public class TradingViewModel : INotifyPropertyChanged
+    internal class TradingViewModel : INotifyPropertyChanged
     {
-        public class FilterInfo : INotifyPropertyChanged
-        {
-            public string Category { get; set; }
-            public string Filters { get; set; }
-
-            public event PropertyChangedEventHandler PropertyChanged;
-        }
-
         public TradingViewModel()
         {
-            Filters = new List<FilterInfo>();
-            Filters.Add(new FilterInfo() { Category = "Headshot", Filters = "4L, White" });
-            Filters.Add(new FilterInfo() { Category = "Uniques Weapons", Filters = "Uniques, Weapons" });
+            Filters = CategoryManager.GetAvailableFilters();
         }
 
-        private List<FilterInfo> filters;
-        public List<FilterInfo> Filters
+        private List<IFilter> getFilters()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        private List<IFilter> filters;
+        public List<IFilter> Filters
         {
             get { return filters; }
             set

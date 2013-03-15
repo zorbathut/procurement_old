@@ -1,7 +1,12 @@
 ﻿namespace Procurement.ViewModel.Filters
 {
-    internal class LightningResistance : StatFilter
+    public class LightningResistance : StatFilter
     {
+        public override  FilterGroup Group
+        {
+            get { return FilterGroup.Resistances; }
+        }
+
         public LightningResistance()
             : base("Lightning Resistance", "Lightning Resistance", "to Lightning Resistance")
         { }

@@ -7,6 +7,12 @@ namespace Procurement.ViewModel.Filters
     internal abstract class Link : IFilter
     {
         private int links;
+        
+        public FilterGroup Group 
+        { 
+            get { return FilterGroup.Links; } 
+        }
+ 
         public Link(int links)
         {
             this.links = links;

@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using POEApi.Model;
 using System.Text.RegularExpressions;
+using POEApi.Model;
 
 namespace Procurement.ViewModel.Filters
 {
-    internal abstract class StatFilter : IFilter
+    public abstract class StatFilter : IFilter
     {
         private string keyword;
         private string help;
         private List<Regex> stats;
+
+        public abstract FilterGroup Group { get; }
 
         public StatFilter(string keyword, string help, params string[] stats)
         {
@@ -57,5 +57,5 @@ namespace Procurement.ViewModel.Filters
 
             return pool.Count == 0;
         }
-    }
+   }
 }

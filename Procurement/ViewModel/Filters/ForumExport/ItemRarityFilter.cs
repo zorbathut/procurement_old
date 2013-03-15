@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using POEApi.Model;
-
-namespace Procurement.ViewModel.Filters
+﻿namespace Procurement.ViewModel.Filters
 {
     internal class ItemRarityFilter : StatFilter
     {
+        public override FilterGroup Group
+        {
+            get { return FilterGroup.MagicFind; }
+        }
+
         public ItemRarityFilter()
             : base("Item Rarity", "Item with the Item Rarity stat", "INCREASED RARITY")
         { }

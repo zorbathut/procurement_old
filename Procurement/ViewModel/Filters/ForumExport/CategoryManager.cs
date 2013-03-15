@@ -31,13 +31,17 @@ namespace Procurement.ViewModel.Filters
             return categories[category];
         }
 
-        // [Insert sticky's code below]
         private static void initializeUserCategories()
         {
             //For Testing and Illustration
             categories.Add("Craftables", new List<IFilter>() { new WhiteQuality(), new OrFilter(new FourLink(), new FiveLink()) });
         }
 
+        public static List<IFilter> GetAvailableFilters()
+        {
+            availableFilters = availableFilters ?? getAvailableFilters();
+            return availableFilters;
+        }
         private static List<IFilter> getAvailableFilters()
         {
             return Assembly.GetExecutingAssembly().GetTypes()
@@ -45,6 +49,7 @@ namespace Procurement.ViewModel.Filters
                                                   .Where(t => t.GetConstructor(new Type[] { }) != null)
                                                   .OrderBy(t => t.Name)
                                                   .Select(t => Activator.CreateInstance(t) as IFilter)
+                                                  .OrderBy(i => i.Group)
                                                   .ToList();
         }
 

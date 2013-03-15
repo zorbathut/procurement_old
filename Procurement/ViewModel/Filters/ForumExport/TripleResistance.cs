@@ -1,13 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using POEApi.Model;
 
 namespace Procurement.ViewModel.Filters
 {
-    internal class TripleResistance : IFilter
+    public class TripleResistance : IFilter
     {
+        public FilterGroup Group
+        {
+            get { return FilterGroup.Resistances; }
+        }
+
         private List<StatFilter> resistances;
         public TripleResistance()
         {
@@ -36,5 +39,6 @@ namespace Procurement.ViewModel.Filters
         {
             return resistances.Count(r => r.Applicable(item)) >= 3;
         }
+
     }
 }

@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using POEApi.Model;
+﻿using POEApi.Model;
 
 namespace Procurement.ViewModel.Filters
 {
     internal class QualityGemFilter : IFilter
     {
+        public FilterGroup Group
+        {
+            get { return FilterGroup.Gems; }
+        }
 
         public bool CanFormCategory
         {

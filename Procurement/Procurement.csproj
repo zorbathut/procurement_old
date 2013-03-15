@@ -131,6 +131,7 @@
     <Compile Include="ViewModel\DisplayModeStrategy\NamePlusValueStrategy.cs" />
     <Compile Include="ViewModel\DisplayModeStrategy\StringFormatStrategy.cs" />
     <Compile Include="ViewModel\DisplayModeStrategy\ValuesPlusNameStrategy.cs" />
+    <Compile Include="ViewModel\Filters\FilterGroup.cs" />
     <Compile Include="ViewModel\Filters\ForumExport\AllElementalResistances.cs" />
     <Compile Include="ViewModel\Filters\ForumExport\CategoryManager.cs">
       <SubType>Code</SubType>

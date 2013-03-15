@@ -6,8 +6,13 @@ using POEApi.Model;
 
 namespace Procurement.ViewModel.Filters
 {
-    internal class ItemFilter : IFilter
+    public class ItemFilter : IFilter
     {
+        public FilterGroup Group
+        {
+            get { return FilterGroup.Default; }
+        }
+
         public bool CanFormCategory
         {
             get { return false; }

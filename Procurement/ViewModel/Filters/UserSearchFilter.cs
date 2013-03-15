@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using POEApi.Model;
+﻿using POEApi.Model;
 
 namespace Procurement.ViewModel.Filters
 {
-    internal class UserSearchFilter : IFilter
+    public class UserSearchFilter : IFilter
     {
+        public FilterGroup Group
+        {
+            get { return FilterGroup.Default; }
+        }
+
         private string filter;
         public UserSearchFilter(string filter)
         {

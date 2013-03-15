@@ -8,6 +8,11 @@ namespace Procurement.ViewModel.Filters
 {
     internal class DropOnlyGemFilter : IFilter
     {
+        public FilterGroup Group
+        {
+            get { return FilterGroup.Gems; }
+        }
+
         private List<string> dropOnly;
         public DropOnlyGemFilter()
         {
