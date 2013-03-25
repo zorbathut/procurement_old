@@ -23,8 +23,8 @@
                 <ColumnDefinition Width="129"/>
                 <ColumnDefinition Width="250"/>
                 <ColumnDefinition Width="129"/>
-                <ColumnDefinition Width="129"/>
-                <ColumnDefinition Width="129"/>
+                <ColumnDefinition Width="134"/>
+                <ColumnDefinition Width="61"/>
                 <ColumnDefinition Width="129"/>
             </Grid.ColumnDefinitions>
 
@@ -88,14 +88,14 @@
                 </Image>
             </Button>
 
-            <Button Grid.Column="5" Grid.Row="1" Width="120" Height="42" HorizontalAlignment="Left" Command="{Binding MenuButtonCommand}" CommandParameter="About">
+            <Button Grid.Column="5" Grid.Row="1" Width="120" Height="42" HorizontalAlignment="Left" Command="{Binding MenuButtonCommand}" CommandParameter="Recipes">
                 <Image>
                     <Image.Style>
                         <Style TargetType="{x:Type Image}">
-                            <Setter Property="Source" Value="/Procurement;component/Images/buttons/btn_about.png"/>
+                            <Setter Property="Source" Value="/Procurement;component/Images/buttons/btn_recipes.png"/>
                             <Style.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Source" Value="/Procurement;component/Images/buttons/btn_selected_about.png"/>
+                                    <Setter Property="Source" Value="/Procurement;component/Images/buttons/btn_recipes_hover.png"/>
                                 </Trigger>
                             </Style.Triggers>
                         </Style>
@@ -103,14 +103,14 @@
                 </Image>
             </Button>
 
-            <Button Grid.Column="6" Grid.Row="1" Width="120" Height="42" HorizontalAlignment="Left" Command="{Binding MenuButtonCommand}" CommandParameter="Exit">
+            <Button Grid.Column="6" Grid.Row="1" Width="49" Height="42" HorizontalAlignment="Left" Click="minimize_Click">
                 <Image>
                     <Image.Style>
                         <Style TargetType="{x:Type Image}">
-                            <Setter Property="Source" Value="/Procurement;component/Images/buttons/btn_exit.png"/>
+                            <Setter Property="Source" Value="/Procurement;component/Images/buttons/btn_min.png"/>
                             <Style.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Source" Value="/Procurement;component/Images/buttons/btn_selected_exit.png"/>
+                                    <Setter Property="Source" Value="/Procurement;component/Images/buttons/btn_min_hover.png"/>
                                 </Trigger>
                             </Style.Triggers>
                         </Style>
@@ -118,6 +118,20 @@
                 </Image>
             </Button>
 
+            <Button Grid.Column="7" Grid.Row="1" Width="49" Height="42" HorizontalAlignment="Left" Click="exit_Click">
+                <Image>
+                    <Image.Style>
+                        <Style TargetType="{x:Type Image}">
+                            <Setter Property="Source" Value="/Procurement;component/Images/buttons/btn_close.png"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Source" Value="/Procurement;component/Images/buttons/btn_close_hover.png"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                </Image>
+            </Button>
         </Grid>
 
         <Grid Grid.Row="1" ShowGridLines="True" Height="630" Width="1012" x:Name="MainRegion">

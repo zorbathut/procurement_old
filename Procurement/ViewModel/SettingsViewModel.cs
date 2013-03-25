@@ -14,7 +14,6 @@ namespace Procurement.ViewModel
 
         private string currentCharacter;
         private string currentLeague;
-        private bool updateRatesOnStartUp;
         private bool isBusy;
         public string CurrentLeague
         {
@@ -55,19 +54,6 @@ namespace Procurement.ViewModel
             }
         }
 
-        public bool UpdateRatesOnStartUp
-        {
-            get { return updateRatesOnStartUp; }
-            set
-            {
-                if (updateRatesOnStartUp == value)
-                    return;
-                updateRatesOnStartUp = value;
-                Settings.UserSettings["UpdateRatesOnStartUp"] = value.ToString();
-                Settings.Save();
-            }
-        }
-        
         public List<string> Characters { get; set; }
 
         public List<string> Leagues { get; set; }
@@ -85,26 +71,8 @@ namespace Procurement.ViewModel
             this.Leagues = ApplicationState.Leagues;
             this.CurrentLeague = Settings.UserSettings["FavoriteLeague"];
             refreshCharacters();
-            this.CurrentCharacter = Settings.UserSettings["FavoriteCharacter"];
-            
-            this.updateRatesOnStartUp = false;
-            if (Settings.UserSettings.ContainsKey("UpdateRatesOnStartUp"))
-                this.updateRatesOnStartUp = bool.Parse(Settings.UserSettings["UpdateRatesOnStartUp"]);
-
-            UpdateRates = new DelegateCommand(updateCurrencyFromPOEEx);
+            this.CurrentCharacter = Settings.UserSettings["FavoriteCharacter"];            
             isBusy = false;
-        }
-
-        private void updateCurrencyFromPOEEx(object o)
-        {
-            IsBusy = true;
-            Task.Factory.StartNew(() => ApplicationState.Model.UpdateCurrenyRatiosFromPOEEx())
-                        .ContinueWith(t =>
-                        {
-                            if (PropertyChanged != null)
-                                PropertyChanged(this, new PropertyChangedEventArgs("CurrencyRatios"));
-                            IsBusy = false;
-                        });
         }
 
         private void refreshCharacters()

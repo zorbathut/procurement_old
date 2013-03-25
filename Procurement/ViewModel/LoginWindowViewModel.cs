@@ -92,8 +92,6 @@ namespace Procurement.ViewModel
                 var chars = ApplicationState.Model.GetCharacters();
                 updateView("[OK]");
 
-                getExchangeRates();
-
                 foreach (var character in chars)
                 {
                     ApplicationState.Characters.Add(character);
@@ -106,19 +104,6 @@ namespace Procurement.ViewModel
                 updateView("\nDone!");
                 OnLoginCompleted();
             }).ContinueWith((t) => { Logger.Log(t.Exception.InnerException.ToString()); updateView("ERROR: " + t.Exception.InnerException.Message); }, TaskContinuationOptions.OnlyOnFaulted);
-        }
-
-        private void getExchangeRates()
-        {
-            if (authOffLine)
-                return;
-
-            if (!Settings.UserSettings.ContainsKey("UpdateRatesOnStartUp") || !bool.Parse(Settings.UserSettings["UpdateRatesOnStartUp"]) == true)
-                return;
-
-            updateView("Loading Orb Ratios from poeex.info...");
-            ApplicationState.Model.UpdateCurrenyRatiosFromPOEEx();
-            updateView("[OK]");
         }
 
         private void saveSettings(SecureString password)

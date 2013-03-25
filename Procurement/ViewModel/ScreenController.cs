@@ -1,10 +1,10 @@
-﻿using Procurement.View;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
+using System.Collections.Generic;
+using Procurement.View;
 
 namespace Procurement.ViewModel
 {
@@ -38,8 +38,7 @@ namespace Procurement.ViewModel
                 screens.Add("Inventory", new InventoryView());
                 screens.Add("Trading", new TradingView());
                 screens.Add("Settings", new SettingsView());
-                screens.Add("About", new AboutView());
-                screens.Add("Exit", new RecipeView());
+                screens.Add("Recipes", new RecipeView());
             }));
         }
 

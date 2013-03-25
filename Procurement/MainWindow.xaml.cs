@@ -20,5 +20,15 @@ namespace Procurement
             ItemDisplay.ClosePopups();
             DragMove();
         }
+
+        private void minimize_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = System.Windows.WindowState.Minimized;
+        }
+
+        private void exit_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
     }
 }

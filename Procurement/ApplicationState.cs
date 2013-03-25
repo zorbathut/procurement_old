@@ -27,7 +27,6 @@ namespace Procurement
             }
         }
 
-
         public static event PropertyChangedEventHandler LeagueChanged;
         public static event PropertyChangedEventHandler CharacterChanged;
         private static string currentLeague = string.Empty;

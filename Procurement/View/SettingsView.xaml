@@ -59,8 +59,6 @@
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
                         <Label Grid.Column="0" Content="Currency Ratios" Foreground="#FFAB9066" FontSize="14" FontWeight="Bold"/>
-                        <CheckBox Grid.Column="1" IsChecked="{Binding UpdateRatesOnStartUp}"  Content="Update Rates on startup" Foreground="#FFAB9066" FontSize="14" FontWeight="Bold"/>
-                        <Button Grid.Column="2" Command="{Binding UpdateRates}" Content="Update Now" Foreground="#FFAB9066" FontSize="14" FontWeight="Bold" Style="{Binding }"/>
                     </Grid>
 
                     <DataGrid Grid.Row="1" Name="CurrencyGrid" Background="Black" ItemsSource="{Binding CurrencyRatios}" SelectionMode="Single" AutoGenerateColumns="False" RowEditEnding="CurrencyGrid_RowEditEnding" Width="460" HorizontalAlignment="Left" Margin="5,0,0,0" BorderThickness="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden">

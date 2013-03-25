@@ -507,6 +507,19 @@
     <Resource Include="Images\ItemHover\ItemHeaderUniqueMiddle.png" />
     <Resource Include="Images\ItemHover\ItemHeaderUniqueRight.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\buttons\btn_close.png" />
+    <Resource Include="Images\buttons\btn_close_hover.png" />
+    <Resource Include="Images\buttons\btn_min.png" />
+    <Resource Include="Images\buttons\btn_min_hover.png" />
+    <Resource Include="Images\buttons\btn_recipes.png" />
+    <Resource Include="Images\buttons\btn_recipes_hover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\footer.png" />
+    <Resource Include="Images\header.png" />
+    <Resource Include="Images\main.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
