@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
-using System.Collections.Generic;
+using POEApi.Model;
 using Procurement.View;
 
 namespace Procurement.ViewModel
@@ -13,12 +14,24 @@ namespace Procurement.ViewModel
         private static MainWindow mainView;
         private static Dictionary<string, IView> screens = new Dictionary<string, IView>();
 
+        public double HeaderHeight { get; set; }
+        public double FooterHeight { get; set; }
+        public bool ButtonsVisible{ get; set; }
+        public bool FullMode { get; set; }
+
         public DelegateCommand MenuButtonCommand { get; set; }
 
         private const string STASH_VIEW = "StashView";
 
         public ScreenController(MainWindow layout)
         {
+            FullMode = !bool.Parse(Settings.UserSettings["CompactMode"]);
+            if (FullMode)
+            {
+                HeaderHeight = 169;
+                FooterHeight = 138;
+            }
+
             MenuButtonCommand = new DelegateCommand(execute);
             mainView = layout;
             initLogin();
