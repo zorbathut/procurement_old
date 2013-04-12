@@ -11,7 +11,7 @@
         <v:CharacterToLevelConverter x:Key="lc" />
     </UserControl.Resources>
     <Grid>
-        <ItemsControl Grid.Column="0" ItemsSource="{Binding Characters}">
+        <ListBox Grid.Column="0" ItemsSource="{Binding Characters}" Background="Black" SelectionChanged="ListBox_SelectionChanged">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Vertical"/>
@@ -33,37 +33,17 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Image Source="/Images/character-background.png" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2"/>
-                        <Button Click="Button_Click" Tag="{Binding .}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="3">
-                            <Image Source="{Binding Path=., Converter={StaticResource vc}, ConverterParameter=Class}">
-                                <Image.Style>
-                                    <Style TargetType="Image" >
-                                        <Style.Triggers>
-                                            <Trigger Property ="IsMouseOver" Value="True">
-                                                <Setter Property="Cursor" Value="Hand" />
-                                            </Trigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Image.Style>
-                            </Image>
-                        </Button>
-                        <Button Margin="14,0,0,0" Click="Button_Click" Tag="{Binding .}" Grid.Row="0" Grid.Column="1">
-                            <Label Content="{Binding Name, Mode=OneTime}"  FontSize="12"  HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Grid.Row="0" Grid.Column="1" Foreground="#FFAB9066">
-                                <Label.Style>
-                                    <Style TargetType="Label" >
-                                        <Style.Triggers>
-                                            <Trigger Property ="IsMouseOver" Value="True">
-                                                <Setter Property="Cursor" Value="Hand" />
-                                            </Trigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Label.Style>
-                            </Label>
-                        </Button>
+                        <!--<Button Click="Button_Click" Tag="{Binding .}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="3">-->
+                            <Image Source="{Binding Path=., Converter={StaticResource vc}, ConverterParameter=Class}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" />
+                        <!--</Button>-->
+                        <!--<Button Margin="14,0,0,0" Click="Button_Click" Tag="{Binding .}" Grid.Row="0" Grid.Column="1">-->
+                            <Label Content="{Binding Name, Mode=OneTime}"  FontSize="12"  HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Grid.Row="0" Grid.Column="1" Foreground="#FFAB9066" />
+                        <!--</Button>-->
                         <Label Margin="14,0,0,0" Content="{Binding ., Mode=OneTime, Converter={StaticResource lc}}" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Grid.Row="1" Grid.Column="1" Foreground="#FFAB9066" />
                         <Label Margin="14,0,0,0" Content="{Binding League, Mode=OneTime}" FontWeight="Bold" Grid.Row="2" Grid.Column="1" Foreground="Gray" />
                         </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
-        </ItemsControl>
+        </ListBox>
     </Grid>
 </UserControl>

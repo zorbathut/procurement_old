@@ -151,26 +151,12 @@ namespace Procurement.Controls
 
         private void setBackround(Grid childGrid, Item item)
         {
-            switch (item.ItemType)
-            {
-                case ItemType.Currency:
-                    childGrid.Background = new SolidColorBrush(Colors.Green);
-                    childGrid.Background.Opacity = 0.3;
-                    break;
+            if (item is Gear && (item as Gear).Quality != Quality.White && (item as Gear).Explicitmods == null)
+                childGrid.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#88001D"));
+            else
+                childGrid.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#21007F"));
 
-                case ItemType.Gear:
-                    childGrid.Background = new SolidColorBrush(Colors.LightBlue);
-                    childGrid.Background.Opacity = 0.3;
-                    break;
-
-                case ItemType.Gem:
-                    childGrid.Background = new SolidColorBrush(Colors.Orange);
-                    childGrid.Background.Opacity = 0.3;
-                    break;
-
-                default:
-                    break;
-            }
+            childGrid.Background.Opacity = 0.3;
         }
 
         private bool search(Item item)

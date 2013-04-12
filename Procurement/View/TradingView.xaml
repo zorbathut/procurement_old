@@ -6,8 +6,48 @@
              xmlns:poe="clr-namespace:Procurement.Controls"
              mc:Ignorable="d" 
              Height="600" Width="990">
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="TabControlNormalBorderBrush" Color="#AA9072" />
+        <SolidColorBrush x:Key="ButtonNormalBackground" Color="#2D1D13" />
+        <Style TargetType="{x:Type TabItem}" x:Key="NonImages">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TabItem}">
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Foreground" Value="#E7C892" />
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="False">
+                                <Setter Property="Foreground" Value="#795D42" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                        <Grid>
+                            <Border 
+                                  Name="Border"
+                                  Background="#2D1C13"
+                                  BorderBrush="Black" 
+                                  BorderThickness="1,1,1,1" 
+                                  CornerRadius="6,6,0,0" >
+                                <ContentPresenter x:Name="ContentSite"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    ContentSource="Header"
+                    Margin="12,2,12,2"/>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
     <Grid x:Name="ViewContent" Width="990">
-        <poe:ForumExport />
-        <!--<poe:ForumTemplate />-->
+        <TabControl>
+            <TabItem Header="Forum Export" Style="{StaticResource NonImages}">
+                <poe:ForumExport />
+            </TabItem>
+            <TabItem Header="Forum Template" Style="{StaticResource NonImages}">
+                <poe:ForumTemplate />
+            </TabItem>
+        </TabControl>
     </Grid>
 </UserControl>

@@ -97,7 +97,7 @@
                                                         <RowDefinition Height="26"/>
                                                     </Grid.RowDefinitions>
 
-                                                    <Button Grid.Column="0" Command="ScrollBar.LineLeftCommand" Background="Transparent">
+                                                    <RepeatButton Grid.Column="0" Command="ScrollBar.LineLeftCommand" Background="Transparent">
                                                         <Image>
                                                             <Image.Style>
                                                                 <Style TargetType="{x:Type Image}">                                                                    
@@ -110,10 +110,10 @@
                                                                 </Style>
                                                             </Image.Style>
                                                         </Image>
-                                                    </Button>
+                                                    </RepeatButton>
 
                                                     <ScrollContentPresenter Grid.Column="1" Content="{TemplateBinding ScrollViewer.Content}"  />
-                                                    <Button Grid.Column="2" Command="ScrollBar.LineRightCommand" Background="Transparent">
+                                                    <RepeatButton Grid.Column="2" Command="ScrollBar.LineRightCommand" Background="Transparent">
                                                         <Image>
                                                             <Image.Style>
                                                                 <Style TargetType="{x:Type Image}">
@@ -126,7 +126,7 @@
                                                                 </Style>
                                                             </Image.Style>
                                                         </Image>
-                                                    </Button>
+                                                    </RepeatButton>
                                                     <Button Grid.Column="3" Command="{Binding GetTabs}" Background="{StaticResource TabControlNormalBorderBrush}" Foreground="#E5C690" CommandParameter="{Binding RelativeSource={RelativeSource Self} }"> 
                                                         <Grid>
                                                             <Image>

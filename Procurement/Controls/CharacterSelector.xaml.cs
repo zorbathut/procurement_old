@@ -21,10 +21,9 @@ namespace Procurement.Controls
         public static readonly DependencyProperty CharactersProperty =
             DependencyProperty.Register("Characters", typeof(List<Character>), typeof(CharacterSelector), null);
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Character c = (Character)(sender as Button).Tag;
-            ApplicationState.CurrentCharacter = c;
+            ApplicationState.CurrentCharacter = (Character)e.AddedItems[0];
         }
 
     }

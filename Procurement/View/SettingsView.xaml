@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              Height="630" Width="1012">
     <UserControl.Resources>
-        <ResourceDictionary Source="/Procurement;component/Controls/ExpressionDark.xaml" />
+        <ResourceDictionary Source="/Procurement;component/Controls/ExpressionDarkGrid.xaml" />
     </UserControl.Resources>
     <Grid x:Name="ViewContent" Width="1012">
         <Grid.Resources>
@@ -63,9 +63,9 @@
 
                     <DataGrid Grid.Row="1" Name="CurrencyGrid" Background="Black" ItemsSource="{Binding CurrencyRatios}" SelectionMode="Single" AutoGenerateColumns="False" RowEditEnding="CurrencyGrid_RowEditEnding" Width="460" HorizontalAlignment="Left" Margin="5,0,0,0" BorderThickness="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Name" Binding="{Binding OrbType}" IsReadOnly="True" Width="150"/>
-                            <DataGridTextColumn Header="OrbAmount" Binding="{Binding OrbAmount, Mode=TwoWay, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" Width="150"/>
-                            <DataGridTextColumn Header="GCPAmount" Binding="{Binding GCPAmount, Mode=TwoWay, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" Width="150"/>
+                            <DataGridTextColumn Header="Name" Binding="{Binding OrbType}" IsReadOnly="True" Width="150" Foreground="#FFAB9066"/>
+                            <DataGridTextColumn Header="OrbAmount" Binding="{Binding OrbAmount, Mode=TwoWay, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" Width="150" Foreground="#FFAB9066"  />
+                            <DataGridTextColumn Header="GCPAmount" Binding="{Binding GCPAmount, Mode=TwoWay, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" Width="150" Foreground="#FFAB9066"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
