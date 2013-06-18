@@ -56,5 +56,13 @@ namespace POEApi.Model
             if (item.Properties != null)
                 this.Properties = item.Properties.Select(p => new Property(p)).ToList();
         }
+
+        protected Quality getQuality(JSONProxy.Item item)
+        {
+            if (item.frameType <= 3)
+                return (Quality)item.frameType;
+
+            return Quality.White;
+        }
     }
 }

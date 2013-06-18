@@ -26,14 +26,6 @@ namespace POEApi.Model
             this.GearType = GearTypeFactory.GetType(this);
         }
 
-        private Quality getQuality(JSONProxy.Item item)
-        {
-            if (item.frameType <= 3)
-                return (Quality)item.frameType;
-
-            return Quality.White;
-        }
-
         public bool IsLinked(int links)
         {
             return Sockets.GroupBy(s => s.Group).Any(g => g.Count() >= links);
