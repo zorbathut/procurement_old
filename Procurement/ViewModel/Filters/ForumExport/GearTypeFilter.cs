@@ -4,27 +4,27 @@ using POEApi.Model;
 
 namespace Procurement.ViewModel.Filters
 {
-    public class QualityFilter : IFilter
+    public class GearTypeFilter : IFilter
     {
         public FilterGroup Group
         {
-            get { return FilterGroup.Quality; }
+            get { return FilterGroup.Default; }
         }
 
-        private Quality quality;
-        public QualityFilter(Quality quality)
+        private GearType gearType;
+        public GearTypeFilter(GearType gearType)
         {
-            this.quality = quality;
+            this.gearType = gearType;
         }
 
-        public string Keyword { get { return quality.ToString() + " quality"; } }
-        public string Help { get { return "Returns All " + quality.ToString() + " quality items"; } }
+        public string Keyword { get { return gearType.ToString() + " gear"; } }
+        public string Help { get { return "Returns All " + gearType.ToString() + " gear"; } }
 
         public bool Applicable(Item item)
         {
             Gear gear = item as Gear;
             if (gear != null)
-                return gear.Quality == quality;
+                return gear.GearType == gearType;
 
             return false;
         }
@@ -33,5 +33,7 @@ namespace Procurement.ViewModel.Filters
         {
             get { return true; }
         }
+
+
     }
 }

@@ -5,6 +5,8 @@ using System.Linq;
 using POEApi.Model;
 using System.Windows.Input;
 using System.Windows;
+using Procurement.ViewModel.ForumExportVisitors;
+using System.Reflection;
 
 namespace Procurement.ViewModel
 {
@@ -42,6 +44,7 @@ namespace Procurement.ViewModel
         private List<ExportStashInfo> stashItems;
         private List<int> selected = new List<int>();
         private string text;
+        private static List<IVisitor> visitors = null;
 
         private DelegateCommand copyCommand;
 
@@ -77,6 +80,7 @@ namespace Procurement.ViewModel
             copyCommand = new DelegateCommand(copy);
             updateForLeague();
             ApplicationState.LeagueChanged += new PropertyChangedEventHandler(ApplicationState_LeagueChanged);
+            visitors = visitors ?? getVisitors();
         }
 
         private void copy(object parameter)
@@ -109,17 +113,29 @@ namespace Procurement.ViewModel
             else
                 selected.Remove(key);
 
-            Text = string.Join(Environment.NewLine, selected.SelectMany(sid => ApplicationState.Stash[ApplicationState.CurrentLeague].GetItemsByTab(sid))
-                                                            .OrderBy(id => id.Y).ThenBy(i => i.X)
-                                                            .GroupBy(item => item.GetType())
-                                                            .Select(group => getSpoiler(group))
-                                                            .ToArray());
+            Text = getSpoiler(selected.SelectMany(sid => ApplicationState.Stash[ApplicationState.CurrentLeague].GetItemsByTab(sid))
+                                                              .OrderBy(id => id.Y).ThenBy(i => i.X));
         }
 
-        private string getSpoiler(IGrouping<Type, Item> group)
+        private string getSpoiler(IEnumerable<Item> items)
         {
-            return ForumExportRunners.ForumExportRunnerFactory.Create(group.Key).GetSpoiler(group);
-        }       
+            string template = System.IO.File.ReadAllText("ForumExportTemplate.txt");
+
+            foreach (IVisitor visitor in visitors)
+                template = visitor.Visit(items, template);
+
+            return template;
+            
+        }
+
+        private static List<IVisitor> getVisitors()
+        {
+            Type visitorType = typeof(IVisitor);
+            return Assembly.GetAssembly(visitorType).GetTypes()
+                                                    .Where(t => !(t.IsAbstract || t.IsInterface) && visitorType.IsAssignableFrom(t))
+                                                    .Select(t => Activator.CreateInstance(t) as IVisitor)
+                                                    .ToList();
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

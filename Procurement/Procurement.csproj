@@ -135,6 +135,7 @@
     <Compile Include="ViewModel\DisplayModeStrategy\ValuesPlusNameStrategy.cs" />
     <Compile Include="ViewModel\Filters\FilterGroup.cs" />
     <Compile Include="ViewModel\Filters\ForumExport\AllElementalResistances.cs" />
+    <Compile Include="ViewModel\Filters\ForumExport\AndFilter.cs" />
     <Compile Include="ViewModel\Filters\ForumExport\CategoryManager.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -150,6 +151,7 @@
     <Compile Include="ViewModel\Filters\ForumExport\FourLink.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ViewModel\Filters\ForumExport\GearTypeFilter.cs" />
     <Compile Include="ViewModel\Filters\ForumExport\ItemQuantityFilter.cs" />
     <Compile Include="ViewModel\Filters\ForumExport\ItemRarityFilter.cs">
       <SubType>Code</SubType>
@@ -184,13 +186,14 @@
     <Compile Include="ViewModel\Filters\IFilter.cs" />
     <Compile Include="ViewModel\Filters\ItemFilter.cs" />
     <Compile Include="ViewModel\Filters\UserSearchFilter.cs" />
-    <Compile Include="ViewModel\ForumExportRunners\ForumExportRunnerBase.cs" />
-    <Compile Include="ViewModel\ForumExportRunners\ForumExportRunnerFactory.cs" />
-    <Compile Include="ViewModel\ForumExportRunners\GearRunner.cs" />
-    <Compile Include="ViewModel\ForumExportRunners\GemsRunner.cs" />
-    <Compile Include="ViewModel\ForumExportRunners\CurrencyRunner.cs" />
-    <Compile Include="ViewModel\ForumExportRunners\MapRunner.cs" />
     <Compile Include="ViewModel\ForumExportViewModel.cs" />
+    <Compile Include="ViewModel\ForumExportVisitors\GearVisitor.cs" />
+    <Compile Include="ViewModel\ForumExportVisitors\IGNVistior.cs" />
+    <Compile Include="ViewModel\ForumExportVisitors\IVisitor.cs" />
+    <Compile Include="ViewModel\ForumExportVisitors\MagicFindVisitor.cs" />
+    <Compile Include="ViewModel\ForumExportVisitors\QualityGemVisitor.cs" />
+    <Compile Include="ViewModel\ForumExportVisitors\UniquesVisitor.cs" />
+    <Compile Include="ViewModel\ForumExportVisitors\VisitorBase.cs" />
     <Compile Include="ViewModel\ForumTemplateViewModel.cs" />
     <Compile Include="ViewModel\InventoryViewModel.cs" />
     <Compile Include="ViewModel\ItemHoverViewModel.cs" />
@@ -531,6 +534,11 @@
     <Resource Include="Images\footer.png" />
     <Resource Include="Images\header.png" />
     <Resource Include="Images\main.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ForumExportTemplate.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
