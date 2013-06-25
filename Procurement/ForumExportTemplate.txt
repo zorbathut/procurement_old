@@ -1,13 +1,24 @@
-﻿Welcome to my shop,
+﻿Welcome to my shop(Last Updated {LastUpdated}),
 
-Please message me here or ingame if something catches your eye. My IGN is {IGN}
+Please message me here or ingame if something catches your eye. My IGN is {IGN}.
 
 [spoiler="======----Uniques----======"]
 {Uniques}
 [/spoiler]
 
+
+[spoiler="======----Gem Categories----======"]
 [spoiler="======----Quality Gems----======"]
 {QualityGems}
+[/spoiler]
+
+[spoiler="======----Drop Only Gems----======"]
+{DropOnlyGems}
+[/spoiler]
+[/spoiler]
+
+[spoiler="======----Triple Res Pieces----======"]
+{TripRes}
 [/spoiler]
 
 [spoiler="======----Magic Find Gears----======"]

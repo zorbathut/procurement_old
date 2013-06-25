@@ -187,11 +187,14 @@
     <Compile Include="ViewModel\Filters\ItemFilter.cs" />
     <Compile Include="ViewModel\Filters\UserSearchFilter.cs" />
     <Compile Include="ViewModel\ForumExportViewModel.cs" />
+    <Compile Include="ViewModel\ForumExportVisitors\DropOnlyGemVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\GearVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\IGNVistior.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\IVisitor.cs" />
+    <Compile Include="ViewModel\ForumExportVisitors\LastUpdatedVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\MagicFindVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\QualityGemVisitor.cs" />
+    <Compile Include="ViewModel\ForumExportVisitors\TripResVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\UniquesVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\VisitorBase.cs" />
     <Compile Include="ViewModel\ForumTemplateViewModel.cs" />
