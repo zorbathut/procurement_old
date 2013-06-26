@@ -2,6 +2,7 @@
 <Settings>
     <Ratios>
         <Orb type="Mirror" orbamount="1" gcpamount="100"/>
+        <Orb type="Eternal" orbamount="1" gcpamount="5"/>  
         <Orb type="Exalted" orbamount="1" gcpamount="5"/>
         <Orb type="Divine" orbamount="1" gcpamount="3"/>
         <Orb type="GemCutterPrism" orbamount="1" gcpamount="1"/> 

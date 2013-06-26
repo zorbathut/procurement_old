@@ -27,6 +27,7 @@ namespace Procurement.ViewModel.Filters
             dropOnly.Add("Elemental Weakness");
             dropOnly.Add("Greater Multiple Projectiles");
             dropOnly.Add("Knockback");
+            dropOnly.Add("Multistrike");
             dropOnly.Add("Punishment");
             dropOnly.Add("Temporal Chains");
             dropOnly.Add("Portal");
