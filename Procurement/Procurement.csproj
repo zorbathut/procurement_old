@@ -172,6 +172,7 @@
     <Compile Include="ViewModel\Filters\ForumExport\OrFilter.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ViewModel\Filters\ForumExport\PopularGemsFilter.cs" />
     <Compile Include="ViewModel\Filters\ForumExport\QualityFilter.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -199,6 +200,7 @@
     <Compile Include="ViewModel\ForumExportVisitors\IVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\LastUpdatedVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\MagicFindVisitor.cs" />
+    <Compile Include="ViewModel\ForumExportVisitors\PopularGemsVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\QualityGemVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\TripResVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\UniquesVisitor.cs" />

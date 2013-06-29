@@ -14,6 +14,10 @@ Please message me here or ingame if something catches your eye. My IGN is {IGN}.
 [spoiler="          Drop Only Gems          "]
 {DropOnlyGems}
 [/spoiler]
+
+[spoiler="          Popular Gems          "]
+{PopularGems}
+[/spoiler]
 [/spoiler]
 
 [spoiler="          Triple Res Pieces          "]
