@@ -8,11 +8,12 @@ namespace Procurement.Controls
         public ForumTemplate()
         {
             InitializeComponent();
+            this.DataContext = new ForumTemplateViewModel(); 
+        }
 
-            ForumTemplateViewModel context = new ForumTemplateViewModel();
-            context.Grid = this.dataGrid;
-            this.DataContext = context;
-            
+        private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            (this.DataContext as ForumTemplateViewModel).Save();
         }
     }
 }

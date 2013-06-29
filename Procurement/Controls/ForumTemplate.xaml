@@ -11,71 +11,10 @@
     </UserControl.Resources>
     <Border Grid.Column="0" BorderBrush="#FF76591B" BorderThickness="2" Background="Black">
         <Grid Width="950">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="10"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="30"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="560"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-
-            <Grid Grid.Column="0" Grid.Row="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="30"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-               
-                
-                <Button Grid.Row="0" Content="Add Category" Style="{Binding}" Width="120" Height="20" HorizontalAlignment="Left" Command="{Binding AddCatagory}" CommandParameter="{Binding ElementName=dataGrid}" />
-                <DataGrid Grid.Row="1" Width="550" Height="450" AutoGenerateColumns="False" ItemsSource="{Binding Categories}" x:Name="dataGrid" HorizontalAlignment="Left" HorizontalScrollBarVisibility="Hidden">
-                    <DataGrid.Resources>
-                        <v:FilterListToNameConverter x:Key="flc" />
-                    </DataGrid.Resources>
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Width="100"  Header="Category" Binding="{Binding Name}">
-                            <DataGridTextColumn.ElementStyle>
-                                <Style TargetType="TextBlock">
-                                    <Setter Property="TextWrapping" Value="Wrap" />
-                                </Style>
-                            </DataGridTextColumn.ElementStyle>
-                            <DataGridTextColumn.EditingElementStyle>
-                                <Style TargetType="TextBox">
-                                    <Setter Property="TextWrapping" Value="Wrap" />
-                                    <Setter Property="AcceptsReturn" Value="true" />
-                                </Style>
-                            </DataGridTextColumn.EditingElementStyle>
-                        </DataGridTextColumn>
-
-                        <DataGridTextColumn Width="440"  Header="Filters" Binding="{Binding Filters, Converter={StaticResource flc}}" IsReadOnly="True">
-                            <DataGridTextColumn.ElementStyle>
-                                <Style TargetType="TextBlock">
-                                    <Setter Property="TextWrapping" Value="Wrap" />
-                                </Style>
-                            </DataGridTextColumn.ElementStyle>
-                        </DataGridTextColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
-            </Grid>
-            <Grid Grid.Column="1" Grid.Row="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="25"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-
-                <Button Content="Add Filter" Grid.Row="0" Style="{Binding}" Width="120" Height="20" HorizontalAlignment="Left" Command="{Binding AddFilter}" CommandParameter="{Binding ElementName=Filters, Path=SelectedItem}"/>
-                <ListBox Grid.Row="1" ItemsSource="{Binding Filters}" x:Name="Filters" Background="Black" BorderThickness="0">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Label Content="{Binding Keyword}" ToolTip="{Binding Help}" Foreground="#FFAB9066"/>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </Grid>
-            
-            <Button Content="Save All" Grid.Column="0" Grid.Row="2" Style="{Binding null}" />
-            
+            <StackPanel>
+                <Button Content="Save All Changes" Style="{x:Null}" Width="100" Height="20" Margin="0,0,0,5" Click="Button_Click"/>
+                <TextBox Name="TemplateText" Margin="2,5,2,5" Text="{Binding Text}" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Background="Black" Foreground="#FFAB9066" BorderThickness="0"/>
+            </StackPanel>
         </Grid>
     </Border>
 </UserControl>

@@ -7,6 +7,7 @@ using System.Windows.Input;
 using System.Windows;
 using Procurement.ViewModel.ForumExportVisitors;
 using System.Reflection;
+using Procurement.Controls;
 
 namespace Procurement.ViewModel
 {
@@ -119,7 +120,7 @@ namespace Procurement.ViewModel
 
         private string getSpoiler(IEnumerable<Item> items)
         {
-            string template = System.IO.File.ReadAllText("ForumExportTemplate.txt");
+            string template = ForumExportTemplateReader.GetTemplate();
 
             foreach (IVisitor visitor in visitors)
                 template = visitor.Visit(items, template);

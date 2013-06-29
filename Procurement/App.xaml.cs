@@ -17,7 +17,7 @@ namespace Procurement
             Logger.Log("Application Version: " + ApplicationState.Version);
             Logger.Log(getEnvironementDetails());
             Logger.Log(e.Exception.ToString());
-            MessageBox.Show("There was an unhandled error - Sorry! Please send the debuginfo.log to one of us devs :)");
+            MessageBox.Show("There was an unhandled error - Sorry! Please send the debuginfo.log to one of the developers. For quickest response please log a ticket on our google code page at http://code.google.com/p/procurement/issues");
         }
 
         private string getEnvironementDetails()

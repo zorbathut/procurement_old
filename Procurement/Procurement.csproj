@@ -101,6 +101,7 @@
     <Compile Include="Controls\ForumExport.xaml.cs">
       <DependentUpon>ForumExport.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ForumExportTemplateReader.cs" />
     <Compile Include="Controls\ForumTemplate.xaml.cs">
       <DependentUpon>ForumTemplate.xaml</DependentUpon>
     </Compile>
@@ -548,9 +549,9 @@
     <Resource Include="Images\main.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ForumExportTemplate.txt">
+    <EmbeddedResource Include="ForumExportTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </EmbeddedResource>
     <Resource Include="Images\buttons\donate-hover.png" />
     <Resource Include="Images\buttons\donate.png" />
     <Resource Include="Images\buttons\about-button-hover.png" />
