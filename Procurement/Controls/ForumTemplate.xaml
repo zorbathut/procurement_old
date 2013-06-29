@@ -11,10 +11,12 @@
     </UserControl.Resources>
     <Border Grid.Column="0" BorderBrush="#FF76591B" BorderThickness="2" Background="Black">
         <Grid Width="950">
-            <StackPanel>
-                <Button Content="Save All Changes" Style="{x:Null}" Width="100" Height="20" Margin="0,0,0,5" Click="Button_Click"/>
-                <TextBox Name="TemplateText" Margin="2,5,2,5" Text="{Binding Text}" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Background="Black" Foreground="#FFAB9066" BorderThickness="0"/>
-            </StackPanel>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Button Content="Save All Changes" Style="{x:Null}" Width="100" Height="20" Margin="0,0,0,5" Click="Button_Click" Grid.Row="0"/>
+            <TextBox Name="TemplateText" Margin="2,5,2,5" Text="{Binding Text}" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Background="Black" Foreground="#FFAB9066" BorderThickness="0" Grid.Row="1"/>
         </Grid>
     </Border>
 </UserControl>
