@@ -11,7 +11,8 @@ namespace Procurement
         {
             InitializeComponent();
             this.Title = ApplicationState.Version;
-            this.DataContext = new ScreenController(this);
+            ScreenController.Create(this);
+            this.DataContext = ScreenController.Instance;
             this.MouseLeftButtonDown += new MouseButtonEventHandler(MainWindow_MouseLeftButtonDown);
         }
 

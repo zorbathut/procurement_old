@@ -23,7 +23,14 @@ namespace Procurement.ViewModel
 
         private const string STASH_VIEW = "StashView";
 
-        public ScreenController(MainWindow layout)
+        public static ScreenController Instance = null;
+
+        public static void Create(MainWindow layout)
+        {
+            Instance = new ScreenController(layout);
+        }
+
+        private ScreenController(MainWindow layout)
         {
             FullMode = !bool.Parse(Settings.UserSettings["CompactMode"]);
             if (FullMode)
@@ -39,7 +46,7 @@ namespace Procurement.ViewModel
 
         private void execute(object obj)
         {
-            loadView(screens[obj.ToString()]);
+            LoadView(screens[obj.ToString()]);
         }
 
         private void initScreens()
@@ -60,13 +67,13 @@ namespace Procurement.ViewModel
             var loginView = new LoginView();
             var loginVM = (loginView.DataContext as LoginWindowViewModel);
             loginVM.OnLoginCompleted += new LoginWindowViewModel.LoginCompleted(loginCompleted);
-            loadView(loginView);
+            LoadView(loginView);
         }
 
         void loginCompleted()
         {
             initScreens();
-            loadView(screens.First().Value);
+            LoadView(screens.First().Value);
             showMenuButtons();
         }
 
@@ -79,7 +86,7 @@ namespace Procurement.ViewModel
             }));
         }
 
-        private void loadView(IView view)
+        public void LoadView(IView view)
         {
             Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Normal, 
                 new Action(() => 
