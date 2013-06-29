@@ -72,12 +72,17 @@ namespace Procurement.ViewModel
                 first.TabItem.IsSelected = true;
         }
 
-        public void SetCategoryFilter(string category)
+        public void SetCategoryFilter(string category, bool? isChecked)
         {
-            categoryFilter.Clear();
-            if (category != "None")
-                categoryFilter.AddRange(CategoryManager.GetCategory(category));
+            if (!isChecked.Value)
+            {
+                var filtersBeGone = CategoryManager.GetCategory(category).Select(f => f.GetType()).ToList();
+                categoryFilter.RemoveAll(f => filtersBeGone.Contains(f.GetType()));
+                processFilter();
+                return;
+            }
 
+            categoryFilter.AddRange(CategoryManager.GetCategory(category));
             processFilter();
         }
 

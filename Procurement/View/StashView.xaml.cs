@@ -16,14 +16,23 @@ namespace Procurement.View
             get { return this.ViewContent; }
         }
 
-        private void RadioButton_Checked(object sender, System.Windows.RoutedEventArgs e)
+        private void CheckBox_Checked(object sender, System.Windows.RoutedEventArgs e)
         {
             var vm = this.DataContext as StashViewModel;
 
             if (vm == null)
                 return;
 
-            vm.SetCategoryFilter((sender as RadioButton).Content.ToString());
+            var cb = sender as CheckBox;
+            if (cb.Content.ToString() == "None" && cb.IsChecked.Value)
+            {
+                foreach (var item in VisualTreeHelper.GetVisualChildren<CheckBox>(cb.Parent))
+                    item.IsChecked = false;
+
+                return;
+            }
+
+            vm.SetCategoryFilter(cb.Content.ToString(), cb.IsChecked);
         }
     }
 }

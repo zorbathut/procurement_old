@@ -63,7 +63,7 @@ namespace Procurement.Controls
 
             i.MouseLeave += (o, ev) =>
             {
-                Rect rect = VisualTreeHelper.GetDescendantBounds(i);
+                Rect rect = System.Windows.Media.VisualTreeHelper.GetDescendantBounds(i);
                 if (!rect.Contains(ev.GetPosition(o as IInputElement)))
                     popup.IsOpen = false;
             };

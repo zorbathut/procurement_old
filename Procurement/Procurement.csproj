@@ -267,6 +267,7 @@
       <DependentUpon>TradingView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\VisibilityConverter.cs" />
+    <Compile Include="View\VisualTreeHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
