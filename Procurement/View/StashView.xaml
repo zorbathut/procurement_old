@@ -55,7 +55,7 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate>
-                                <Border Background="{StaticResource ButtonNormalBackground}">
+                                <Border Background="Transparent">
                                     <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding ContentControl.Content}"/>
                                 </Border>
                             </ControlTemplate>
@@ -97,7 +97,7 @@
                                                         <RowDefinition Height="26"/>
                                                     </Grid.RowDefinitions>
 
-                                                    <RepeatButton Grid.Column="0" Command="ScrollBar.LineLeftCommand" Background="Transparent">
+                                                    <RepeatButton Grid.Column="0" Command="ScrollBar.LineLeftCommand" Background="Transparent" Style="{StaticResource TabScrollerRepeatButtonStyle}">
                                                         <Image>
                                                             <Image.Style>
                                                                 <Style TargetType="{x:Type Image}">                                                                    
@@ -113,7 +113,7 @@
                                                     </RepeatButton>
 
                                                     <ScrollContentPresenter Grid.Column="1" Content="{TemplateBinding ScrollViewer.Content}"  />
-                                                    <RepeatButton Grid.Column="2" Command="ScrollBar.LineRightCommand" Background="Transparent">
+                                                    <RepeatButton Grid.Column="2" Command="ScrollBar.LineRightCommand" Background="Transparent" Style="{StaticResource TabScrollerRepeatButtonStyle}">
                                                         <Image>
                                                             <Image.Style>
                                                                 <Style TargetType="{x:Type Image}">
