@@ -550,6 +550,10 @@
     <Content Include="ForumExportTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Images\buttons\donate-hover.png" />
+    <Resource Include="Images\buttons\donate.png" />
+    <Resource Include="Images\buttons\about-button-hover.png" />
+    <Resource Include="Images\buttons\about-button.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -21,5 +21,10 @@ namespace Procurement.View
         {
             Settings.Save();
         }
+
+        private void AboutButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            ScreenController.Instance.LoadView(new AboutView());
+        }
     }
 }

@@ -59,6 +59,7 @@ namespace Procurement.ViewModel
                 screens.Add("Trading", new TradingView());
                 screens.Add("Settings", new SettingsView());
                 screens.Add("Recipes", new RecipeView());
+                screens.Add("About", new AboutView());
             }));
         }
 
