@@ -10,6 +10,7 @@ using POEApi.Model;
 using Procurement.Controls;
 using Procurement.View;
 using Procurement.ViewModel.Filters;
+using System;
 
 namespace Procurement.ViewModel
 {
@@ -32,6 +33,7 @@ namespace Procurement.ViewModel
         private StashView stashView;
         private List<IFilter> categoryFilter;
         private TabItem selectedTab { get; set; }
+        private ResourceDictionary expressionDark;
 
         private string filter;
 
@@ -117,7 +119,7 @@ namespace Procurement.ViewModel
             ApplicationState.LeagueChanged += new PropertyChangedEventHandler(ApplicationState_LeagueChanged);
             stashView.tabControl.SelectionChanged += new SelectionChangedEventHandler(tabControl_SelectionChanged);
             getAvailableItems();
-            
+            expressionDark = Application.LoadComponent(new Uri("/Procurement;component/Controls/ExpressionDark.xaml", UriKind.RelativeOrAbsolute)) as ResourceDictionary;
         }
 
         private void getAvailableItems()
@@ -181,6 +183,7 @@ namespace Procurement.ViewModel
         {
             ContextMenu menu = new ContextMenu();
             menu.PlacementTarget = target;
+            menu.Resources = expressionDark;
 
             foreach (TabItem item in tabControl.Items)
             {

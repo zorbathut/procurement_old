@@ -1882,6 +1882,25 @@
             </Setter.Value>
         </Setter>
     </Style>
+    <Style TargetType="{x:Type ContextMenu}">
+        <Setter Property="Background" Value="#FF3A3A3A" />
+        <Setter Property="SnapsToDevicePixels" Value="true" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ContextMenu}">
+                    <Border x:Name="Border" Height="Auto" Background="#FF3A3A3A" BorderThickness="1" BorderBrush="#FFFFFFFF">
+                        <StackPanel Background="{TemplateBinding Background}" IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle" Margin="2"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="HasDropShadow" Value="true">
+                            <Setter TargetName="Border" Property="Padding" Value="0,3,0,3" />
+                            <Setter TargetName="Border" Property="CornerRadius" Value="4" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
     <Style TargetType="{x:Type Separator}">
         <Setter Property="Height" Value="1" />
         <Setter Property="Margin" Value="0,2,0,2" />
