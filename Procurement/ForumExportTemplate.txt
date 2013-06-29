@@ -2,35 +2,34 @@
 
 Please message me here or ingame if something catches your eye. My IGN is {IGN}.
 
-[spoiler="======----Uniques----======"]
+[spoiler="          Uniques          "]
 {Uniques}
 [/spoiler]
 
-
-[spoiler="======----Gem Categories----======"]
-[spoiler="======----Quality Gems----======"]
+[spoiler="          Gem Categories          "]
+[spoiler="          Quality Gems          "]
 {QualityGems}
 [/spoiler]
 
-[spoiler="======----Drop Only Gems----======"]
+[spoiler="          Drop Only Gems          "]
 {DropOnlyGems}
 [/spoiler]
 [/spoiler]
 
-[spoiler="======----Triple Res Pieces----======"]
+[spoiler="          Triple Res Pieces          "]
 {TripRes}
 [/spoiler]
 
-[spoiler="======----Magic Find Gears----======"]
+[spoiler="          Magic Find Gears          "]
 {MagicFind}
 [/spoiler]
 
-[spoiler="======----Crafting Gears----======"]
+[spoiler="          Crafting Gears          "]
 {WhiteGear}
 [/spoiler]
 
-[spoiler="======----Weapons and Armor----======"]
-[spoiler="======----Weapons----======"]
+[spoiler="          Weapons and Armor          "]
+[spoiler="          Weapons          "]
 {RareSword}
 {RareAxe}
 {RareSceptre}
@@ -39,35 +38,36 @@ Please message me here or ingame if something catches your eye. My IGN is {IGN}.
 {RareBow}
 {RareMace}
 [/spoiler]
-[spoiler="======----Shields/Quivers----======"]
+[spoiler="          Shields/Quivers          "]
 {RareShield}
 {RareQuiver}
 [/spoiler]
-[spoiler="======----Wands/Daggers/Staff----======"]
+[spoiler="          Wands/Daggers/Staff          "]
 {RareWand}
 {RareDagger}
 {RareStaff}
 [/spoiler]
-[spoiler="======----Helms----======"]
+[spoiler="          Helms          "]
 {RareHelmet}
 [/spoiler]
-[spoiler="======----Amulets----======"]
+[spoiler="          Amulets          "]
 {RareAmulet}
 [/spoiler]
-[spoiler="======----Chest----======"]
+[spoiler="          Chest Armor          "]
 {RareChest}
 [/spoiler]
-[spoiler="======----Rings----======"]
+[spoiler="          Rings          "]
 {RareRing}
 [/spoiler]
-[spoiler="======----Belts----======"]
+[spoiler="          Belts          "]
 {RareBelt}
 [/spoiler]
-[spoiler="======----Boots----======"]
+[spoiler="          Boots          "]
 {RareBoots}
 [/spoiler]
 [/spoiler]
 
-
 Thanks for visiting!
+
+[url=https://code.google.com/p/procurement/][img]http://i.imgur.com/vAP7LoM.jpg[/img][/url]
 
