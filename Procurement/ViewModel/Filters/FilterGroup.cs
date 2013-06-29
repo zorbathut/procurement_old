@@ -7,6 +7,8 @@
         Links,
         MagicFind,
         Gems,
-        Default
+        Default,
+        Damage,
+        Attacks
     };
 }

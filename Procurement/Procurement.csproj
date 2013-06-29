@@ -136,11 +136,17 @@
     <Compile Include="ViewModel\Filters\FilterGroup.cs" />
     <Compile Include="ViewModel\Filters\ForumExport\AllElementalResistances.cs" />
     <Compile Include="ViewModel\Filters\ForumExport\AndFilter.cs" />
+    <Compile Include="ViewModel\Filters\ForumExport\AttackSpeed.cs" />
+    <Compile Include="ViewModel\Filters\ForumExport\CastSpeed.cs" />
     <Compile Include="ViewModel\Filters\ForumExport\CategoryManager.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ViewModel\Filters\ForumExport\ChaosResistance.cs" />
     <Compile Include="ViewModel\Filters\ForumExport\ColdResistance.cs" />
+    <Compile Include="ViewModel\Filters\ForumExport\DamageCold.cs" />
+    <Compile Include="ViewModel\Filters\ForumExport\DamageFire.cs" />
+    <Compile Include="ViewModel\Filters\ForumExport\DamageLightning.cs" />
+    <Compile Include="ViewModel\Filters\ForumExport\DamageTriple.cs" />
     <Compile Include="ViewModel\Filters\ForumExport\DropOnlyGemFilter.cs">
       <SubType>Code</SubType>
     </Compile>
