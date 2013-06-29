@@ -5,6 +5,8 @@ using POEApi.Model;
 using Procurement.View;
 using System.Windows.Input;
 using System.Threading.Tasks;
+using System;
+using System.Windows;
 
 namespace Procurement.ViewModel
 {
@@ -41,6 +43,21 @@ namespace Procurement.ViewModel
             }
         }
 
+        private bool compactMode;
+        public bool CompactMode
+        {
+            get { return compactMode; }
+            set
+            {
+                compactMode = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("CompactMode"));
+
+                Settings.UserSettings["CompactMode"] = Convert.ToString(value);
+                Settings.Save();
+            }
+        }
+
         public string CurrentCharacter
         {
             get { return currentCharacter; }
@@ -71,7 +88,8 @@ namespace Procurement.ViewModel
             this.Leagues = ApplicationState.Leagues;
             this.CurrentLeague = Settings.UserSettings["FavoriteLeague"];
             refreshCharacters();
-            this.CurrentCharacter = Settings.UserSettings["FavoriteCharacter"];            
+            this.CurrentCharacter = Settings.UserSettings["FavoriteCharacter"];
+            this.CompactMode = Convert.ToBoolean(Settings.UserSettings["CompactMode"]);
             isBusy = false;
         }
 
