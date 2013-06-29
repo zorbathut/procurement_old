@@ -94,6 +94,9 @@ namespace Procurement.ViewModel
 
                 foreach (var character in chars)
                 {
+                    if (character.League == "Void")
+                        continue;
+
                     ApplicationState.Characters.Add(character);
                     loadCharacterInventory(character);
                     loadStash(character);
