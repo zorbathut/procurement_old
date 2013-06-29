@@ -1,23 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Settings>
     <Ratios>
-        <Orb type="Mirror" orbamount="1" gcpamount="100"/>
-        <Orb type="Eternal" orbamount="1" gcpamount="5"/>  
-        <Orb type="Exalted" orbamount="1" gcpamount="5"/>
+        <Orb type="Mirror" orbamount="1" gcpamount="450"/>
+        <Orb type="Eternal" orbamount="1" gcpamount="30"/>  
+        <Orb type="Exalted" orbamount="1" gcpamount="15"/>
         <Orb type="Divine" orbamount="1" gcpamount="3"/>
         <Orb type="GemCutterPrism" orbamount="1" gcpamount="1"/> 
-        <Orb type="Chisel" orbamount="48" gcpamount="5"/>
+        <Orb type="Chisel" orbamount="8" gcpamount="1"/>
         <Orb type="Regal" orbamount="3" gcpamount="1"/>
-        <Orb type="Chaos" orbamount="3" gcpamount="1"/>
+        <Orb type="Chaos" orbamount="4" gcpamount="1"/>
         <Orb type="Regret" orbamount="3" gcpamount="1"/>
-        <Orb type="Blessed" orbamount="4" gcpamount="1"/>
-        <Orb type="Scouring" orbamount="6" gcpamount="1"/>
-        <Orb type="Fusing" orbamount="6" gcpamount="1"/>
-        <Orb type="Alchemy" orbamount="6" gcpamount="1"/>
-        <Orb type="AlchemyShard" orbamount="120" gcpamount="1"/>
-        <Orb type="Chance" orbamount="48" gcpamount="1"/>
-        <Orb type="JewelersOrb" orbamount="24" gcpamount="1"/>
-        <Orb type="Alteration" orbamount="48" gcpamount="1"/>
+        <Orb type="Blessed" orbamount="16" gcpamount="1"/>
+        <Orb type="Scouring" orbamount="16" gcpamount="1"/>
+        <Orb type="Fusing" orbamount="8" gcpamount="1"/>
+        <Orb type="Alchemy" orbamount="8" gcpamount="1"/>
+        <Orb type="AlchemyShard" orbamount="160" gcpamount="1"/>
+        <Orb type="Chance" orbamount="64" gcpamount="1"/>
+        <Orb type="JewelersOrb" orbamount="32" gcpamount="1"/>
+        <Orb type="Alteration" orbamount="64" gcpamount="1"/>
         <Orb type="Chromatic" orbamount="60" gcpamount="1"/>
     </Ratios>
     <UserSettings>
