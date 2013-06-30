@@ -91,10 +91,5 @@ namespace POEApi.Transport
 
             return userCacheService.Get(characterName);
         }
-
-        public Stream GetPOEExInfoRates()
-        {
-            return innerTranport.GetPOEExInfoRates();
-        }
     }
 }

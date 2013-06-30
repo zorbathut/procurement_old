@@ -12,7 +12,6 @@ namespace POEApi.Transport
         Stream GetImage(string url);
         Stream GetCharacters();
         Stream GetInventory(string characterName);
-        Stream GetPOEExInfoRates();
         event ThottledEventHandler Throttled;
     }
 }
