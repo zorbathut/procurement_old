@@ -223,6 +223,7 @@
     <Compile Include="ViewModel\Recipes\Recipe.cs" />
     <Compile Include="ViewModel\Recipes\RecipeManager.cs" />
     <Compile Include="ViewModel\Recipes\RecipeResult.cs" />
+    <Compile Include="ViewModel\Recipes\SameNameRecipe.cs" />
     <Compile Include="ViewModel\ScreenController.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="ViewModel\StashViewModel.cs" />
