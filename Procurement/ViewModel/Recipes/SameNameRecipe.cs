@@ -8,13 +8,15 @@ namespace Procurement.ViewModel.Recipes
 {
     class SameNameRecipe : Recipe
     {
-        protected string name;
-        protected int setCount;
+        private string name;
+        private int setCount;
+        private bool isMaxCount;
 
-        public SameNameRecipe(string recipeName, int setCount)
+        public SameNameRecipe(string recipeName, int setCount, bool isMaxCount)
         {
             this.name = recipeName;
             this.setCount = setCount;
+            this.isMaxCount = isMaxCount;
         }
 
         public override string Name
@@ -38,7 +40,7 @@ namespace Procurement.ViewModel.Recipes
             {
                 var matchedItems = gear.Where(g => g.Name == item.Key).Select(g => g as Item).ToList();
 
-                if (matchedItems.Count() == setCount)
+                if (isCountMatch(matchedItems.Count()))
                     matches.Add(new RecipeResult()
                     {
                         Instance = this,
@@ -50,6 +52,14 @@ namespace Procurement.ViewModel.Recipes
             }
 
             return matches;
+        }
+
+        private bool isCountMatch(int count)
+        {
+            if (isMaxCount)
+                return count == setCount;
+
+            return count >= setCount;
         }
     }
 }
