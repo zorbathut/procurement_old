@@ -3,6 +3,7 @@
     public enum OrbType
     {
         Eternal,
+        Imprint,
         Exalted,
         Divine,
         GemCutterPrism,

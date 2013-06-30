@@ -41,8 +41,9 @@ namespace POEApi.Model
             { "Orb of Fusing", OrbType.Fusing },
             { "Portal Scroll", OrbType.PortalScroll },
             { "Albino Rhoa Feather", OrbType.AlbinaRhoaFeather},
-            { "Mirror", OrbType.Mirror }
-            
+            { "Mirror", OrbType.Mirror },
+            { "Eternal Orb", OrbType.Eternal},
+            { "Imprint", OrbType.Imprint }            
         };
         #endregion
 
