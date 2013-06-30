@@ -23,8 +23,8 @@ namespace Procurement.Controls
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ApplicationState.CurrentCharacter = (Character)e.AddedItems[0];
+            if (e.AddedItems.Count != 0)
+                ApplicationState.CurrentCharacter = (Character)e.AddedItems[0];
         }
-
     }
 }
