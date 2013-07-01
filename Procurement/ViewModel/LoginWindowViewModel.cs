@@ -92,15 +92,29 @@ namespace Procurement.ViewModel
                 var chars = ApplicationState.Model.GetCharacters();
                 updateView("[OK]");
 
+                bool downloadOnlyMyLeagues = false;
+                downloadOnlyMyLeagues = (Settings.UserSettings.ContainsKey("DownloadOnlyMyLeagues") && 
+                                         bool.TryParse(Settings.UserSettings["DownloadOnlyMyLeagues"], out downloadOnlyMyLeagues) && 
+                                         downloadOnlyMyLeagues &&
+                                         Settings.Lists.ContainsKey("MyLeagues") &&
+                                         Settings.Lists["MyLeagues"].Count > 0
+                                         );
+
                 foreach (var character in chars)
                 {
                     if (character.League == "Void")
+                        continue;
+
+                    if (downloadOnlyMyLeagues && !Settings.Lists["MyLeagues"].Contains(character.League))
                         continue;
 
                     ApplicationState.Characters.Add(character);
                     loadCharacterInventory(character);
                     loadStash(character);
                 }
+
+                if (downloadOnlyMyLeagues && ApplicationState.Characters.Count == 0)
+                    throw new Exception("No characters found in the leagues specified. Check spelling or try setting DownloadOnlyMyLeagues to false in settings");
 
                 ApplicationState.SetDefaults();
 

@@ -12,6 +12,7 @@ namespace POEApi.Model
         public static Dictionary<OrbType, CurrencyRatio> CurrencyRatios { get; private set; }
         public static Dictionary<string, string> UserSettings { get; private set; }
         public static Dictionary<string, string> ProxySettings { get; private set; }
+        public static Dictionary<string, List<string>> Lists { get; private set; }
         private static XElement originalDoc;
 
         static Settings()
@@ -21,6 +22,10 @@ namespace POEApi.Model
 
             UserSettings = getStandardNameValue("UserSettings");
             ProxySettings = getStandardNameValue("ProxySettings");
+
+            Lists = new Dictionary<string, List<string>>();
+            if (originalDoc.Element("Lists") != null)
+                Lists = originalDoc.Element("Lists").Elements("List").ToDictionary(list => list.Attribute("name").Value, list => list.Elements("Item").Select(e => e.Attribute("value").Value).ToList());
         }
 
         private static Dictionary<string, string> getStandardNameValue(string root)
