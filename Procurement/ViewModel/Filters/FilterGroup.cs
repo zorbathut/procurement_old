@@ -9,6 +9,7 @@
         Gems,
         Default,
         Damage,
-        Attacks
+        Attacks,
+        Level,
     };
 }

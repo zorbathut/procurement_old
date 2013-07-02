@@ -170,6 +170,7 @@
     <Compile Include="ViewModel\Filters\ForumExport\MagicQuality.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ViewModel\Filters\ForumExport\MapLevelFilter.cs" />
     <Compile Include="ViewModel\Filters\ForumExport\OrFilter.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -201,6 +202,7 @@
     <Compile Include="ViewModel\ForumExportVisitors\IVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\LastUpdatedVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\MagicFindVisitor.cs" />
+    <Compile Include="ViewModel\ForumExportVisitors\MapVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\PopularGemsVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\QualityGemVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\TripResVisitor.cs" />

@@ -20,6 +20,14 @@ Please message me here or ingame if something catches your eye. My IGN is {IGN}.
 [/spoiler]
 [/spoiler]
 
+[spoiler="          Maps          "]
+{66Maps}
+{67Maps}
+{68Maps}
+{69Maps}
+{70Maps}
+[/spoiler]
+
 [spoiler="          Triple Res Pieces          "]
 {TripRes}
 [/spoiler]
@@ -68,6 +76,9 @@ Please message me here or ingame if something catches your eye. My IGN is {IGN}.
 [/spoiler]
 [spoiler="          Boots          "]
 {RareBoots}
+[/spoiler]
+[spoiler="          Gloves          "]
+{RareGloves}
 [/spoiler]
 [/spoiler]
 
