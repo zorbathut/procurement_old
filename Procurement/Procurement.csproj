@@ -205,6 +205,7 @@
     <Compile Include="ViewModel\ForumExportVisitors\MapVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\PopularGemsVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\QualityGemVisitor.cs" />
+    <Compile Include="ViewModel\ForumExportVisitors\StashVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\TripResVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\UniquesVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\VisitorBase.cs" />
