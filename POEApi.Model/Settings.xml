@@ -42,5 +42,9 @@
             <Item value="Onslaught"/>
             <Item value="Anarchy"/>
         </List>
+        <List name="AdditionalTemplates">
+            <!--Add yours own templates here. Eg-->
+            <!--<Item value="LvlingShop.txt"/>-->
+        </List>
     </Lists>
 </Settings>

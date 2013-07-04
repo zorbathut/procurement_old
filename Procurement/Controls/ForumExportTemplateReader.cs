@@ -5,28 +5,37 @@ using System.Text;
 using System.Reflection;
 using System.IO;
 using POEApi.Infrastructure;
+using System.ComponentModel;
 
 namespace Procurement.Controls
 {
     internal class ForumExportTemplateReader
     {
-        private static string template = string.Empty;
         private const string templateFileName = "ForumExportTemplate.txt";
+        private static string currentTemplateName;
 
-        internal static string GetTemplate()
+        internal static event PropertyChangedEventHandler OnTemplateReloaded;
+
+        internal static string GetTemplate(string templateName)
         {
             try
             {
-                if (template != string.Empty)
-                    return template;
-
-                template = getTemplateFromDisk();
+                currentTemplateName = templateName ?? templateFileName;
+                string template = getTemplateFromDisk(templateName ?? templateFileName);
 
                 if (template != string.Empty)
+                {
+                    if (OnTemplateReloaded != null)
+                        OnTemplateReloaded(template, null);
+
                     return template;
+                }
 
                 template = getDefaultTemplate();
                 saveTemplate(template);
+
+                if (OnTemplateReloaded != null)
+                    OnTemplateReloaded(template, null);
 
                 return template;
             }
@@ -41,15 +50,14 @@ namespace Procurement.Controls
 
         internal static void SaveTemplate(string Template)
         {
-            template = Template;
-            saveTemplate(template);
+            saveTemplate(Template);
         }
 
         private static void saveTemplate(string defaultTemplate)
         {
             try
             {
-                File.WriteAllText(templateFileName, defaultTemplate);
+                File.WriteAllText(currentTemplateName, defaultTemplate);
             }
             catch (System.Exception ex)
             {
@@ -67,12 +75,12 @@ namespace Procurement.Controls
             }
         }
 
-        private static string getTemplateFromDisk()
+        private static string getTemplateFromDisk(string templateName)
         {
             if (!File.Exists(templateFileName))
                 return string.Empty;
 
-            return System.IO.File.ReadAllText(templateFileName);
+            return System.IO.File.ReadAllText(templateName);
         }
     }
 }

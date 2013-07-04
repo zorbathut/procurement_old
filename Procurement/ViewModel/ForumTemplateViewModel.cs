@@ -14,7 +14,13 @@ namespace Procurement.ViewModel
 
         public ForumTemplateViewModel()
         {
-            this.Text = ForumExportTemplateReader.GetTemplate();
+            this.Text = ForumExportTemplateReader.GetTemplate(null);
+            ForumExportTemplateReader.OnTemplateReloaded += new PropertyChangedEventHandler(ForumExportTemplateReader_OnTemplateReloaded);
+        }
+
+        void ForumExportTemplateReader_OnTemplateReloaded(object sender, PropertyChangedEventArgs e)
+        {
+            this.Text = sender.ToString();
         }
 
         private void onPropertyChanged(string name)

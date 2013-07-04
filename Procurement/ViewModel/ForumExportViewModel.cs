@@ -57,7 +57,21 @@ namespace Procurement.ViewModel
             get { return copyCommand; }
             set { copyCommand = value; }
         }
-        
+
+        public List<string> AvailableTemplates { get; private set; }
+
+        private string currentTemplate;
+        public string CurrentTemplate
+        {
+            get { return currentTemplate; }
+            set
+            {
+                currentTemplate = value;
+                onPropertyChanged("CurrentTemplate");
+                Text = getFinal(selected.SelectMany(sid => ApplicationState.Stash[ApplicationState.CurrentLeague].GetItemsByTab(sid))
+                                                              .OrderBy(id => id.Y).ThenBy(i => i.X));
+            }
+        }
 
         public List<ExportStashInfo> StashItems
         {
@@ -85,6 +99,12 @@ namespace Procurement.ViewModel
             updateForLeague();
             ApplicationState.LeagueChanged += new PropertyChangedEventHandler(ApplicationState_LeagueChanged);
             visitors = visitors ?? getVisitors();
+            AvailableTemplates = new List<string>();
+            AvailableTemplates.Add("ForumExportTemplate.txt");
+            if (Settings.Lists.ContainsKey("AdditionalTemplates"))
+                AvailableTemplates.AddRange(Settings.Lists["AdditionalTemplates"]);
+
+            CurrentTemplate = "ForumExportTemplate.txt";
         }
 
         private void copy(object parameter)
@@ -123,7 +143,7 @@ namespace Procurement.ViewModel
 
         private string getFinal(IEnumerable<Item> items)
         {
-            string template = ForumExportTemplateReader.GetTemplate();
+            string template = ForumExportTemplateReader.GetTemplate(CurrentTemplate);
 
             foreach (IVisitor visitor in visitors)
                 template = visitor.Visit(items, template);
