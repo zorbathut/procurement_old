@@ -8,6 +8,9 @@ using System.Windows;
 using Procurement.ViewModel.ForumExportVisitors;
 using System.Reflection;
 using Procurement.Controls;
+using System.Text.RegularExpressions;
+using System.IO;
+using System.Text;
 
 namespace Procurement.ViewModel
 {
@@ -114,19 +117,102 @@ namespace Procurement.ViewModel
             else
                 selected.Remove(key);
 
-            Text = getSpoiler(selected.SelectMany(sid => ApplicationState.Stash[ApplicationState.CurrentLeague].GetItemsByTab(sid))
+            Text = getFinal(selected.SelectMany(sid => ApplicationState.Stash[ApplicationState.CurrentLeague].GetItemsByTab(sid))
                                                               .OrderBy(id => id.Y).ThenBy(i => i.X));
         }
 
-        private string getSpoiler(IEnumerable<Item> items)
+        private string getFinal(IEnumerable<Item> items)
         {
             string template = ForumExportTemplateReader.GetTemplate();
 
             foreach (IVisitor visitor in visitors)
                 template = visitor.Visit(items, template);
 
+            template = doPostProcessing(template);
+
             return template;
             
+        }
+
+        private string doPostProcessing(string template)
+        {
+            string current = template;
+            List<int> toRemove = getLinesToRemove(current);
+            while (toRemove.Count > 0)
+            {
+                current = removeLines(current, toRemove);
+                toRemove = getLinesToRemove(current);
+            }
+
+            return current;
+        }
+
+        private string removeLines(string template, List<int> removeLines)
+        {
+            List<string> lines = readAllLines(template);
+
+            for (int i = removeLines.Count - 1; i > -1; i--)
+            {
+                lines.RemoveAt(removeLines[i]);
+            }
+
+            return string.Join(Environment.NewLine, lines);
+        }
+        private List<int> getLinesToRemove(string template)
+        {
+            string start = @"\[spoiler=[\s\S]*?\]";
+            string end = @"\[/spoiler\]";
+
+            List<string> lines = readAllLines(template);
+            List<int> exludeLines = new List<int>();
+
+            int startLine = -1;
+            int endLine = -1;
+
+            for (int i = 0; i < lines.Count; i++)
+            {
+                string line = lines[i];
+
+                if (Regex.IsMatch(line, start))
+                    startLine = i;
+
+                if (Regex.IsMatch(line, end))
+                    endLine = i;
+
+                if (endLine == -1)
+                    continue;
+
+                bool shouldRemove = true;
+                for (int j = startLine + 1; j < endLine; j++)
+                {
+                    if (lines[j].Trim() != string.Empty)
+                    {
+                        shouldRemove = false;
+                        break;
+                    }
+                }
+
+                if (shouldRemove)
+                    exludeLines.AddRange(Enumerable.Range(startLine, endLine - startLine + 1));
+
+                startLine = -1;
+                endLine = -1;
+            }
+
+            return exludeLines;
+        }
+        public List<string> readAllLines(string template)
+        {
+            List<string> list = new List<string>();
+            using (StreamReader reader = new StreamReader(new MemoryStream(Encoding.Default.GetBytes(template)), Encoding.Default))
+            {
+                string str;
+                while ((str = reader.ReadLine()) != null)
+                {
+                    list.Add(str);
+                }
+            }
+            return list;
         }
 
         private static List<IVisitor> getVisitors()
