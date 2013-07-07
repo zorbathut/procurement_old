@@ -144,6 +144,7 @@
     </Compile>
     <Compile Include="ViewModel\Filters\ForumExport\ChaosResistance.cs" />
     <Compile Include="ViewModel\Filters\ForumExport\ColdResistance.cs" />
+    <Compile Include="ViewModel\Filters\ForumExport\CurseGemFilter.cs" />
     <Compile Include="ViewModel\Filters\ForumExport\DamageCold.cs" />
     <Compile Include="ViewModel\Filters\ForumExport\DamageFire.cs" />
     <Compile Include="ViewModel\Filters\ForumExport\DamageLightning.cs" />
@@ -198,6 +199,7 @@
     <Compile Include="ViewModel\ForumExportViewModel.cs" />
     <Compile Include="ViewModel\Filters\ForumExport\AuraGemsFilter.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\AuraGemsVisitor.cs" />
+    <Compile Include="ViewModel\ForumExportVisitors\CurseGemsVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\DropOnlyGemVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\GearVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\IGNVistior.cs" />
