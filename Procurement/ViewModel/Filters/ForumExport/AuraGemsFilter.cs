@@ -33,7 +33,6 @@ namespace Procurement.ViewModel.Filters
             auraList.Add("Discipline");
             auraList.Add("Purity");
             auraList.Add("Wrath");
-            auraList.Add("abcdefg");
         }
 
         public bool CanFormCategory
