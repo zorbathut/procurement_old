@@ -77,7 +77,7 @@ namespace Procurement.Controls
 
         private static string getTemplateFromDisk(string templateName)
         {
-            if (!File.Exists(templateFileName))
+            if (!File.Exists(templateName))
                 return string.Empty;
 
             return System.IO.File.ReadAllText(templateName);
