@@ -196,6 +196,8 @@
     <Compile Include="ViewModel\Filters\ItemFilter.cs" />
     <Compile Include="ViewModel\Filters\UserSearchFilter.cs" />
     <Compile Include="ViewModel\ForumExportViewModel.cs" />
+    <Compile Include="ViewModel\Filters\ForumExport\AuraGemsFilter.cs" />
+    <Compile Include="ViewModel\ForumExportVisitors\AuraGemsVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\DropOnlyGemVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\GearVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\IGNVistior.cs" />
