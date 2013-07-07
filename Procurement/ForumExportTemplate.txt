@@ -6,7 +6,7 @@ Please message me here or ingame if something catches your eye. My IGN is {IGN}.
 {Uniques}
 [/spoiler]
 
-[spoiler="          Gem Categories          "]
+[spoiler="          Gems          "]
 [spoiler="          Quality Gems          "]
 {QualityGems}
 [/spoiler]
@@ -18,47 +18,28 @@ Please message me here or ingame if something catches your eye. My IGN is {IGN}.
 [spoiler="          Popular Gems          "]
 {PopularGems}
 [/spoiler]
+
+[spoiler="          Aura Gems          "]
+{AuraGems}
 [/spoiler]
 
-[spoiler="          Maps          "]
-{66Maps}
-{67Maps}
-{68Maps}
-{69Maps}
-{70Maps}
+[spoiler="          Curse Gems          "]
+{CurseGems}
 [/spoiler]
 
-[spoiler="          Triple Res Pieces          "]
+[/spoiler]
+
+[spoiler="          Tri Res Gear          "]
 {TripRes}
 [/spoiler]
 
-[spoiler="          Magic Find Gears          "]
+[spoiler="          IIR/IIQ Gear          "]
 {MagicFind}
 [/spoiler]
 
-[spoiler="          Crafting Gears          "]
-{WhiteGear}
-[/spoiler]
-
 [spoiler="          Weapons and Armor          "]
-[spoiler="          Weapons          "]
-{RareSword}
-{RareAxe}
-{RareSceptre}
-{RareMace}
-{RareClaw}
-{RareBow}
-{RareMace}
-[/spoiler]
-[spoiler="          Shields/Quivers          "]
-{RareShield}
-{RareQuiver}
-[/spoiler]
-[spoiler="          Wands/Daggers/Staff          "]
-{RareWand}
-{RareDagger}
-{RareStaff}
-[/spoiler]
+
+[spoiler="          Armor                                 "]
 [spoiler="          Helms          "]
 {RareHelmet}
 [/spoiler]
@@ -81,8 +62,40 @@ Please message me here or ingame if something catches your eye. My IGN is {IGN}.
 {RareGloves}
 [/spoiler]
 [/spoiler]
+[spoiler="          Shields          "]
+{RareShield}
+[/spoiler]
+
+[spoiler="          Swords, Axes & Maces          "]
+
+{RareSword}
+{RareAxe}
+
+{RareMace}
+[/spoiler]
+
+[spoiler="          Daggers          "]
+{RareDagger}
+[/spoiler]
+
+[spoiler="          Claws          "]
+{RareClaw}
+[/spoiler]
+
+[spoiler="          Bows  & Quivers          "]
+{RareBow}
+{RareQuiver}
+[/spoiler]
+
+[spoiler="          Wands, Sceptres & Staves          "]
+{RareWand}
+{RareSceptre}
+{RareStaff}
+[/spoiler]
+
+[/spoiler]
 
 Thanks for visiting!
 
-[url=https://code.google.com/p/procurement/][img]http://i.imgur.com/vAP7LoM.jpg[/img][/url]
+[url=https://code.google.com/p/procurement/][img]http://i.imgur.com/ZHBMImo.png[/img][/url]
 
