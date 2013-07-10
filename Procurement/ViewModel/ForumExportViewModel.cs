@@ -212,7 +212,7 @@ namespace Procurement.ViewModel
                     }
                 }
 
-                if (shouldRemove)
+                if (shouldRemove && startLine > 0 && endLine > 0)
                     exludeLines.AddRange(Enumerable.Range(startLine, endLine - startLine + 1));
 
                 startLine = -1;
