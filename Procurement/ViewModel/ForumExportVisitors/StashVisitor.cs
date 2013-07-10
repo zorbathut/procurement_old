@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using POEApi.Model;
+using System.Text.RegularExpressions;
 
 namespace Procurement.ViewModel.ForumExportVisitors
 {
@@ -18,14 +19,15 @@ namespace Procurement.ViewModel.ForumExportVisitors
             foreach (int location in tokenLocations)
             {
                 var nameToken = getToken(location, current);
+                Regex replacer = new Regex(nameToken.Item2);
                 var tab = ApplicationState.Stash[ApplicationState.CurrentLeague].Tabs.Find(t => t.Name == nameToken.Item1);
                 if (tab == null)
                 {
-                    current = current.Replace(nameToken.Item2, string.Empty);
+                    current = replacer.Replace(current, string.Empty, 1, location);
                     continue;
                 }
 
-                current = current.Replace(nameToken.Item2, getItems(ApplicationState.Stash[ApplicationState.CurrentLeague].GetItemsByTab(tab.i).OrderBy(i => i.H).ThenBy(i => i.IconURL)));
+                current = replacer.Replace(current, getItems(ApplicationState.Stash[ApplicationState.CurrentLeague].GetItemsByTab(tab.i).OrderBy(i => i.H).ThenBy(i => i.IconURL)), 1, location);
             }
 
             return current;
