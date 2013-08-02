@@ -28,6 +28,7 @@
         <Setting name="FavoriteCharacter" value="" />
         <Setting name="CompactMode" value="false" />
         <Setting name="DownloadOnlyMyLeagues" value="false" />
+        <Setting name="CurrencyDistributionMetric" value="GemCutterPrism" />
     </UserSettings>
     <ProxySettings>
         <Setting name="Enabled" value="False" />

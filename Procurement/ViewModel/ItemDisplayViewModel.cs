@@ -199,6 +199,9 @@ namespace Procurement.ViewModel
                 case "S":
                     color = "red" + suffix;
                     break;
+                default:
+                    color = "white" + suffix;
+                    break;
             }
 
             Image img = new Image();

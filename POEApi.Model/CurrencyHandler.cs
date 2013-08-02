@@ -18,22 +18,35 @@ namespace POEApi.Model
             return ratio.OrbAmount * ratio.GCPAmount;
         }
 
-        public static double GetTotalGCP(IEnumerable<Currency> currency)
+        public static double GetTotal(OrbType target, IEnumerable<Currency> currency)
         {
             double total = 0;
 
             foreach (var orb in currency)
                 total += orb.StackInfo.Amount * orb.GCPValue;
 
+            var ratioToGCP = Settings.CurrencyRatios[target];
+
+            total *= (ratioToGCP.OrbAmount / ratioToGCP.GCPAmount);
+
             return total;
         }
 
-        public static Dictionary<OrbType, double> GetTotalGCPDistribution(IEnumerable<Currency> currency)
+        public static Dictionary<OrbType, double> GetTotalCurrencyDistribution(OrbType target, IEnumerable<Currency> currency)
         {
             return currency.Where(o => !o.TypeLine.Contains("Shard"))
                            .GroupBy(orb => orb.Type)
-                           .Where(group => GetTotalGCP(group) > 0)
-                           .Select(grp => new { Key = grp.Key, Value = GetTotalGCP(grp) })
+                           .Where(group => GetTotal(target, group) > 0)
+                           .Select(grp => new { Key = grp.Key, Value = GetTotal(target, grp) })
+                           .OrderByDescending(at => at.Value)
+                           .ToDictionary(at => at.Key, at => at.Value);
+        }
+
+        public static Dictionary<OrbType, double> GetTotalCurrencyCount(IEnumerable<Currency> currency)
+        {
+            return currency.Where(o => !o.TypeLine.Contains("Shard"))
+                           .GroupBy(orb => orb.Type)
+                           .Select(grp => new { Key = grp.Key, Value = (double)grp.Sum(c => c.StackInfo.Amount) })
                            .OrderByDescending(at => at.Value)
                            .ToDictionary(at => at.Key, at => at.Value);
         }

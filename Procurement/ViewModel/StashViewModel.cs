@@ -34,6 +34,8 @@ namespace Procurement.ViewModel
         private List<IFilter> categoryFilter;
         private TabItem selectedTab { get; set; }
         private ResourceDictionary expressionDark;
+        private OrbType configuredOrbType;
+        private bool currencyDistributionUsesCount;
 
         private string filter;
 
@@ -100,14 +102,20 @@ namespace Procurement.ViewModel
             get { return ApplicationState.CurrentLeague; }
         }
 
-        public string TotalGCP
+        public string Total
         {
-            get { return "Total GCP in Orbs : " + ApplicationState.Stash[ApplicationState.CurrentLeague].GetTotalGCP().ToString(); }
+            get { return "Total " + configuredOrbType.ToString() + " in Orbs : " + ApplicationState.Stash[ApplicationState.CurrentLeague].GetTotal(configuredOrbType).ToString(); }
         }
 
-        public Dictionary<OrbType, double> TotalGCPDistibution
+        public Dictionary<OrbType, double> TotalDistibution
         {
-            get { return ApplicationState.Stash[ApplicationState.CurrentLeague].GetTotalGCPDistribution(); }
+            get 
+            {
+                if (currencyDistributionUsesCount)
+                    return ApplicationState.Stash[ApplicationState.CurrentLeague].GetTotalCurrencyCount();
+
+                return ApplicationState.Stash[ApplicationState.CurrentLeague].GetTotalCurrencyDistribution(configuredOrbType); 
+            }
         }
 
         public List<string> AvailableItems { get; private set; }
@@ -125,6 +133,13 @@ namespace Procurement.ViewModel
             stashView.tabControl.SelectionChanged += new SelectionChangedEventHandler(tabControl_SelectionChanged);
             getAvailableItems();
             expressionDark = Application.LoadComponent(new Uri("/Procurement;component/Controls/ExpressionDark.xaml", UriKind.RelativeOrAbsolute)) as ResourceDictionary;
+
+            configuredOrbType = OrbType.GemCutterPrism;
+            string currencyDistributionMetric = Settings.UserSettings["CurrencyDistributionMetric"];
+            if (currencyDistributionMetric.ToLower() == "count")
+                currencyDistributionUsesCount = true;
+            else
+                configuredOrbType = (OrbType)Enum.Parse(typeof(OrbType), currencyDistributionMetric);
         }
 
         private void getAvailableItems()

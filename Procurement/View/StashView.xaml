@@ -190,8 +190,8 @@
                                 </Grid.RowDefinitions>
 
                                 <Label Content="Currency Breakdown" Grid.Row="0"  Foreground="#FFAB9066" FontSize="14" FontWeight="Bold"/>
-                                <Label Grid.Row="1" Content="{Binding TotalGCP}" Foreground="#FFAB9066"/>
-                                <ItemsControl Grid.Row="2" ItemsSource="{Binding TotalGCPDistibution}">
+                                <Label Grid.Row="1" Content="{Binding Total}" Foreground="#FFAB9066"/>
+                                <ItemsControl Grid.Row="2" ItemsSource="{Binding TotalDistibution}">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <StackPanel Orientation="Vertical"/>

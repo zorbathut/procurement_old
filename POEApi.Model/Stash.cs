@@ -55,14 +55,19 @@ namespace POEApi.Model
                         .ToList();
         }
 
-        public double GetTotalGCP()
+        public double GetTotal(OrbType target)
         {
-            return CurrencyHandler.GetTotalGCP(Get<Currency>());
+            return CurrencyHandler.GetTotal(target, Get<Currency>());
         }
 
-        public Dictionary<OrbType, double> GetTotalGCPDistribution()
+        public Dictionary<OrbType, double> GetTotalCurrencyDistribution(OrbType target)
         {
-            return CurrencyHandler.GetTotalGCPDistribution(Get<Currency>());
+            return CurrencyHandler.GetTotalCurrencyDistribution(target, Get<Currency>());
+        }
+
+        public Dictionary<OrbType, double> GetTotalCurrencyCount()
+        {
+            return CurrencyHandler.GetTotalCurrencyCount(Get<Currency>());
         }
 
         public Dictionary<string, List<Gear>> GetDuplicateRares()
