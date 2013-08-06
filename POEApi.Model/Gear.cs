@@ -24,6 +24,8 @@ namespace POEApi.Model
             this.Requirements = ProxyMapper.GetRequirements(item.Requirements);
             this.ItemType = Model.ItemType.Gear;
             this.GearType = GearTypeFactory.GetType(this);
+
+            this.UniqueIDHash = base.getHash();
         }
 
         public bool IsLinked(int links)
@@ -34,6 +36,20 @@ namespace POEApi.Model
         public int NumberOfSockets()
         {
             return Sockets.Count();
+        }
+
+        protected override int getConcreteHash()
+        {
+            var anonomousType = new
+            {
+                f1 = Sockets != null ? string.Join(string.Empty, Sockets.Select(s => string.Concat(s.Group, s.Attribute)).ToArray()) : string.Empty,
+                f2 = Implicitmods != null ? string.Join(string.Empty, Implicitmods.ToArray()) : string.Empty,
+                f3 = Quality.ToString(),
+                f4 = this.Requirements != null ? string.Join(string.Empty, this.Requirements.Select(r => string.Concat(r.Name, r.Value)).ToArray()) : string.Empty,
+                f5 = this.GearType.ToString()
+            };
+
+            return anonomousType.GetHashCode();
         }
     }
 }

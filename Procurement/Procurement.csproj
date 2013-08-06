@@ -124,6 +124,9 @@
     <Compile Include="Controls\RecipeResults.xaml.cs">
       <DependentUpon>RecipeResults.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\SetBuyoutView.xaml.cs">
+      <DependentUpon>SetBuyoutView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -138,6 +141,7 @@
     <Compile Include="ViewModel\Filters\ForumExport\AllElementalResistances.cs" />
     <Compile Include="ViewModel\Filters\ForumExport\AndFilter.cs" />
     <Compile Include="ViewModel\Filters\ForumExport\AttackSpeed.cs" />
+    <Compile Include="ViewModel\Filters\ForumExport\BuyoutFilter.cs" />
     <Compile Include="ViewModel\Filters\ForumExport\CastSpeed.cs" />
     <Compile Include="ViewModel\Filters\ForumExport\CategoryManager.cs">
       <SubType>Code</SubType>
@@ -202,6 +206,8 @@
     <Compile Include="ViewModel\ForumExportViewModel.cs" />
     <Compile Include="ViewModel\Filters\ForumExport\AuraGemsFilter.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\AuraGemsVisitor.cs" />
+    <Compile Include="ViewModel\ForumExportVisitors\MultipleBuyoutVisitor.cs" />
+    <Compile Include="ViewModel\ForumExportVisitors\SingleBuyoutVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\CurseGemsVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\DropOnlyGemVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\GearVisitor.cs" />
@@ -358,6 +364,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\RecipeResults.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SetBuyoutView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

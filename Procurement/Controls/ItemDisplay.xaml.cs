@@ -8,15 +8,22 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
 using System.Windows.Media;
 using Procurement.ViewModel;
+using POEApi.Model;
+using System.Windows.Media.Imaging;
+using System.IO;
 
 namespace Procurement.Controls
 {
     public partial class ItemDisplay : UserControl
     {
         private static List<Popup> annoyed = new List<Popup>();
+        private ResourceDictionary expressionDark;
+
         public ItemDisplay()
         {
             InitializeComponent();
+            expressionDark = Application.LoadComponent(new Uri("/Procurement;component/Controls/ExpressionDark.xaml", UriKind.RelativeOrAbsolute)) as ResourceDictionary;
+
             this.Loaded += new RoutedEventHandler(ItemDisplay_Loaded);
         }
 
@@ -29,12 +36,15 @@ namespace Procurement.Controls
         {
             ItemDisplayViewModel vm = this.DataContext as ItemDisplayViewModel;
             Image i = vm.getImage();
+
             UIElement socket = vm.getSocket();
 
             this.MainGrid.Children.Add(i);
 
             if (socket != null)
                 doSocketOnHover(socket, i);
+
+            i.ContextMenu = getContextMenu();
 
             this.Height = i.Height;
             this.Width = i.Width;
@@ -70,6 +80,47 @@ namespace Procurement.Controls
 
             this.MainGrid.Children.Add(popup);
             annoyed.Add(popup);
+        }
+
+        private ContextMenu getContextMenu()
+        {
+            ItemDisplayViewModel vm = this.DataContext as ItemDisplayViewModel;
+            Item item = vm.Item;
+
+            ContextMenu menu = new ContextMenu();
+            menu.Resources = expressionDark;
+
+            if (!(item is Currency))
+            {
+                MenuItem setBuyout = new MenuItem();
+                string buyoutValue = string.Empty;
+                if (Settings.Buyouts.ContainsKey(item.UniqueIDHash))
+                    buyoutValue = Settings.Buyouts[item.UniqueIDHash];
+
+                var buyoutView = new SetBuyoutView();
+                buyoutView.BuyoutValue.Text = buyoutValue;
+
+                setBuyout.Header = buyoutView;
+                setBuyout.Click += new RoutedEventHandler(setBuyout_Click);
+                menu.Items.Add(setBuyout);
+            }
+
+            return menu;
+        }
+
+        void setBuyout_Click(object sender, RoutedEventArgs e)
+        {
+            ItemDisplayViewModel vm = this.DataContext as ItemDisplayViewModel;
+            Item item = vm.Item;
+
+            string buyoutValue = ((sender as MenuItem).Header as SetBuyoutView).BuyoutValue.Text;
+            
+            Settings.Buyouts[item.UniqueIDHash] = buyoutValue;
+
+            if (buyoutValue == string.Empty)
+                Settings.Buyouts.Remove(item.UniqueIDHash);
+
+            Settings.Save();
         }
 
         public static void closeOthersButNot(Popup current)

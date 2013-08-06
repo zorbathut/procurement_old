@@ -36,6 +36,7 @@ namespace POEApi.Model
         public List<string> Explicitmods { get; set; }
         public ItemType ItemType { get; set; }
         public List<Property> Properties { get; set; }
+        public int UniqueIDHash { get; set; }
 
         protected Item(JSONProxy.Item item)
         {
@@ -55,6 +56,25 @@ namespace POEApi.Model
             this.ItemType = Model.ItemType.UnSet;
             if (item.Properties != null)
                 this.Properties = item.Properties.Select(p => new Property(p)).ToList();
+        }
+
+        protected abstract int getConcreteHash();
+
+        protected int getHash()
+        {
+            var anonomousType = new 
+            { 
+                f = this.IconURL, 
+                f1 = this.League,
+                f2 = this.Name,
+                f3 = this.TypeLine,
+                f4 = this.DescrText,
+                f5 = this.Explicitmods != null ? string.Join(string.Empty, this.Explicitmods.ToArray()) : string.Empty,
+                f6 = this.Properties != null ? string.Join(string.Empty, this.Properties.Select(p => string.Concat(p.DisplayMode, p.Name, string.Join(string.Empty, p.Values.Select(t => string.Concat(t.Item1, t.Item2)).ToArray()))).ToArray()) : string.Empty,
+                f7 = getConcreteHash()
+            };
+
+            return anonomousType.GetHashCode();
         }
 
         protected Quality getQuality(JSONProxy.Item item)

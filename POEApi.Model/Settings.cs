@@ -13,6 +13,7 @@ namespace POEApi.Model
         public static Dictionary<string, string> UserSettings { get; private set; }
         public static Dictionary<string, string> ProxySettings { get; private set; }
         public static Dictionary<string, List<string>> Lists { get; private set; }
+        public static Dictionary<int, string> Buyouts { get; private set; }
         private static XElement originalDoc;
 
         static Settings()
@@ -26,6 +27,10 @@ namespace POEApi.Model
             Lists = new Dictionary<string, List<string>>();
             if (originalDoc.Element("Lists") != null)
                 Lists = originalDoc.Element("Lists").Elements("List").ToDictionary(list => list.Attribute("name").Value, list => list.Elements("Item").Select(e => e.Attribute("value").Value).ToList());
+
+            Buyouts = new Dictionary<int, string>();
+            if (originalDoc.Element("Buyouts") != null)
+                Buyouts = originalDoc.Element("Buyouts").Elements("Item").ToDictionary(list => (int)list.Attribute("id"), list => list.Attribute("value").Value);
         }
 
         private static Dictionary<string, string> getStandardNameValue(string root)
@@ -47,6 +52,13 @@ namespace POEApi.Model
                 XElement update = originalDoc.Elements("Ratios").Descendants().First(x => x.Attribute("type").Value == key.ToString());
                 update.Attribute("orbamount").SetValue(CurrencyRatios[key].OrbAmount.ToString());
                 update.Attribute("gcpamount").SetValue(CurrencyRatios[key].GCPAmount.ToString());
+            }
+
+            originalDoc.Element("Buyouts").RemoveNodes();
+            foreach (int key in Buyouts.Keys)
+            {
+                XElement buyout = new XElement("Item", new XAttribute("id", key), new XAttribute("value", Buyouts[key]));
+                originalDoc.Element("Buyouts").Add(buyout);
             }
 
             try

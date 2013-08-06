@@ -11,6 +11,13 @@
             this.Type = ProxyMapper.GetOrbType(item);
             this.GCPValue = CurrencyHandler.GetGCPValue(this.Type);
             this.StackInfo = ProxyMapper.GetStackInfo(item.Properties);
+
+            this.UniqueIDHash = base.getHash();
+        }
+
+        protected override int getConcreteHash()
+        {
+            return 0;
         }
     }
 }
