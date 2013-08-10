@@ -176,12 +176,12 @@ namespace Procurement.ViewModel
             if (item.SocketedItems == null || item.SocketedItems.Count == 0)
                 return false;
 
-            return item.SocketedItems.Exists(i => i.Socket == socketIndex && socket.Attribute == i.Color);
+            return item.SocketedItems.Exists(i => i.Socket == socketIndex && (socket.Attribute == i.Color || socket.Attribute == "G"));
         }
 
         private Gem getSocketItemAt(Tuple<int, int> nextAvail, Socket socket, int socketIndex, Gear item)
         {
-            return item.SocketedItems.First(i => i.Socket == socketIndex && socket.Attribute == i.Color);
+            return item.SocketedItems.First(i => i.Socket == socketIndex && (socket.Attribute == i.Color || socket.Attribute == "G"));
         }
 
         private Image getSocket(Tuple<int, int> current, Socket socket, string suffix)

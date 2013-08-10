@@ -110,7 +110,7 @@ namespace Procurement.ViewModel
         private void copy(object parameter)
         {
             if (text != null)
-                Clipboard.SetText(text);
+                Clipboard.SetDataObject(text);
         }
 
         void ApplicationState_LeagueChanged(object sender, PropertyChangedEventArgs e)
