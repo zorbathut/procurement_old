@@ -5,6 +5,7 @@ using System.Text;
 using POEApi.Infrastructure;
 using System.Security;
 using POEApi.Infrastructure.Events;
+using System.Text.RegularExpressions;
 
 namespace POEApi.Transport
 {
@@ -25,6 +26,7 @@ namespace POEApi.Transport
         private const string characterURL = @"http://www.pathofexile.com/character-window/get-characters";
         private const string stashURL = @"http://www.pathofexile.com/character-window/get-stash-items?league={0}&tabs=1&tabIndex={1}";
         private const string inventoryURL = @"http://www.pathofexile.com/character-window/get-items?character={0}";
+        private const string hashRegEx = "name=\\\"hash\\\" value=\\\"(?<hash>[a-zA-Z0-9]{1,})\\\"";
 
         public event ThottledEventHandler Throttled;
 
@@ -54,12 +56,18 @@ namespace POEApi.Transport
 
         public bool Authenticate(string email, SecureString password)
         {
+            HttpWebRequest getHash = getHttpRequest(HttpMethod.GET, loginURL);
+            HttpWebResponse hashResponse = (HttpWebResponse)getHash.GetResponse();
+            string loginResponse = Encoding.Default.GetString(getMemoryStreamFromResponse(hashResponse).ToArray());
+            string hashValue = Regex.Match(loginResponse, hashRegEx).Groups["hash"].Value;
+
             HttpWebRequest request = getHttpRequest(HttpMethod.POST, loginURL);
             request.AllowAutoRedirect = false;
 
             StringBuilder data = new StringBuilder();
             data.Append("login_email=" + Uri.EscapeDataString(email));
             data.Append("&login_password=" + Uri.EscapeDataString(password.UnWrap()));
+            data.Append("&hash=" + hashValue);
 
             byte[] byteData = UTF8Encoding.UTF8.GetBytes(data.ToString());
 
