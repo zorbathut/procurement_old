@@ -22,6 +22,7 @@ namespace Procurement.ViewModel
     public class ItemDisplayViewModel
     {
         public Item Item { get; set; }
+        private static Dictionary<string, BitmapImage> imageCache = new Dictionary<string, BitmapImage>();
         public ItemDisplayViewModel(Item item)
         {
             this.Item = item;
@@ -31,17 +32,21 @@ namespace Procurement.ViewModel
         {
             Image img = new Image();
 
-            using (var stream = ApplicationState.Model.GetImage(Item))
+            if (!imageCache.ContainsKey(Item.IconURL))
             {
-                var bitmap = new BitmapImage();
-                bitmap.BeginInit();
-                bitmap.StreamSource = stream;
-                bitmap.CacheOption = BitmapCacheOption.OnLoad;
-                bitmap.EndInit();
-                bitmap.Freeze();
-                img.Source = bitmap;
+                using (var stream = ApplicationState.Model.GetImage(Item))
+                {
+                    var bitmap = new BitmapImage();
+                    bitmap.BeginInit();
+                    bitmap.StreamSource = stream;
+                    bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                    bitmap.EndInit();
+                    bitmap.Freeze();
+                    imageCache.Add(Item.IconURL, bitmap);
+                }
             }
 
+            img.Source = imageCache[Item.IconURL];
             var itemhover = new ItemHover() { DataContext = ItemHoverViewModelFactory.Create(Item) };
 
             Popup popup = new Popup();

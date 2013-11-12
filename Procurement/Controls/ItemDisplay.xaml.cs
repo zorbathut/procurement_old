@@ -17,12 +17,12 @@ namespace Procurement.Controls
     public partial class ItemDisplay : UserControl
     {
         private static List<Popup> annoyed = new List<Popup>();
-        private ResourceDictionary expressionDark;
+        private static ResourceDictionary expressionDark;
 
         public ItemDisplay()
         {
             InitializeComponent();
-            expressionDark = Application.LoadComponent(new Uri("/Procurement;component/Controls/ExpressionDark.xaml", UriKind.RelativeOrAbsolute)) as ResourceDictionary;
+            expressionDark = expressionDark ?? Application.LoadComponent(new Uri("/Procurement;component/Controls/ExpressionDark.xaml", UriKind.RelativeOrAbsolute)) as ResourceDictionary;
 
             this.Loaded += new RoutedEventHandler(ItemDisplay_Loaded);
         }

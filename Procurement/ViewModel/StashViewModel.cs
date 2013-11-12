@@ -36,6 +36,7 @@ namespace Procurement.ViewModel
         private ResourceDictionary expressionDark;
         private OrbType configuredOrbType;
         private bool currencyDistributionUsesCount;
+        private static Dictionary<string, CroppedBitmap> imageCache = new Dictionary<string, CroppedBitmap>();
 
         private string filter;
 
@@ -283,17 +284,22 @@ namespace Procurement.ViewModel
             Image img = new Image();
             int offset = mouseOver ? 26 : 0;
 
-            using (var stream = ApplicationState.Model.GetImage(tab))
+            string key = tab.src + mouseOver.ToString();
+            if (!imageCache.ContainsKey(key))
             {
-                var bitmap = new BitmapImage();
-                bitmap.BeginInit();
-                bitmap.StreamSource = stream;
-                bitmap.CacheOption = BitmapCacheOption.OnLoad;
-                bitmap.EndInit();
 
-                var croppedImage = new CroppedBitmap(bitmap, new Int32Rect(0, offset, (int)bitmap.Width, 26));
-                img.Source = croppedImage;
+                using (var stream = ApplicationState.Model.GetImage(tab))
+                {
+                    var bitmap = new BitmapImage();
+                    bitmap.BeginInit();
+                    bitmap.StreamSource = stream;
+                    bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                    bitmap.EndInit();
+
+                    imageCache.Add(key, new CroppedBitmap(bitmap, new Int32Rect(0, offset, (int)bitmap.Width, 26)));
+                }
             }
+            img.Source = imageCache[key];
             img.Tag = tab;
 
             return img;

@@ -64,7 +64,6 @@ namespace Procurement.Controls
         void ApplicationState_LeagueChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             initialized = false;
-            refresh();
         }
 
         void StashControl_Loaded(object sender, RoutedEventArgs e)
