@@ -32,9 +32,9 @@ namespace POEApi.Model
         public POEModel()
         { }
 
-        public bool Authenticate(string email, SecureString password, bool offline)
+        public bool Authenticate(string email, SecureString password, bool offline, bool useSessionID)
         {
-            transport = getTransport(email, password);
+            transport = getTransport(email);
             cacheService = new CacheService(email);
             Offline = offline;
 
@@ -44,7 +44,7 @@ namespace POEApi.Model
             transport.Throttled += new ThottledEventHandler(instance_Throttled);
             onAuthenticate(POEEventState.BeforeEvent, email);
 
-            transport.Authenticate(email, password);
+            transport.Authenticate(email, password, useSessionID);
 
             onAuthenticate(POEEventState.AfterEvent, email);
 
@@ -57,12 +57,12 @@ namespace POEApi.Model
                 Throttled(sender, e);
         }
 
-        private ITransport getTransport(string email, SecureString password)
+        private ITransport getTransport(string email)
         {
             if (Settings.ProxySettings["Enabled"] != bool.TrueString)
-                return new ChainedTransportService(email, password);
+                return new ChainedTransportService(email);
 
-            return new ChainedTransportService(email, password, Settings.ProxySettings["Username"], Settings.ProxySettings["Password"], Settings.ProxySettings["Domain"]);
+            return new ChainedTransportService(email, Settings.ProxySettings["Username"], Settings.ProxySettings["Password"], Settings.ProxySettings["Domain"]);
         }
 
         public void ForceRefresh()

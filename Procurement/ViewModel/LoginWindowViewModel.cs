@@ -24,6 +24,7 @@ namespace Procurement.ViewModel
         public event LoginCompleted OnLoginCompleted;
         public delegate void LoginCompleted();
         private bool usePasswordBoxPassword;
+        private bool useSession;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -50,6 +51,14 @@ namespace Procurement.ViewModel
         public LoginWindowViewModel(UserControl view)
         {
             this.view = view;
+
+            useSession = Settings.UserSettings.ContainsKey("UseSessionID") ? bool.Parse(Settings.UserSettings["UseSessionID"]) : false;
+            if (useSession)
+            {
+                LoginView v = view as LoginView;
+                v.lblEmail.Content = "Alias";
+                v.lblPassword.Content = "Session ID";
+            }
 
             Email = Settings.UserSettings["AccountLogin"];
             this.usePasswordBoxPassword = string.IsNullOrEmpty(Settings.UserSettings["AccountPassword"]);
@@ -82,7 +91,7 @@ namespace Procurement.ViewModel
             Task.Factory.StartNew(() =>
             {
                 SecureString password = usePasswordBoxPassword ? (this.view as LoginView).txtPassword.SecurePassword : Settings.UserSettings["AccountPassword"].Decrypt();
-                ApplicationState.Model.Authenticate(Email, password, authOffLine);
+                ApplicationState.Model.Authenticate(Email, password, authOffLine, useSession);
                 saveSettings(password);
 
                 if (!authOffLine)

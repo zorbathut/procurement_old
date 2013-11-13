@@ -9,9 +9,9 @@ namespace POEApi.Transport
         ITransport transport;
         public event ThottledEventHandler Throttled;
 
-        public ChainedTransportService(string email, SecureString password)
+        public ChainedTransportService(string email)
         {
-            transport = new CachedTransport(email, new HttpTransport(email, password));
+            transport = new CachedTransport(email, new HttpTransport(email));
             transport.Throttled += instance_Throttled;
         }
 
@@ -21,15 +21,15 @@ namespace POEApi.Transport
                 Throttled(sender, e);
         }
 
-        public ChainedTransportService(string email, SecureString password, string proxyUser, string proxyPassword, string proxyDomain)
+        public ChainedTransportService(string email, string proxyUser, string proxyPassword, string proxyDomain)
         {
-            transport = new CachedTransport(email, new HttpTransport(email, password, proxyUser, proxyPassword, proxyDomain));
+            transport = new CachedTransport(email, new HttpTransport(email, proxyUser, proxyPassword, proxyDomain));
             transport.Throttled += instance_Throttled;
         }
 
-        public bool Authenticate(string email, SecureString password)
+        public bool Authenticate(string email, SecureString password, bool useSessionID)
         {
-            return transport.Authenticate(email, password);
+            return transport.Authenticate(email, password, useSessionID);
         }
 
         public Stream GetStash(int index, string league, bool refresh)

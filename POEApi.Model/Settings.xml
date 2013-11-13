@@ -24,6 +24,7 @@
     <UserSettings>
         <Setting name="AccountLogin" value="" />
         <Setting name="AccountPassword" value="" />
+        <Setting name="UseSessionID" value="false" />
         <Setting name="FavoriteLeague" value="" />
         <Setting name="FavoriteCharacter" value="" />
         <Setting name="CompactMode" value="false" />
@@ -40,8 +41,8 @@
         <List name="MyLeagues">
             <Item value="Standard"/>
             <Item value="Hardcore"/>
-            <Item value="Onslaught"/>
-            <Item value="Anarchy"/>
+            <Item value="Domination"/>
+            <Item value="Nemesis"/>
         </List>
         <List name="AdditionalTemplates">
             <!--Add yours own templates here. Eg-->
