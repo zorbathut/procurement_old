@@ -11,6 +11,8 @@ using Procurement.View;
 using System.Security;
 using POEApi.Infrastructure;
 using POEApi.Infrastructure.Events;
+using System.Net;
+using System.Collections.Generic;
 
 namespace Procurement.ViewModel
 {
@@ -164,10 +166,25 @@ namespace Procurement.ViewModel
 
         private void loadCharacterInventory(Character character)
         {
+            bool success = false;
             updateView(string.Format("Loading {0}'s inventory...", character.Name));
-            var inventory = ApplicationState.Model.GetInventory(character.Name);
+            List<Item> inventory = null;
+            try
+            {
+                inventory = ApplicationState.Model.GetInventory(character.Name);
+                success = true;
+            }
+            catch (WebException)
+            {
+                inventory = new List<Item>();
+                success = false;
+            }
+
             var inv = inventory.Where(i => i.inventoryId != "MainInventory");
-            updateView("[OK]");
+            if (success)
+                updateView("[OK]");
+            else
+                updateView("ERROR");
 
             ApplicationState.Model.GetImages(inventory);
         }
