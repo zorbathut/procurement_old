@@ -4,7 +4,7 @@ using POEApi.Model;
 
 namespace Procurement.ViewModel.Filters
 {
-    internal abstract class Link : IFilter
+    internal class Link : IFilter
     {
         private int links;
         

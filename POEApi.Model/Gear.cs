@@ -30,7 +30,7 @@ namespace POEApi.Model
 
         public bool IsLinked(int links)
         {
-            return Sockets.GroupBy(s => s.Group).Any(g => g.Count() >= links);
+            return Sockets.GroupBy(s => s.Group).Any(g => g.Count() == links);
         }
 
         public int NumberOfSockets()

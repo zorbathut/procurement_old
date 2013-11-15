@@ -206,6 +206,7 @@
     <Compile Include="ViewModel\ForumExportViewModel.cs" />
     <Compile Include="ViewModel\Filters\ForumExport\AuraGemsFilter.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\AuraGemsVisitor.cs" />
+    <Compile Include="ViewModel\ForumExportVisitors\LinksVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\MultipleBuyoutVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\SingleBuyoutVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\CurseGemsVisitor.cs" />
