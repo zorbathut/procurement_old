@@ -14,24 +14,18 @@ namespace Procurement.ViewModel.Filters
         }
 
         private List<string> dropOnly;
+
         public DropOnlyGemFilter()
         {
             //From http://en.pathofexilewiki.com/wiki/Drop_Only_Gems
             dropOnly = new List<string>();
-            dropOnly.Add("Added Chaos Damage");
-            dropOnly.Add("Chain");
-            dropOnly.Add("Concentrated Effect");
-            dropOnly.Add("Devouring Totem");
-            dropOnly.Add("Elemental Hit");
-            dropOnly.Add("Elemental Proliferation");
-            dropOnly.Add("Elemental Weakness");
-            dropOnly.Add("Greater Multiple Projectiles");
-            dropOnly.Add("Knockback");
-            dropOnly.Add("Multistrike");
-            dropOnly.Add("Punishment");
-            dropOnly.Add("Temporal Chains");
+            dropOnly.Add("Empower");
             dropOnly.Add("Portal");
+            dropOnly.Add("Reduced Duration");
+            dropOnly.Add("Slower Projectiles");
+            dropOnly.Add("Enhance");
         }
+
         public bool CanFormCategory
         {
             get { return true; }

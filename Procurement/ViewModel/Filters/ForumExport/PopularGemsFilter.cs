@@ -31,7 +31,16 @@ namespace Procurement.ViewModel.Filters
             popular.Add("Mana Leech");
             popular.Add("Added Chaos Damage");
             popular.Add("Item Rarity");
+            popular.Add("Concentrated Effect");
+            popular.Add("Devouring Totem");
+            popular.Add("Elemental Hit");
+            popular.Add("Elemental Proliferation");
+            popular.Add("Elemental Weakness");
+            popular.Add("Multistrike");
+            popular.Add("Temporal Chains");
+            popular.Add("Faster Casting");
         }
+
         public bool CanFormCategory
         {
             get { return true; }
