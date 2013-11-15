@@ -21,8 +21,7 @@ namespace Procurement.ViewModel
         private static bool authOffLine;       
         
         private UserControl view;
-        private Brush brush;
-        private static RichTextBox statusBox;
+        private StatusController statusController;
         public event LoginCompleted OnLoginCompleted;
         public delegate void LoginCompleted();
         private bool usePasswordBoxPassword;
@@ -70,9 +69,8 @@ namespace Procurement.ViewModel
 
             (this.view as LoginView).txtPassword.PasswordChanged += new System.Windows.RoutedEventHandler(txtPassword_PasswordChanged);
 
-            statusBox = (this.view as LoginView).StatusBox;
-            brush = statusBox.Foreground;
-            statusBox.AppendText(ApplicationState.Version + " Initialized.\r");
+            statusController = new StatusController((this.view as LoginView).StatusBox);
+            statusController.DisplayMessage(ApplicationState.Version + " Initialized.\r");
 
             ApplicationState.Model.Authenticating += new POEModel.AuthenticateEventHandler(model_Authenticating);
             ApplicationState.Model.StashLoading += new POEModel.StashLoadEventHandler(model_StashLoading);
@@ -99,9 +97,9 @@ namespace Procurement.ViewModel
                 if (!authOffLine)
                     ApplicationState.Model.ForceRefresh();
 
-                updateView("Loading characters...");
+                statusController.DisplayMessage("Loading characters...");
                 var chars = ApplicationState.Model.GetCharacters();
-                updateView("[OK]");
+                statusController.Ok();
 
                 bool downloadOnlyMyLeagues = false;
                 downloadOnlyMyLeagues = (Settings.UserSettings.ContainsKey("DownloadOnlyMyLeagues") && 
@@ -129,9 +127,9 @@ namespace Procurement.ViewModel
 
                 ApplicationState.SetDefaults();
 
-                updateView("\nDone!");
+                statusController.DisplayMessage("\nDone!");
                 OnLoginCompleted();
-            }).ContinueWith((t) => { Logger.Log(t.Exception.InnerException.ToString()); updateView("ERROR: " + t.Exception.InnerException.Message); }, TaskContinuationOptions.OnlyOnFaulted);
+            }).ContinueWith((t) => { Logger.Log(t.Exception.InnerException.ToString()); statusController.HandleError(t.Exception.InnerException.Message, toggleControls); }, TaskContinuationOptions.OnlyOnFaulted);
         }
 
         private void saveSettings(SecureString password)
@@ -167,7 +165,7 @@ namespace Procurement.ViewModel
         private void loadCharacterInventory(Character character)
         {
             bool success = false;
-            updateView(string.Format("Loading {0}'s inventory...", character.Name));
+            statusController.DisplayMessage((string.Format("Loading {0}'s inventory...", character.Name)));
             List<Item> inventory = null;
             try
             {
@@ -182,75 +180,11 @@ namespace Procurement.ViewModel
 
             var inv = inventory.Where(i => i.inventoryId != "MainInventory");
             if (success)
-                updateView("[OK]");
+                statusController.Ok();
             else
-                updateView("ERROR");
+                statusController.NotOK();
 
             ApplicationState.Model.GetImages(inventory);
-        }
-
-        private void updateView(string message)
-        {
-            if (statusBox.Dispatcher.CheckAccess())
-            {
-                Run text = new Run(message);
-
-                if (message.Contains("OK"))
-                {
-                    text.Foreground = Brushes.White;
-                    text.Text = "[";
-                    ((Paragraph)statusBox.Document.Blocks.LastBlock).Inlines.Add(text);
-
-                    text = new Run();
-                    text.Foreground = Brushes.Green;
-                    text.Text = "OK";
-                    ((Paragraph)statusBox.Document.Blocks.LastBlock).Inlines.Add(text);
-
-                    text = new Run();
-                    text.Foreground = Brushes.White;
-                    text.Text = "]";
-
-                    ((Paragraph)statusBox.Document.Blocks.LastBlock).Inlines.Add(text);
-
-                }
-                else if (message.Contains("ERROR"))
-                {
-                    text.Foreground = Brushes.White;
-                    text.Text = "\r\r[";
-                    ((Paragraph)statusBox.Document.Blocks.LastBlock).Inlines.Add(text);
-
-                    text = new Run();
-                    text.Foreground = Brushes.Red;
-                    text.Text = "NOT OK";
-                    ((Paragraph)statusBox.Document.Blocks.LastBlock).Inlines.Add(text);
-
-                    text = new Run();
-                    text.Foreground = Brushes.White;
-                    text.Text = "]";
-                    ((Paragraph)statusBox.Document.Blocks.LastBlock).Inlines.Add(text);
-
-                    text = new Run(message + "\r\r");
-                    text.Foreground = Brushes.White;
-                    ((Paragraph)statusBox.Document.Blocks.LastBlock).Inlines.Add(text);
-
-                    toggleControls();
-                }
-                else
-                {
-                    text.Foreground = brush;
-                    text.Text = "\r" + getPaddedString(text.Text);
-                    ((Paragraph)statusBox.Document.Blocks.LastBlock).Inlines.Add(text);
-                }
-
-                statusBox.ScrollToEnd();
-            }
-            else
-            {
-                statusBox.Dispatcher.Invoke((Action)delegate()
-                {
-                    updateView(message);
-                });
-            }
         }
 
         void model_StashLoading(POEModel sender, StashLoadedEventArgs e)
@@ -278,16 +212,11 @@ namespace Procurement.ViewModel
         {
             if (e.State == POEEventState.BeforeEvent)
             {
-                updateView(message);
+                statusController.DisplayMessage(message);
                 return;
             }
 
-            updateView("[OK]");
-        }
-
-        private string getPaddedString(string text)
-        {
-            return text.PadRight(90, ' ');
+            statusController.Ok();
         }
     }
 }

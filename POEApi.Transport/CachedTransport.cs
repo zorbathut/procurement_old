@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace POEApi.Transport
 {
-    class CachedTransport : ITransport
+    public class CachedTransport : ITransport
     {
         private ITransport innerTranport;
         private const string stashKey = "stash";

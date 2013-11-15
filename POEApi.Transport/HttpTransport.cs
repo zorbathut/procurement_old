@@ -43,7 +43,6 @@ namespace POEApi.Transport
             this.proxyPassword = proxyPassword;
             this.proxyDomain = proxyDomain;
             this.useProxy = true;
-            RequestThrottle.Instance.Throttled += new ThottledEventHandler(instance_Throttled);
         }
 
         private void instance_Throttled(object sender, ThottledEventArgs e)

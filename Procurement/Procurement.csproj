@@ -245,6 +245,7 @@
     <Compile Include="ViewModel\ScreenController.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="ViewModel\StashViewModel.cs" />
+    <Compile Include="ViewModel\StatusController.cs" />
     <Compile Include="ViewModel\TradingViewModel.cs" />
     <Compile Include="View\AboutView.xaml.cs">
       <DependentUpon>AboutView.xaml</DependentUpon>

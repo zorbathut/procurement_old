@@ -29,11 +29,11 @@ namespace POEApi.Model
 
         public bool Offline { get; private set; }
 
-        public POEModel()
-        { }
-
         public bool Authenticate(string email, SecureString password, bool offline, bool useSessionID)
         {
+            if (transport != null)
+                transport.Throttled -= new ThottledEventHandler(instance_Throttled);
+
             transport = getTransport(email);
             cacheService = new CacheService(email);
             Offline = offline;
@@ -60,9 +60,9 @@ namespace POEApi.Model
         private ITransport getTransport(string email)
         {
             if (Settings.ProxySettings["Enabled"] != bool.TrueString)
-                return new ChainedTransportService(email);
+                return new CachedTransport(email, new HttpTransport(email));
 
-            return new ChainedTransportService(email, Settings.ProxySettings["Username"], Settings.ProxySettings["Password"], Settings.ProxySettings["Domain"]);
+            return new CachedTransport(email, new HttpTransport(email, Settings.ProxySettings["Username"], Settings.ProxySettings["Password"], Settings.ProxySettings["Domain"]));
         }
 
         public void ForceRefresh()
