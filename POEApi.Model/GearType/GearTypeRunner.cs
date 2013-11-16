@@ -59,7 +59,7 @@ namespace POEApi.Model
     public class HelmetRunner : GearTypeRunnerBase
     {
         public HelmetRunner()
-            : base(GearType.Helmet, "Helmet", "Circlet", "Cap", "Mask", "Chain Coif", "Casque", "Hood", "Ringmail Coif", "Chainmail Coif", "Ring Coif")
+            : base(GearType.Helmet, "Helmet", "Circlet", "Cap", "Mask", "Chain Coif", "Casque", "Hood", "Ringmail Coif", "Chainmail Coif", "Ring Coif", "Crown", "Burgonet", "Bascinet", "Pelt")
         { }
     }
 
