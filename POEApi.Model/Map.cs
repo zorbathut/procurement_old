@@ -4,7 +4,7 @@ namespace POEApi.Model
 {
     public class Map : Item
     {
-        public Quality Quality { get; private set; }
+        public Rarity Rarity { get; private set; }
         public int MapLevel { get; private set; }
         public int MapQuantity { get; private set; }
 
@@ -12,7 +12,7 @@ namespace POEApi.Model
         {
             this.ItemType = Model.ItemType.Gear;
             this.Properties = ProxyMapper.GetProperties(item.Properties);
-            this.Quality = getQuality(item);
+            this.Rarity = getQuality(item);
             this.MapLevel = int.Parse(Properties.Find(p => p.Name == "Map Level").Values[0].Item1);
 
             this.UniqueIDHash = base.getHash();
@@ -22,7 +22,7 @@ namespace POEApi.Model
         {
             var anonomousType = new
             {
-                f1 = Quality,
+                f1 = Rarity,
                 f2 = MapLevel,
                 f3 = MapQuantity,
             };

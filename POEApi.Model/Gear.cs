@@ -5,7 +5,7 @@ namespace POEApi.Model
 {
     public class Gear : Item
     {
-        public Quality Quality { get; private set; }
+        public Rarity Rarity { get; private set; }
         public List<string> FlavourText { get; set; }
         public List<Socket> Sockets { get; set; }
         public List<Gem> SocketedItems { get; set; }
@@ -15,7 +15,7 @@ namespace POEApi.Model
 
         internal Gear(JSONProxy.Item item) : base(item)
         {
-            this.Quality = getQuality(item);
+            this.Rarity = getQuality(item);
             this.FlavourText = item.FlavourText;
             this.Sockets = item.Sockets.Select(proxy => new Socket(proxy)).ToList();
             this.Explicitmods = item.ExplicitMods;
@@ -44,7 +44,7 @@ namespace POEApi.Model
             {
                 f1 = Sockets != null ? string.Join(string.Empty, Sockets.Select(s => string.Concat(s.Group, s.Attribute)).ToArray()) : string.Empty,
                 f2 = Implicitmods != null ? string.Join(string.Empty, Implicitmods.ToArray()) : string.Empty,
-                f3 = Quality.ToString(),
+                f3 = Rarity.ToString(),
                 f4 = this.Requirements != null ? string.Join(string.Empty, this.Requirements.Select(r => string.Concat(r.Name, r.Value)).ToArray()) : string.Empty,
                 f5 = this.GearType.ToString()
             };

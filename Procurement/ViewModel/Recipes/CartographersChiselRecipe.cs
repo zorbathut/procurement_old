@@ -6,21 +6,21 @@ using POEApi.Model;
 
 namespace Procurement.ViewModel.Recipes
 {
-    internal class GCPRecipe : MinimumQualityRecipe<Gem>
+    internal class CartographersChiselRecipe : MinimumQualityRecipe<Map>
     {
         public override string Name
         {
-            get { return "1 GCP"; }
+            get { return "1 Cartographer's Chisel"; }
         }
 
-        protected override IEnumerable<Gem> getCandidateItems(IEnumerable<Item> items)
+        protected override IEnumerable<Map> getCandidateItems(IEnumerable<Item> items)
         {
-            return items.OfType<Gem>().Where(g => g.IsQuality);
+            return items.OfType<Map>().Where(a => a.IsQuality);
         }
 
         protected override string getMissingCombinationText(decimal requiredQuality, decimal qualityFound)
         {
-            return string.Format("Gem(s) with quality totaling {0}%", requiredQuality - qualityFound);
+            return string.Format("Map(s) with quality totaling {0}%", requiredQuality - qualityFound);
         }
     }
 }

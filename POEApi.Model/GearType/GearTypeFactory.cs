@@ -11,6 +11,7 @@ namespace POEApi.Model
             { new AmuletRunner() },
             { new BeltRunner() },
             { new FlaskRunner() },
+            { new MapRunner() },
             { new GloveRunner() },
             { new BootRunner() },
             { new AxeRunner() },

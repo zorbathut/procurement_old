@@ -11,7 +11,7 @@ namespace POEApi.Model
         Currency,
     }
 
-    public enum Quality : int
+    public enum Rarity : int
     {
         White,
         Magic,
@@ -36,6 +36,8 @@ namespace POEApi.Model
         public List<string> Explicitmods { get; set; }
         public ItemType ItemType { get; set; }
         public List<Property> Properties { get; set; }
+        public bool IsQuality { get; private set; }
+        public int Quality { get; private set; }
         public int UniqueIDHash { get; set; }
 
         protected Item(JSONProxy.Item item)
@@ -55,7 +57,15 @@ namespace POEApi.Model
             this.Explicitmods = item.ExplicitMods;
             this.ItemType = Model.ItemType.UnSet;
             if (item.Properties != null)
+            {
                 this.Properties = item.Properties.Select(p => new Property(p)).ToList();
+
+                if (this.Properties.Any(p => p.Name == "Quality"))
+                {
+                    this.IsQuality = true;
+                    this.Quality = ProxyMapper.GetQuality(item.Properties);
+                }
+            }
         }
 
         protected abstract int getConcreteHash();
@@ -77,12 +87,12 @@ namespace POEApi.Model
             return anonomousType.GetHashCode();
         }
 
-        protected Quality getQuality(JSONProxy.Item item)
+        protected Rarity getQuality(JSONProxy.Item item)
         {
             if (item.frameType <= 3)
-                return (Quality)item.frameType;
+                return (Rarity)item.frameType;
 
-            return Quality.White;
+            return Model.Rarity.White;
         }
     }
 }

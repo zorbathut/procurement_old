@@ -65,7 +65,7 @@ namespace Procurement.ViewModel.Recipes
         public override IEnumerable<RecipeResult> Matches(IEnumerable<Item> items)
         {
             List<Gear> allGear = items.OfType<Gear>().ToList();
-            Dictionary<string, List<Gear>> buckets = allGear.Where(g => g.Quality == Quality.Rare)
+            Dictionary<string, List<Gear>> buckets = allGear.Where(g => g.Rarity == Rarity.Rare)
                                                             .GroupBy(g => g.GearType)
                                                             .ToDictionary(g => g.Key.ToString(), g => g.ToList());
 

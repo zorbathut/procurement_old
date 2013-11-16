@@ -72,7 +72,7 @@ namespace POEApi.Model
 
         public Dictionary<string, List<Gear>> GetDuplicateRares()
         {
-            return Get<Gear>().Where(g => g.Quality == Quality.Rare && g.Name != string.Empty)
+            return Get<Gear>().Where(g => g.Rarity == Rarity.Rare && g.Name != string.Empty)
                               .GroupBy(g => g.Name)
                               .Where(g => g.Count() > 1)
                               .Select(g => g.ToList()).ToDictionary(d => d.First().Name);

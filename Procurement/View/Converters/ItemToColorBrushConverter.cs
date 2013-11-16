@@ -19,15 +19,15 @@ namespace Procurement.View
                 opacity = double.Parse(parameter.ToString(), CultureInfo.InvariantCulture);
             if (gear != null)
             {
-                switch (gear.Quality)
+                switch (gear.Rarity)
                 {
-                    case Quality.White:
+                    case Rarity.White:
                         return new SolidColorBrush(Colors.White) { Opacity = opacity };
-                    case Quality.Magic:
+                    case Rarity.Magic:
                         return new SolidColorBrush((Color)ColorConverter.ConvertFromString("#8888F1")) { Opacity = opacity };
-                    case Quality.Rare:
+                    case Rarity.Rare:
                         return new SolidColorBrush((Color)ColorConverter.ConvertFromString("#F1FF77")) { Opacity = opacity };
-                    case Quality.Unique:
+                    case Rarity.Unique:
                         return new SolidColorBrush(Colors.Orange) { Opacity = opacity };
                 }
             }

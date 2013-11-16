@@ -152,7 +152,7 @@ namespace Procurement.Controls
 
         private void setBackround(Grid childGrid, Item item)
         {
-            if (item is Gear && (item as Gear).Quality != Quality.White && (item as Gear).Explicitmods == null)
+            if (item is Gear && (item as Gear).Rarity != Rarity.White && (item as Gear).Explicitmods == null)
                 childGrid.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#88001D"));
             else
                 childGrid.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#21007F"));

@@ -16,6 +16,10 @@ namespace Procurement.ViewModel.Recipes
                 new OneChaosRecipe(), 
                 new Chromatic(), 
                 new GCPRecipe(), 
+                new ArmourersScrapRecipe(),
+                new BlacksmithsWhetstoneRecipe(),
+                new GlassblowersBaubleRecipe(),
+                new CartographersChiselRecipe(),
                 new SameNameRecipe("Chance Orb - 2 Of The Same Name", 2, true),
                 new SameNameRecipe("Alchemy Orb - 3 Of The Same Name", 3, false)
             };

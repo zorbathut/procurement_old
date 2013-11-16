@@ -11,8 +11,8 @@ namespace Procurement.ViewModel.Filters
             get { return FilterGroup.Quality; }
         }
 
-        private Quality quality;
-        public QualityFilter(Quality quality)
+        private Rarity quality;
+        public QualityFilter(Rarity quality)
         {
             this.quality = quality;
         }
@@ -24,7 +24,7 @@ namespace Procurement.ViewModel.Filters
         {
             Gear gear = item as Gear;
             if (gear != null)
-                return gear.Quality == quality;
+                return gear.Rarity == quality;
 
             return false;
         }
