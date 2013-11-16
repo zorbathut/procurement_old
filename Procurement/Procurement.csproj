@@ -237,7 +237,7 @@
     <Compile Include="ViewModel\RecipeResultViewModel.cs" />
     <Compile Include="ViewModel\Recipes\ChromaticRecipe.cs" />
     <Compile Include="ViewModel\Recipes\GCPRecipe.cs" />
-    <Compile Include="ViewModel\Recipes\OneChoasRecipe.cs" />
+    <Compile Include="ViewModel\Recipes\OneChaosRecipe.cs" />
     <Compile Include="ViewModel\Recipes\Recipe.cs" />
     <Compile Include="ViewModel\Recipes\RecipeManager.cs" />
     <Compile Include="ViewModel\Recipes\RecipeResult.cs" />

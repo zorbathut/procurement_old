@@ -13,7 +13,7 @@ namespace Procurement.ViewModel.Recipes
         {
             known = new List<Recipe>() 
             { 
-                new OneChoasRecipe(), 
+                new OneChaosRecipe(), 
                 new Chromatic(), 
                 new GCPRecipe(), 
                 new SameNameRecipe("Chance Orb - 2 Of The Same Name", 2, true),

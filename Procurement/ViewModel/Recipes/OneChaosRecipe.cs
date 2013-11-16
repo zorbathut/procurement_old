@@ -6,7 +6,7 @@ using POEApi.Model;
 
 namespace Procurement.ViewModel.Recipes
 {
-    internal class OneChoasRecipe : Recipe
+    internal class OneChaosRecipe : Recipe
     {
         private class MatchedSet
         {
@@ -58,7 +58,7 @@ namespace Procurement.ViewModel.Recipes
 
         private List<MatchedSet> sets = new List<MatchedSet>();
         
-        public OneChoasRecipe()
+        public OneChaosRecipe()
             : base(80)
         { }
 
