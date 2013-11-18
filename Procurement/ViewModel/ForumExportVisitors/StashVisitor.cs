@@ -27,7 +27,7 @@ namespace Procurement.ViewModel.ForumExportVisitors
                     continue;
                 }
 
-                current = replacer.Replace(current, getItems(ApplicationState.Stash[ApplicationState.CurrentLeague].GetItemsByTab(tab.i).OrderBy(i => i.H).ThenBy(i => i.IconURL)), 1, location);
+                current = current.Replace(nameToken.Item2, getItems(ApplicationState.Stash[ApplicationState.CurrentLeague].GetItemsByTab(tab.i).OrderBy(i => i.H).ThenBy(i => i.IconURL)));
             }
 
             return current;
