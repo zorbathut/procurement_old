@@ -22,6 +22,11 @@ namespace Procurement.ViewModel.Recipes
             this.ReturnMatchesGreaterThan = returnMatchesGreaterThan;
         }
 
+        public virtual string GetResultName(RecipeResult result)
+        {
+            return Name;
+        }
+
         public abstract IEnumerable<RecipeResult> Matches(IEnumerable<Item> items);
     }
 }

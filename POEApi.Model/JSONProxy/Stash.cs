@@ -73,6 +73,9 @@ namespace POEApi.Model.JSONProxy
         [DataMember(Name = "typeLine")]
         public string TypeLine { get; set; }
 
+        [DataMember(Name = "identified")]
+        public bool Identified { get; set; }
+
         [DataMember(Name = "properties")]
         public List<Property> Properties { get; set; }
 

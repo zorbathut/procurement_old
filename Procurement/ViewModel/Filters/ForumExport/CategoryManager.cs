@@ -34,7 +34,7 @@ namespace Procurement.ViewModel.Filters
         private static void initializeUserCategories()
         {
             //For Testing and Illustration
-            categories.Add("Craftables", new List<IFilter>() { new WhiteQuality(), new OrFilter(new FourLink(), new FiveLink()) });
+            categories.Add("Craftables", new List<IFilter>() { new NormalRarity(), new OrFilter(new FourLink(), new FiveLink()) });
         }
 
         public static List<IFilter> GetAvailableFilters()

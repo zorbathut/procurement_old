@@ -2,6 +2,7 @@
 {
     public enum GearType
     {
+        Unknown,
         Ring,
         Amulet,
         Helmet,
@@ -21,7 +22,7 @@
         Shield,
         Wand,
         Flask,
-        QuestItem,
-        Unknown
+        Map,
+        QuestItem
     }
 }

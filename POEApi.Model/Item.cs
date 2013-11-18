@@ -13,7 +13,7 @@ namespace POEApi.Model
 
     public enum Rarity : int
     {
-        White,
+        Normal,
         Magic,
         Rare,
         Unique
@@ -22,6 +22,7 @@ namespace POEApi.Model
     public abstract class Item
     {
         public bool Verified { get; private set; }
+        public bool Identified { get; private set; }
         public int W { get; private set; }
         public int H { get; private set; }
         public string IconURL { get; private set; }
@@ -43,6 +44,7 @@ namespace POEApi.Model
         protected Item(JSONProxy.Item item)
         {
             this.Verified = item.Verified;
+            this.Identified = item.Identified;
             this.W = item.W;
             this.H = item.H;
             this.IconURL = item.Icon;
@@ -87,12 +89,12 @@ namespace POEApi.Model
             return anonomousType.GetHashCode();
         }
 
-        protected Rarity getQuality(JSONProxy.Item item)
+        protected Rarity getRarity(JSONProxy.Item item)
         {
             if (item.frameType <= 3)
                 return (Rarity)item.frameType;
 
-            return Model.Rarity.White;
+            return Rarity.Normal;
         }
     }
 }

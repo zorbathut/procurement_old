@@ -12,10 +12,11 @@ namespace POEApi.Model
         public List<string> Implicitmods { get; set; }
         public List<Requirement> Requirements { get; set; }
         public GearType GearType { get; set; }
+        public string BaseType { get; set; }
 
         internal Gear(JSONProxy.Item item) : base(item)
         {
-            this.Rarity = getQuality(item);
+            this.Rarity = getRarity(item);
             this.FlavourText = item.FlavourText;
             this.Sockets = item.Sockets.Select(proxy => new Socket(proxy)).ToList();
             this.Explicitmods = item.ExplicitMods;
@@ -24,6 +25,7 @@ namespace POEApi.Model
             this.Requirements = ProxyMapper.GetRequirements(item.Requirements);
             this.ItemType = Model.ItemType.Gear;
             this.GearType = GearTypeFactory.GetType(this);
+            this.BaseType = GearTypeFactory.GetBaseType(this);
 
             this.UniqueIDHash = base.getHash();
         }

@@ -5,7 +5,8 @@ namespace POEApi.Model
 {
     public abstract class GearTypeRunner
     {
-        public abstract bool IsCompatableType(Gear item);
+        public abstract bool IsCompatibleType(Gear item);
+        public abstract string GetBaseType(Gear item);
         public GearType Type { get; set; }
 
         public GearTypeRunner(GearType gearType)
@@ -16,31 +17,40 @@ namespace POEApi.Model
 
     public class GearTypeRunnerBase : GearTypeRunner
     {
-        protected List<string> compatableTypes;
+        protected List<string> compatibleTypes;
 
-        public GearTypeRunnerBase(GearType gearType, params string[] compatableTypes)
+        public GearTypeRunnerBase(GearType gearType, params string[] compatibleTypes)
             : base(gearType)
         {
-            this.compatableTypes = compatableTypes.ToList();
+            this.compatibleTypes = compatibleTypes.ToList();
         }
 
-        public override bool IsCompatableType(Gear item)
+        public override bool IsCompatibleType(Gear item)
         {
-            foreach (var type in compatableTypes)
+            foreach (var type in compatibleTypes)
                 if (item.TypeLine.Contains(type))
                     return true;
 
             return false;
         }
+
+        public override string GetBaseType(Gear item)
+        {
+            foreach (var type in compatibleTypes)
+                if (item.TypeLine.Contains(type))
+                    return type;
+
+            return null;
+        }
     }
 
-    public class RingRunner : GearTypeRunner
+    public class RingRunner : GearTypeRunnerBase
     {
         public RingRunner()
             : base(GearType.Ring)
         { }
 
-        public override bool IsCompatableType(Gear item)
+        public override bool IsCompatibleType(Gear item)
         {
             if (item.TypeLine.Contains("Ring") && !item.TypeLine.Contains("Ringmail"))
                 return true;
@@ -59,7 +69,7 @@ namespace POEApi.Model
     public class HelmetRunner : GearTypeRunnerBase
     {
         public HelmetRunner()
-            : base(GearType.Helmet, "Helmet", "Circlet", "Cap", "Mask", "Chain Coif", "Casque", "Hood", "Ringmail Coif", "Chainmail Coif", "Ring Coif", "Crown", "Burgonet", "Bascinet", "Pelt")
+            : base(GearType.Helmet, "Helmet", "Circlet", "Cap", "Mask", "Chain Coif", "Casque", "Hood", "Ringmail Coif", "Chainmail Coif", "Ring Coif", "Crown", "Burgonet", "Bascinet", "Pelt", "Hat")
         { }
     }
 
@@ -186,5 +196,4 @@ namespace POEApi.Model
             : base(GearType.Wand, "Wand", "Horn")
         { }
     }
-
 }

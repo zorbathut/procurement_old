@@ -172,7 +172,7 @@
     <Compile Include="ViewModel\Filters\ForumExport\Link.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ViewModel\Filters\ForumExport\MagicQuality.cs">
+    <Compile Include="ViewModel\Filters\ForumExport\MagicRarity.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ViewModel\Filters\ForumExport\MapLevelFilter.cs" />
@@ -181,21 +181,21 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ViewModel\Filters\ForumExport\PopularGemsFilter.cs" />
-    <Compile Include="ViewModel\Filters\ForumExport\QualityFilter.cs">
+    <Compile Include="ViewModel\Filters\ForumExport\RarityFilter.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ViewModel\Filters\ForumExport\QualityGemFilter.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ViewModel\Filters\ForumExport\RareQuality.cs">
+    <Compile Include="ViewModel\Filters\ForumExport\RareRarity.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ViewModel\Filters\ForumExport\StatFilter.cs" />
     <Compile Include="ViewModel\Filters\ForumExport\TripleResistance.cs" />
-    <Compile Include="ViewModel\Filters\ForumExport\UniqueQuality.cs">
+    <Compile Include="ViewModel\Filters\ForumExport\UniqueRarity.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ViewModel\Filters\ForumExport\WhiteQuality.cs">
+    <Compile Include="ViewModel\Filters\ForumExport\NormalRarity.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ViewModel\Filters\ForumExport\XHandFilter.cs" />
@@ -246,6 +246,7 @@
     <Compile Include="ViewModel\Recipes\Recipe.cs" />
     <Compile Include="ViewModel\Recipes\RecipeManager.cs" />
     <Compile Include="ViewModel\Recipes\RecipeResult.cs" />
+    <Compile Include="ViewModel\Recipes\SameBaseTypeRecipe.cs" />
     <Compile Include="ViewModel\Recipes\SameNameRecipe.cs" />
     <Compile Include="ViewModel\ScreenController.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />

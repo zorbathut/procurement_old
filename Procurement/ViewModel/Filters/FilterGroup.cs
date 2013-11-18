@@ -3,7 +3,7 @@
     public enum FilterGroup
     {
         Resistances,
-        Quality,
+        Rarity,
         Links,
         MagicFind,
         Gems,

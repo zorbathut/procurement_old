@@ -13,5 +13,16 @@ namespace Procurement.ViewModel.Recipes
         public Recipe Instance { get; set; }
         public List<Item> MatchedItems { get; set; }
         public List<string> Missing { get; set; }
+
+        public string Name
+        {
+            get
+            {
+                if (Instance != null)
+                    return Instance.GetResultName(this);
+
+                return "Undocumented recipe.";
+            }
+        }
     }
 }

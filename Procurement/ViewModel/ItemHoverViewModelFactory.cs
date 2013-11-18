@@ -11,18 +11,18 @@ namespace Procurement.ViewModel
         internal static ItemHoverViewModel Create(Item item)
         {
             Gear gear = item as Gear;
-            Nullable<Rarity> q = null;
+            Nullable<Rarity> r = null;
 
             if (gear != null)
-                q = gear.Rarity;
+                r = gear.Rarity;
 
             Map map = item as Map;
             if (map != null)
-                q = map.Rarity;
+                r = map.Rarity;
 
-            if (q != null)
+            if (r != null)
             {
-                switch (q)
+                switch (r)
                 {
                     case Rarity.Unique:
                         return new UniqueGearItemHoverViewModel(item);
@@ -30,8 +30,8 @@ namespace Procurement.ViewModel
                         return new RareGearItemHoverViewModel(item); 
                     case Rarity.Magic:
                         return new MagicGearItemHoverViewModel(item);
-                    case Rarity.White:
-                        return new WhiteGearItemHoverViewModel(item); 
+                    case Rarity.Normal:
+                        return new NormalGearItemHoverViewModel(item); 
                 }
             }
 
@@ -66,9 +66,9 @@ namespace Procurement.ViewModel
         { }
     }
 
-    public class WhiteGearItemHoverViewModel : ItemHoverViewModel
+    public class NormalGearItemHoverViewModel : ItemHoverViewModel
     {
-        public WhiteGearItemHoverViewModel(Item item)
+        public NormalGearItemHoverViewModel(Item item)
             : base(item)
         { }
     }

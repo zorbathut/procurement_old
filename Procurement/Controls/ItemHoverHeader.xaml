@@ -79,7 +79,7 @@
                         </Grid>
                     </Border>
                 </DataTemplate>
-                <DataTemplate DataType="{x:Type vm:WhiteGearItemHoverViewModel}">
+                <DataTemplate DataType="{x:Type vm:NormalGearItemHoverViewModel}">
                     <Border Background="{Binding Item, Converter={StaticResource vc}, ConverterParameter=0.3}" HorizontalAlignment="Stretch" >
                         <Grid  MinWidth="200" >
                             <Grid.RowDefinitions>

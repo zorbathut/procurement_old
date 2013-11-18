@@ -12,7 +12,7 @@ namespace POEApi.Model
         {
             this.ItemType = Model.ItemType.Gear;
             this.Properties = ProxyMapper.GetProperties(item.Properties);
-            this.Rarity = getQuality(item);
+            this.Rarity = getRarity(item);
             this.MapLevel = int.Parse(Properties.Find(p => p.Name == "Map Level").Values[0].Item1);
 
             this.UniqueIDHash = base.getHash();

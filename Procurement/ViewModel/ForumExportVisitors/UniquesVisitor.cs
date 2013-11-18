@@ -14,7 +14,7 @@ namespace Procurement.ViewModel.ForumExportVisitors
             if (current.IndexOf(TOKEN) < 0)
                 return current;
 
-            return current.Replace(TOKEN, runFilter<UniqueQuality>(items.OrderBy(i => i.H).ThenBy(i => i.IconURL)));
+            return current.Replace(TOKEN, runFilter<UniqueRarity>(items.OrderBy(i => i.H).ThenBy(i => i.IconURL)));
         }
     }
 }
