@@ -14,13 +14,11 @@ namespace Procurement.ViewModel.ForumExportVisitors
         private Dictionary<string, IFilter> tokens;
         private const string TOKEN = "{Buyouts}";
 
-        public MultipleBuyoutVisitor()
+        public override string Visit(IEnumerable<POEApi.Model.Item> items, string current)
         {
             tokens = Settings.Buyouts.Keys.GroupBy(k => Settings.Buyouts[k])
                                           .ToDictionary(g => string.Concat(g.Key.ToLower()), g => (IFilter)new BuyoutFilter(g.Key.ToLower()));
-        }
-        public override string Visit(IEnumerable<POEApi.Model.Item> items, string current)
-        {
+
             string updated = current;
             var sorted = items.OrderBy(i => i.H).ThenBy(i => i.IconURL);
 
