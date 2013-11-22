@@ -52,5 +52,13 @@ namespace POEApi.Infrastructure
 
             return string.Concat(text.Substring(start, length), suffix);
         }
+
+        public static string GetEntry(this Dictionary<string, string> dictionary, string key) 
+        {
+            if (!dictionary.ContainsKey(key))
+                return string.Empty;
+
+            return dictionary[key];
+        }
     }
 }

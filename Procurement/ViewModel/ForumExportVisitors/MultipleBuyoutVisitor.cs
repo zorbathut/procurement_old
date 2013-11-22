@@ -14,6 +14,16 @@ namespace Procurement.ViewModel.ForumExportVisitors
         private Dictionary<string, IFilter> tokens;
         private const string TOKEN = "{Buyouts}";
 
+        protected override bool buyoutItemsOnlyVisibleInBuyoutsTag
+        {
+            get { return false; }
+        }
+
+        protected override bool embedBuyouts
+        {
+            get { return false; }
+        }
+
         public override string Visit(IEnumerable<POEApi.Model.Item> items, string current)
         {
             tokens = Settings.Buyouts.Keys.GroupBy(k => Settings.Buyouts[k])

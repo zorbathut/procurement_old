@@ -31,6 +31,7 @@
         <Setting name="DownloadOnlyMyLeagues" value="false" />
         <Setting name="CurrencyDistributionMetric" value="GemCutterPrism" />
         <Setting name="EmbedBuyouts" value="True" />
+        <Setting name="BuyoutItemsOnlyVisibleInBuyoutsTag" value="False" />
     </UserSettings>
     <ProxySettings>
         <Setting name="Enabled" value="False" />

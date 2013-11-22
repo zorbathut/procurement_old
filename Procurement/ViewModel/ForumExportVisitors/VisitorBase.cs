@@ -3,12 +3,23 @@ using System.Text;
 using POEApi.Model;
 using Procurement.ViewModel.Filters;
 using System.Linq;
+using POEApi.Infrastructure;
 
 namespace Procurement.ViewModel.ForumExportVisitors
 {
     internal abstract class VisitorBase : IVisitor
     {
         private const string LINKITEM = "[linkItem location=\"{0}\" league=\"{1}\" x=\"{2}\" y=\"{3}\"]";
+
+        protected virtual bool buyoutItemsOnlyVisibleInBuyoutsTag
+        {
+            get { return Settings.UserSettings.GetEntry("BuyoutItemsOnlyVisibleInBuyoutsTag").ToLower() == "true"; }
+        }
+
+        protected virtual bool embedBuyouts
+        {
+            get { return Settings.UserSettings.GetEntry("EmbedBuyouts").ToLower() == "true"; }
+        }
 
         public abstract string Visit(IEnumerable<Item> items, string current);
         
@@ -28,12 +39,14 @@ namespace Procurement.ViewModel.ForumExportVisitors
 
         protected string getLinkItem<T>(T item) where T : Item
         {
-            if (Settings.Buyouts.ContainsKey(item.UniqueIDHash) && Settings.UserSettings.ContainsKey("EmbedBuyouts") && Settings.UserSettings["EmbedBuyouts"].ToLower() == "true")
+            bool isBuyoutItem = Settings.Buyouts.ContainsKey(item.UniqueIDHash);
+            if (isBuyoutItem && buyoutItemsOnlyVisibleInBuyoutsTag)
+                return string.Empty;
+
+            if (isBuyoutItem && embedBuyouts)
                 return string.Format("\n[linkItem location=\"{0}\" league=\"{1}\" x=\"{2}\" y=\"{3}\"]\n~b/o{4}\n", item.inventoryId, ApplicationState.CurrentLeague, item.X, item.Y, Settings.Buyouts[item.UniqueIDHash]);
 
-                return string.Format("[linkItem location=\"{0}\" league=\"{1}\" x=\"{2}\" y=\"{3}\"]", item.inventoryId, ApplicationState.CurrentLeague, item.X, item.Y);
-
-            
+            return string.Format("[linkItem location=\"{0}\" league=\"{1}\" x=\"{2}\" y=\"{3}\"]", item.inventoryId, ApplicationState.CurrentLeague, item.X, item.Y);
         }
     }
 }
