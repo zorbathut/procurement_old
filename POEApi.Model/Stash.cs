@@ -8,7 +8,7 @@ namespace POEApi.Model
     {
         private List<Item> items;
         private const int tabSize = 144;
-        public int NumberOfTabs { get; private set; }
+        public int NumberOfTabs { get; set; }
         public List<Tab> Tabs { get; set; }
 
 

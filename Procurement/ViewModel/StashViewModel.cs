@@ -244,7 +244,7 @@ namespace Procurement.ViewModel
 
                 itemStash.SetValue(StashControl.FilterProperty, getUserFilter(filter));
                 item.Content = itemStash;
-                itemStash.TabNumber = i - 1;
+                itemStash.TabNumber = ApplicationState.Stash[ApplicationState.CurrentLeague].Tabs[i - 1].i;
 
                 if (!ApplicationState.Model.Offline)
                 {

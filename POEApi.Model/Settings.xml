@@ -46,6 +46,7 @@
             <Item value="Domination"/>
             <Item value="Nemesis"/>
         </List>
+		<List name="MyTabs" />
         <List name="AdditionalTemplates">
             <!--Add yours own templates here. Eg-->
             <!--<Item value="LvlingShop.txt"/>-->
