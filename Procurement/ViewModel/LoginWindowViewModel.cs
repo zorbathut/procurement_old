@@ -53,7 +53,7 @@ namespace Procurement.ViewModel
         {
             this.view = view;
 
-            useSession = Settings.UserSettings.ContainsKey("UseSessionID") ? bool.Parse(Settings.UserSettings["UseSessionID"]) : false;
+            useSession = Settings.UserSettings.ContainsKey("UseSessionID") ? bool.Parse(Settings.UserSettings["UseSessionID"]) : true;
             if (useSession)
             {
                 LoginView v = view as LoginView;
