@@ -19,6 +19,8 @@ namespace Procurement.Controls
         private static List<Popup> annoyed = new List<Popup>();
         private static ResourceDictionary expressionDark;
 
+        private TextBlock textblock;
+
         public ItemDisplay()
         {
             InitializeComponent();
@@ -49,6 +51,33 @@ namespace Procurement.Controls
             this.Height = i.Height;
             this.Width = i.Width;
             this.Loaded -= new RoutedEventHandler(ItemDisplay_Loaded);
+
+            ResyncText();
+        }
+
+        private void ResyncText()
+        {
+            ItemDisplayViewModel vm = this.DataContext as ItemDisplayViewModel;
+            Item item = vm.Item;
+            if (!(item is Currency))
+            {
+                MenuItem setBuyout = new MenuItem();
+                string buyoutValue = string.Empty;
+                if (Settings.Buyouts.ContainsKey(item.UniqueIDHash))
+                    buyoutValue = Settings.Buyouts[item.UniqueIDHash];
+
+                Console.WriteLine("Item buyout: {0}", buyoutValue);
+
+                if (textblock != null)
+                {
+                    this.MainGrid.Children.Remove(textblock);
+                }
+
+                textblock = new TextBlock();
+                textblock.Text = buyoutValue;
+                textblock.IsHitTestVisible = false;
+                this.MainGrid.Children.Add(textblock);
+            }
         }
 
         private void doSocketAlwaysOver(UIElement socket)
@@ -121,6 +150,8 @@ namespace Procurement.Controls
                 Settings.Buyouts.Remove(item.UniqueIDHash);
 
             Settings.Save();
+
+            ResyncText();
         }
 
         public static void closeOthersButNot(Popup current)
