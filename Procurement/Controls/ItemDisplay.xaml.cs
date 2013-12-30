@@ -6,11 +6,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
-using System.Windows.Media;
-using Procurement.ViewModel;
 using POEApi.Model;
-using System.Windows.Media.Imaging;
-using System.IO;
+using Procurement.ViewModel;
 
 namespace Procurement.Controls
 {
@@ -18,6 +15,8 @@ namespace Procurement.Controls
     {
         private static List<Popup> annoyed = new List<Popup>();
         private static ResourceDictionary expressionDark;
+
+        private TextBlock textblock;
 
         public ItemDisplay()
         {
@@ -49,6 +48,32 @@ namespace Procurement.Controls
             this.Height = i.Height;
             this.Width = i.Width;
             this.Loaded -= new RoutedEventHandler(ItemDisplay_Loaded);
+
+            resyncText();
+        }
+
+        private void resyncText()
+        {
+            ItemDisplayViewModel vm = this.DataContext as ItemDisplayViewModel;
+            Item item = vm.Item;
+
+            if ((item is Currency))
+                return;
+
+            MenuItem setBuyout = new MenuItem();
+            string buyoutValue = string.Empty;
+
+            if (Settings.Buyouts.ContainsKey(item.UniqueIDHash))
+                buyoutValue = Settings.Buyouts[item.UniqueIDHash];
+
+            if (textblock != null)
+                this.MainGrid.Children.Remove(textblock);
+
+            textblock = new TextBlock();
+            textblock.Text = buyoutValue;
+            textblock.IsHitTestVisible = false;
+            textblock.Margin = new Thickness(1, 1, 0, 0);
+            this.MainGrid.Children.Add(textblock);
         }
 
         private void doSocketAlwaysOver(UIElement socket)
@@ -114,13 +139,15 @@ namespace Procurement.Controls
             Item item = vm.Item;
 
             string buyoutValue = ((sender as MenuItem).Header as SetBuyoutView).BuyoutValue.Text;
-            
+
             Settings.Buyouts[item.UniqueIDHash] = buyoutValue;
 
             if (buyoutValue == string.Empty)
                 Settings.Buyouts.Remove(item.UniqueIDHash);
 
             Settings.Save();
+
+            resyncText();
         }
 
         public static void closeOthersButNot(Popup current)
