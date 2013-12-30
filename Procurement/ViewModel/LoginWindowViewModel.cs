@@ -1,32 +1,31 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Net;
+using System.Security;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Documents;
-using System.Windows.Media;
+using POEApi.Infrastructure;
+using POEApi.Infrastructure.Events;
 using POEApi.Model;
 using POEApi.Model.Events;
 using Procurement.View;
-using System.Security;
-using POEApi.Infrastructure;
-using POEApi.Infrastructure.Events;
-using System.Net;
-using System.Collections.Generic;
 
 namespace Procurement.ViewModel
 {
     public class LoginWindowViewModel : INotifyPropertyChanged
     {
-        private static bool authOffLine;       
-        
-        private UserControl view;
+        private static bool authOffLine;
+
+        private LoginView view = null;
         private StatusController statusController;
         public event LoginCompleted OnLoginCompleted;
         public delegate void LoginCompleted();
-        private bool usePasswordBoxPassword;
+        private bool formChanged = false;
         private bool useSession;
-
+        
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged(string property)
@@ -49,27 +48,41 @@ namespace Procurement.ViewModel
             }
         }
 
+        public bool UseSession
+        {
+            get { return useSession; }
+            set 
+            { 
+                useSession = value;                
+                Settings.UserSettings["UseSessionID"] = value.ToString();
+                updateButtonLabels(useSession);
+            }
+        }
+
+        private void updateButtonLabels(bool useSession)
+        {
+            if (this.view == null)
+                return;
+
+            this.view.lblEmail.Content = useSession ? "Alias" : "Email";
+            this.view.lblPassword.Content = useSession ? "Session ID" : "Password";
+        }
+
         public LoginWindowViewModel(UserControl view)
         {
-            this.view = view;
+            this.view = view as LoginView;
 
-            useSession = Settings.UserSettings.ContainsKey("UseSessionID") ? bool.Parse(Settings.UserSettings["UseSessionID"]) : false;
-            if (useSession)
-            {
-                LoginView v = view as LoginView;
-                v.lblEmail.Content = "Alias";
-                v.lblPassword.Content = "Session ID";
-            }
+            UseSession = Settings.UserSettings.ContainsKey("UseSessionID") ? bool.Parse(Settings.UserSettings["UseSessionID"]) : false;
 
             Email = Settings.UserSettings["AccountLogin"];
-            this.usePasswordBoxPassword = string.IsNullOrEmpty(Settings.UserSettings["AccountPassword"]);
+            this.formChanged = string.IsNullOrEmpty(Settings.UserSettings["AccountPassword"]);
 
-            if (!this.usePasswordBoxPassword)
-                (this.view as LoginView).txtPassword.Password = string.Empty.PadLeft(8); //For the visuals
+            if (!this.formChanged)
+                this.view.txtPassword.Password = string.Empty.PadLeft(8); //For the visuals
 
-            (this.view as LoginView).txtPassword.PasswordChanged += new System.Windows.RoutedEventHandler(txtPassword_PasswordChanged);
+            this.view.txtPassword.PasswordChanged += new System.Windows.RoutedEventHandler(txtPassword_PasswordChanged);
 
-            statusController = new StatusController((this.view as LoginView).StatusBox);
+            statusController = new StatusController(this.view.StatusBox);
             statusController.DisplayMessage(ApplicationState.Version + " Initialized.\r");
 
             ApplicationState.Model.Authenticating += new POEModel.AuthenticateEventHandler(model_Authenticating);
@@ -80,7 +93,7 @@ namespace Procurement.ViewModel
 
         void txtPassword_PasswordChanged(object sender, System.Windows.RoutedEventArgs e)
         {
-            this.usePasswordBoxPassword = true;
+            this.formChanged = true;
         }
 
         public void Login(bool offline)
@@ -90,7 +103,7 @@ namespace Procurement.ViewModel
 
             Task.Factory.StartNew(() =>
             {
-                SecureString password = usePasswordBoxPassword ? (this.view as LoginView).txtPassword.SecurePassword : Settings.UserSettings["AccountPassword"].Decrypt();
+                SecureString password = formChanged ? this.view.txtPassword.SecurePassword : Settings.UserSettings["AccountPassword"].Decrypt();
                 ApplicationState.Model.Authenticate(Email, password, authOffLine, useSession);
                 saveSettings(password);
 
@@ -98,7 +111,17 @@ namespace Procurement.ViewModel
                     ApplicationState.Model.ForceRefresh();
 
                 statusController.DisplayMessage("Loading characters...");
-                var chars = ApplicationState.Model.GetCharacters();
+                List<Character> chars;
+                try
+                {
+                    chars = ApplicationState.Model.GetCharacters();
+                } 
+                catch (WebException wex) 
+                {
+                    Logger.Log(wex);                    
+                    statusController.NotOK();
+                    throw new Exception("Failed to load characters", wex.InnerException);
+                }
                 statusController.Ok();
 
                 bool downloadOnlyMyLeagues = false;
@@ -134,17 +157,17 @@ namespace Procurement.ViewModel
 
         private void saveSettings(SecureString password)
         {
-            if (!usePasswordBoxPassword)
+            if (!formChanged)
                 return;
          
             Settings.UserSettings["AccountLogin"] = Email;
             Settings.UserSettings["AccountPassword"] = password.Encrypt();
+            Settings.UserSettings["UseSessionID"] = useSession.ToString();
             Settings.Save();
         }
 
         private void toggleControls()
         {
-            var view = (this.view as LoginView);
             view.LoginButton.IsEnabled = !view.LoginButton.IsEnabled;
             view.OfflineButton.IsEnabled = !view.OfflineButton.IsEnabled;
             view.txtLogin.IsEnabled = !view.txtLogin.IsEnabled;
