@@ -10,7 +10,7 @@ namespace Procurement.ViewModel.ForumExportVisitors
 
         public string Visit(IEnumerable<Item> items, string current)
         {
-            return current.Replace(TOKEN, DateTime.Now.ToString("MMMM dd, yyyy hh:mm tt"));
+            return current.Replace(TOKEN, DateTime.Now.ToString("f", System.Globalization.CultureInfo.CreateSpecificCulture("en-US")));
         }
     }
 }

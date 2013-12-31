@@ -20,14 +20,18 @@ namespace Procurement.ViewModel.ForumExportVisitors
             {
                 var nameToken = getToken(location, current);
                 Regex replacer = new Regex(nameToken.Item2);
-                var tab = ApplicationState.Stash[ApplicationState.CurrentLeague].Tabs.Find(t => t.Name == nameToken.Item1);
-                if (tab == null)
+                var tabs = ApplicationState.Stash[ApplicationState.CurrentLeague].Tabs.FindAll(t => t.Name == nameToken.Item1);
+                if (tabs == null)
                 {
                     current = replacer.Replace(current, string.Empty, 1, location);
                     continue;
                 }
 
-                current = current.Replace(nameToken.Item2, getItems(ApplicationState.Stash[ApplicationState.CurrentLeague].GetItemsByTab(tab.i).OrderBy(i => i.H).ThenBy(i => i.IconURL)));
+                string sItems = "";
+                foreach (Tab tab in tabs)
+                    sItems  = sItems + getItems(ApplicationState.Stash[ApplicationState.CurrentLeague].GetItemsByTab(tab.i).OrderBy(i => i.H).ThenBy(i => i.IconURL));
+
+                current = current.Replace(nameToken.Item2, sItems);
             }
 
             return current;
