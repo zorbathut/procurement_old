@@ -8,6 +8,7 @@ using POEApi.Transport;
 using System.Security;
 using System;
 using POEApi.Infrastructure.Events;
+using System.Runtime.Serialization;
 
 namespace POEApi.Model
 {
@@ -154,16 +155,24 @@ namespace POEApi.Model
 
         public List<Item> GetInventory(string characterName)
         {
-            DataContractJsonSerializer serialiser = new DataContractJsonSerializer(typeof(JSONProxy.Inventory));
-            JSONProxy.Inventory item;
+            try
+            {
+                DataContractJsonSerializer serialiser = new DataContractJsonSerializer(typeof(JSONProxy.Inventory));
+                JSONProxy.Inventory item;
 
-            using (Stream stream = transport.GetInventory(characterName))
-                item = (JSONProxy.Inventory)serialiser.ReadObject(stream);
+                using (Stream stream = transport.GetInventory(characterName))
+                    item = (JSONProxy.Inventory)serialiser.ReadObject(stream);
 
-            if (item.Items == null)
-                return new List<Item>();
-            
-            return item.Items.Select(i => ItemFactory.Get(i)).ToList();
+                if (item.Items == null)
+                    return new List<Item>();
+
+                return item.Items.Select(i => ItemFactory.Get(i)).ToList();
+            }
+            catch (SerializationException sex)
+            {
+                Logger.Log(sex);
+                throw new Exception(string.Format("Error reading character data for {0}, if you are in offline mode you will need to login and update. If you received this error while logging in, the authenticated session may have expired or bad data has been returned by GGG or a network issue may have occurred - Please try again.", characterName));
+            }
         }
 
         public void GetImages(Stash stash)

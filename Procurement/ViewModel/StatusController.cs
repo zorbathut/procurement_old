@@ -64,7 +64,8 @@ namespace Procurement.ViewModel
                 text.Foreground = Brushes.White;
                 ((Paragraph)statusBox.Document.Blocks.LastBlock).Inlines.Add(text);
 
-                toggleControls();
+                statusBox.ScrollToEnd();
+                toggleControls();                
             });
         }
 
