@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Xml.Linq;
 using POEApi.Infrastructure;
@@ -20,7 +21,7 @@ namespace POEApi.Model
         static Settings()
         {
             originalDoc = XElement.Load(location);
-            CurrencyRatios = originalDoc.Elements("Ratios").Descendants().ToDictionary(orb => orb.Attribute("type").GetEnum<OrbType>(), orb => new CurrencyRatio(orb.Attribute("type").GetEnum<OrbType>(), (double)orb.Attribute("orbamount"), (double)orb.Attribute("gcpamount")));
+            CurrencyRatios = originalDoc.Elements("Ratios").Descendants().ToDictionary(orb => orb.Attribute("type").GetEnum<OrbType>(), orb => new CurrencyRatio(orb.Attribute("type").GetEnum<OrbType>(), getOrbAmount(orb), getGCPAmount(orb)));
 
             UserSettings = getStandardNameValue("UserSettings");
             ProxySettings = getStandardNameValue("ProxySettings");
@@ -36,6 +37,16 @@ namespace POEApi.Model
             PopularGems = new List<string>();
             if (originalDoc.Element("PopularGems") != null)
                 PopularGems = originalDoc.Element("PopularGems").Elements("Gem").Select(e => e.Attribute("name").Value).ToList();
+        }
+
+        private static double getGCPAmount(XElement orb)
+        {
+            return double.Parse(orb.Attribute("orbamount").Value, CultureInfo.InvariantCulture);
+        }
+
+        private static double getOrbAmount(XElement orb)
+        {
+            return double.Parse(orb.Attribute("gcpamount").Value, CultureInfo.InvariantCulture);
         }
 
         private static Dictionary<string, string> getStandardNameValue(string root)
