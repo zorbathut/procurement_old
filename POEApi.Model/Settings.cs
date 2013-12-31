@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using POEApi.Infrastructure;
-using System;
 
 namespace POEApi.Model
 {
@@ -14,6 +14,7 @@ namespace POEApi.Model
         public static Dictionary<string, string> ProxySettings { get; private set; }
         public static Dictionary<string, List<string>> Lists { get; private set; }
         public static Dictionary<int, string> Buyouts { get; private set; }
+        public static List<string> PopularGems { get; private set; }
         private static XElement originalDoc;
 
         static Settings()
@@ -31,6 +32,10 @@ namespace POEApi.Model
             Buyouts = new Dictionary<int, string>();
             if (originalDoc.Element("Buyouts") != null)
                 Buyouts = originalDoc.Element("Buyouts").Elements("Item").ToDictionary(list => (int)list.Attribute("id"), list => list.Attribute("value").Value);
+
+            PopularGems = new List<string>();
+            if (originalDoc.Element("PopularGems") != null)
+                PopularGems = originalDoc.Element("PopularGems").Elements("Gem").Select(e => e.Attribute("name").Value).ToList();
         }
 
         private static Dictionary<string, string> getStandardNameValue(string root)

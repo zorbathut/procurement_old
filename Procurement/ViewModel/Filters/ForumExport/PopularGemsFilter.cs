@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using POEApi.Model;
 
 namespace Procurement.ViewModel.Filters
@@ -16,29 +13,7 @@ namespace Procurement.ViewModel.Filters
         private List<string> popular;
         public PopularGemsFilter()
         {
-            popular = new List<string>();
-            popular.Add("Blood Magic");
-            popular.Add("Item Quantity");
-            popular.Add("Life Gain on Hit");
-            popular.Add("Life Leech");
-            popular.Add("Multistrike");
-            popular.Add("Reduced Mana");
-            popular.Add("Spell Totem");
-            popular.Add("Chain");
-            popular.Add("Faster Attacks");
-            popular.Add("Greater Multiple Projectiles");
-            popular.Add("Lesser Multiple Projectiles");
-            popular.Add("Mana Leech");
-            popular.Add("Added Chaos Damage");
-            popular.Add("Item Rarity");
-            popular.Add("Concentrated Effect");
-            popular.Add("Devouring Totem");
-            popular.Add("Elemental Hit");
-            popular.Add("Elemental Proliferation");
-            popular.Add("Elemental Weakness");
-            popular.Add("Multistrike");
-            popular.Add("Temporal Chains");
-            popular.Add("Faster Casting");
+            popular = Settings.PopularGems;
         }
 
         public bool CanFormCategory

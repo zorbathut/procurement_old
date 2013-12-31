@@ -21,6 +21,30 @@
         <Orb type="Alteration" orbamount="64" gcpamount="1"/>
         <Orb type="Chromatic" orbamount="60" gcpamount="1"/>
     </Ratios>
+  <PopularGems>
+    <Gem name="Cast when Damage Taken" />
+    <Gem name="Cast On Critical Strike" />
+    <Gem name="Blood Magic" />
+    <Gem name="Item Quantity" />
+    <Gem name="Life Gain on Hit" />
+    <Gem name="Life Leech" />
+    <Gem name="Multistrike" />
+    <Gem name="Reduced Mana" />
+    <Gem name="Spell Totem" />
+    <Gem name="Chain" />
+    <Gem name="Faster Attacks" />
+    <Gem name="Greater Multiple Projectiles" />
+    <Gem name="Lesser Multiple Projectiles" />
+    <Gem name="Added Chaos Damage" />
+    <Gem name="Item Rarity" />
+    <Gem name="Concentrated Effect" />
+    <Gem name="Elemental Hit" />
+    <Gem name="Elemental Proliferation" />
+    <Gem name="Elemental Weakness" />
+    <Gem name="Multistrike" />
+    <Gem name="Temporal Chains" />
+    <Gem name="Faster Casting" />
+  </PopularGems>
     <UserSettings>
         <Setting name="AccountLogin" value="" />
         <Setting name="AccountPassword" value="" />
