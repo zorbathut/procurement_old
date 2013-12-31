@@ -186,8 +186,8 @@ namespace Procurement.ViewModel
             stashView.tabControl.SelectionChanged += new SelectionChangedEventHandler(tabControl_SelectionChanged);
             stashView_Loaded(sender, null);
             raisePropertyChanged("AvailableItems");
-            raisePropertyChanged("TotalGCP");
-            raisePropertyChanged("TotalGCPDistibution");
+            raisePropertyChanged("Total");
+            raisePropertyChanged("TotalDistibution");
         }
 
         public void GetTabList(object o)
