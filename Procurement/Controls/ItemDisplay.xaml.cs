@@ -133,10 +133,22 @@ namespace Procurement.Controls
 
                 setBuyout.Header = buyoutControl;
                 buyoutControl.SaveClicked += new SetBuyoutView.BuyoutHandler(buyoutView_SaveClicked);
+                buyoutControl.RemoveClicked += new SetBuyoutView.BuyoutHandler(buyoutControl_RemoveClicked);
                 menu.Items.Add(setBuyout);
             }
 
             return menu;
+        }
+
+        void buyoutControl_RemoveClicked(string amount, string orbType)
+        {
+            ItemDisplayViewModel vm = this.DataContext as ItemDisplayViewModel;
+            Item item = vm.Item;
+
+            Settings.Buyouts.Remove(item.UniqueIDHash);
+            Settings.Save();
+
+            resyncText();
         }
 
         void buyoutView_SaveClicked(string amount, string orbType)
@@ -147,9 +159,6 @@ namespace Procurement.Controls
             Item item = vm.Item;
 
             Settings.Buyouts[item.UniqueIDHash] = string.Format("{0} {1}", amount, abbreviation);
-
-            if (amount == string.Empty)
-                Settings.Buyouts.Remove(item.UniqueIDHash);
 
             Settings.Save();
 

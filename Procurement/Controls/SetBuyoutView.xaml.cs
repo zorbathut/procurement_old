@@ -15,10 +15,14 @@ namespace Procurement.Controls
         }
 
         public event BuyoutHandler SaveClicked;
+        public event BuyoutHandler RemoveClicked;
         public delegate void BuyoutHandler(string amount, string orbType);
 
         public void SaveBuyout_Click(object sender, System.Windows.RoutedEventArgs e)
         {
+            if (BuyoutValue.Text == string.Empty)
+                BuyoutValue.Text = "0";
+            
             SaveClicked(double.Parse(BuyoutValue.Text, CultureInfo.InvariantCulture).ToString(), ((ComboBoxItem)OrbType.SelectedItem).Content.ToString());
         }
 
@@ -53,6 +57,11 @@ namespace Procurement.Controls
         private static bool validateInput(string text)
         {
             return new Regex("[^0-9.]+").IsMatch(text);
+        }
+
+        private void RemoveBuyout_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            RemoveClicked(null, null);
         }
     }
 }
