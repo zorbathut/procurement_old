@@ -16,6 +16,8 @@ namespace POEApi.Model
     {
         private ITransport transport;
         private CacheService cacheService;
+        private bool downOnlyMyCharacters;
+
 
         public delegate void AuthenticateEventHandler(POEModel sender, AuthenticateEventArgs e);
         public event AuthenticateEventHandler Authenticating;
@@ -29,6 +31,11 @@ namespace POEApi.Model
         public event ThottledEventHandler Throttled;
 
         public bool Offline { get; private set; }
+
+        public POEModel()
+        {
+            downOnlyMyCharacters = bool.Parse(Settings.UserSettings["DownloadOnlyMyCharacters"]);
+        }
 
         public bool Authenticate(string email, SecureString password, bool offline, bool useSessionID)
         {
@@ -168,6 +175,9 @@ namespace POEApi.Model
         {
             try
             {
+                if (downOnlyMyCharacters && !Settings.Lists["MyCharacters"].Contains(characterName))
+                    return new List<Item>();
+
                 DataContractJsonSerializer serialiser = new DataContractJsonSerializer(typeof(JSONProxy.Inventory));
                 JSONProxy.Inventory item;
 
