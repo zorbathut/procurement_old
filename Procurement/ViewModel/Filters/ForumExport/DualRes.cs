@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using POEApi.Model;
+using System.Text;
 
 namespace Procurement.ViewModel.Filters
 {
-    public class TripleResistance : ResistanceBase, IFilter
+    public class DualResistances : ResistanceBase, IFilter
     {
         public FilterGroup Group
         {
@@ -18,17 +19,17 @@ namespace Procurement.ViewModel.Filters
 
         public string Keyword
         {
-            get { return "Triple Resists"; }
+            get { return "Dual Resists"; }
         }
 
         public string Help
         {
-            get { return "Returns items with Triple Resists"; }
+            get { return "Items with dual resists"; }
         }
 
-        public bool Applicable(Item item)
+        public bool Applicable(POEApi.Model.Item item)
         {
-            return resistances.Count(r => r.Applicable(item)) >= 3;
+            return resistances.Count(r => r.Applicable(item)) == 2;
         }
     }
 }
