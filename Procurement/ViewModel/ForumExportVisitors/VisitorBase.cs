@@ -44,7 +44,7 @@ namespace Procurement.ViewModel.ForumExportVisitors
                 return string.Empty;
 
             if (isBuyoutItem && embedBuyouts)
-                return string.Format("\n[linkItem location=\"{0}\" league=\"{1}\" x=\"{2}\" y=\"{3}\"]\n~b/o{4}\n", item.inventoryId, ApplicationState.CurrentLeague, item.X, item.Y, Settings.Buyouts[item.UniqueIDHash]);
+                return string.Format("\n[linkItem location=\"{0}\" league=\"{1}\" x=\"{2}\" y=\"{3}\"]\n~b/o {4}\n", item.inventoryId, ApplicationState.CurrentLeague, item.X, item.Y, Settings.Buyouts[item.UniqueIDHash]);
 
             return string.Format("[linkItem location=\"{0}\" league=\"{1}\" x=\"{2}\" y=\"{3}\"]", item.inventoryId, ApplicationState.CurrentLeague, item.X, item.Y);
         }
