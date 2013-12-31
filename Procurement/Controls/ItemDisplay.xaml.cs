@@ -6,22 +6,24 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
+using System.Windows.Media;
 using POEApi.Model;
 using Procurement.ViewModel;
+using POEApi.Infrastructure;
 
 namespace Procurement.Controls
 {
     public partial class ItemDisplay : UserControl
     {
         private static List<Popup> annoyed = new List<Popup>();
-        private static ResourceDictionary expressionDark;
+        private static ResourceDictionary expressionDarkGrid;
 
         private TextBlock textblock;
 
         public ItemDisplay()
         {
             InitializeComponent();
-            expressionDark = expressionDark ?? Application.LoadComponent(new Uri("/Procurement;component/Controls/ExpressionDark.xaml", UriKind.RelativeOrAbsolute)) as ResourceDictionary;
+            expressionDarkGrid = expressionDarkGrid ?? Application.LoadComponent(new Uri("/Procurement;component/Controls/ExpressionDarkGrid.xaml", UriKind.RelativeOrAbsolute)) as ResourceDictionary;
 
             this.Loaded += new RoutedEventHandler(ItemDisplay_Loaded);
         }
@@ -113,36 +115,40 @@ namespace Procurement.Controls
             Item item = vm.Item;
 
             ContextMenu menu = new ContextMenu();
-            menu.Resources = expressionDark;
+            menu.Background = Brushes.Black;         
+            
+            menu.Resources = expressionDarkGrid;
 
             if (!(item is Currency))
             {
                 MenuItem setBuyout = new MenuItem();
-                string buyoutValue = string.Empty;
+
+                var buyoutControl = new SetBuyoutView();
+
                 if (Settings.Buyouts.ContainsKey(item.UniqueIDHash))
-                    buyoutValue = Settings.Buyouts[item.UniqueIDHash];
+                {
+                    var price = Settings.Buyouts[item.UniqueIDHash].Split(' ');
+                    buyoutControl.SetValue(price[0], CurrencyAbbreviationMap.Instance.FromAbbreviation(price[1]));
+                }
 
-                var buyoutView = new SetBuyoutView();
-                buyoutView.BuyoutValue.Text = buyoutValue;
-
-                setBuyout.Header = buyoutView;
-                setBuyout.Click += new RoutedEventHandler(setBuyout_Click);
+                setBuyout.Header = buyoutControl;
+                buyoutControl.SaveClicked += new SetBuyoutView.BuyoutHandler(buyoutView_SaveClicked);
                 menu.Items.Add(setBuyout);
             }
 
             return menu;
         }
 
-        void setBuyout_Click(object sender, RoutedEventArgs e)
+        void buyoutView_SaveClicked(string amount, string orbType)
         {
+            var abbreviation = CurrencyAbbreviationMap.Instance.FromCurrency(orbType);
+                       
             ItemDisplayViewModel vm = this.DataContext as ItemDisplayViewModel;
             Item item = vm.Item;
 
-            string buyoutValue = ((sender as MenuItem).Header as SetBuyoutView).BuyoutValue.Text;
+            Settings.Buyouts[item.UniqueIDHash] = string.Format("{0} {1}", amount, abbreviation);
 
-            Settings.Buyouts[item.UniqueIDHash] = buyoutValue;
-
-            if (buyoutValue == string.Empty)
+            if (amount == string.Empty)
                 Settings.Buyouts.Remove(item.UniqueIDHash);
 
             Settings.Save();

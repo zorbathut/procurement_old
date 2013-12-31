@@ -1883,13 +1883,13 @@
         </Setter>
     </Style>
     <Style TargetType="{x:Type ContextMenu}">
-        <Setter Property="Background" Value="#FF3A3A3A" />
+        <Setter Property="Background" Value="Black" />
         <Setter Property="SnapsToDevicePixels" Value="true" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ContextMenu}">
                     <Border x:Name="Border" Height="Auto" Background="#FF3A3A3A" BorderThickness="1" BorderBrush="#FFFFFFFF">
-                        <StackPanel Background="{TemplateBinding Background}" IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle" Margin="2"/>
+                        <StackPanel Background="Black" IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle" Margin="2"/>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="HasDropShadow" Value="true">

@@ -1,27 +1,58 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
+﻿using System.Linq;
+using System.Collections;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace Procurement.Controls
 {
-    /// <summary>
-    /// Interaction logic for SetBuyoutView.xaml
-    /// </summary>
     public partial class SetBuyoutView : UserControl
     {
         public SetBuyoutView()
         {
             InitializeComponent();
+            BuyoutValue.Text = "1";
+        }
+
+        public event BuyoutHandler SaveClicked;
+        public delegate void BuyoutHandler(string amount, string orbType);
+
+        public void SaveBuyout_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            SaveClicked(double.Parse(BuyoutValue.Text, CultureInfo.InvariantCulture).ToString(), ((ComboBoxItem)OrbType.SelectedItem).Content.ToString());
+        }
+
+        private void Increase_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            updateValue(1);
+        }
+
+        private void Decrease_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            updateValue(-1);
+        }
+
+        public void SetValue(string amount, string orbType)
+        {
+            BuyoutValue.Text = amount;
+            OrbType.SelectedItem = OrbType.Items.Cast<ComboBoxItem>().First(i => i.Content.ToString() == orbType);
+        }
+
+        private void updateValue(int difference)
+        {
+            var buyout = double.Parse(BuyoutValue.Text, CultureInfo.InvariantCulture);
+            buyout += difference;
+            BuyoutValue.Text = buyout.ToString(); 
+        }
+
+        private void BuyoutValue_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            e.Handled = validateInput(e.Text);
+        }
+
+        private static bool validateInput(string text)
+        {
+            return new Regex("[^0-9.]+").IsMatch(text);
         }
     }
 }

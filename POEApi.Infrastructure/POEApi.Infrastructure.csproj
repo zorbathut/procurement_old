@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CacheService.cs" />
+    <Compile Include="CurrencyAbbreviationMap.cs" />
     <Compile Include="DPAPI.cs" />
     <Compile Include="Events\ThottledEventArgs.cs" />
     <Compile Include="Events\ThrottledEventHandler.cs" />
