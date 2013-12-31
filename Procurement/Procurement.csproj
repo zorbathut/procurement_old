@@ -191,6 +191,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ViewModel\Filters\ForumExport\StatFilter.cs" />
+    <Compile Include="ViewModel\Filters\ForumExport\SupportGemsFilter.cs" />
     <Compile Include="ViewModel\Filters\ForumExport\TripleResistance.cs" />
     <Compile Include="ViewModel\Filters\ForumExport\UniqueRarity.cs">
       <SubType>Code</SubType>
@@ -220,6 +221,7 @@
     <Compile Include="ViewModel\ForumExportVisitors\PopularGemsVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\QualityGemVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\StashVisitor.cs" />
+    <Compile Include="ViewModel\ForumExportVisitors\SupportGemsVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\TripResVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\UniquesVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\VisitorBase.cs" />
