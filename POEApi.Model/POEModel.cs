@@ -135,11 +135,15 @@ namespace POEApi.Model
             if (!onlyMyTabs)
                 return getAllTabs(league, stash);
 
+            int tabCount = 0;
 
             for (int i = 1; i < stash.NumberOfTabs; i++)
             {
                 if (myTabs.Contains(stash.Tabs[i].Name))
+                {
                     stash.Add(GetStash(i, league, false));
+                    ++tabCount;
+                }
                 else
                     skippedTabs.Add(stash.Tabs[i]);
             }
@@ -147,7 +151,7 @@ namespace POEApi.Model
             foreach (var tab in skippedTabs)
                 stash.Tabs.Remove(tab);
 
-            stash.NumberOfTabs = myTabs.Count + 1;
+            stash.NumberOfTabs = tabCount + 1;
 
             return stash;
         }
