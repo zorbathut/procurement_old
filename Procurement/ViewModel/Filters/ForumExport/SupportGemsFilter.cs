@@ -1,24 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using POEApi.Model;
+﻿using POEApi.Model;
 
 namespace Procurement.ViewModel.Filters.ForumExport
 {
     internal class SupportGemsFilter : IFilter
     {
-        private List<string> supportGems;
-        
         public FilterGroup Group
         {
             get { return FilterGroup.Gems; }
         }
 
         public SupportGemsFilter()
-        {
-            supportGems = Settings.SupportGems;
-        }
+        { }
 
         public bool CanFormCategory
         {
