@@ -118,26 +118,37 @@ namespace POEApi.Model
 
         public Stash GetStash(string league)
         {
+            var myTabs = Settings.Lists["MyTabs"];
+            bool onlyMyTabs = myTabs.Count != 0;
+
             Stash stash = GetStash(0, league, false);
-            List<string> remove = new List<string>();
+
+            List<Tab> skippedTabs = new List<Tab>();
+
+            if (!onlyMyTabs)
+                return getAllTabs(league, stash);
+
 
             for (int i = 1; i < stash.NumberOfTabs; i++)
             {
-                string key = string.Concat(league, ":", stash.Tabs[i].Name);
-
-                if (!(Settings.Lists["MyTabs"].Count == 0 || Settings.Lists["MyTabs"].Contains(key)))
-                {
-                    remove.Add(key);
-                    continue;
-                }
-
-                stash.Add(GetStash(i, league, false));
+                if (myTabs.Contains(stash.Tabs[i].Name))
+                    stash.Add(GetStash(i, league, false));
+                else
+                    skippedTabs.Add(stash.Tabs[i]);
             }
 
-            foreach (string item in remove)
-                stash.Tabs.RemoveAll(t => t.Name == item.Split(':')[1]);
+            foreach (var tab in skippedTabs)
+                stash.Tabs.Remove(tab);
 
-            stash.NumberOfTabs = stash.Tabs.Count;
+            stash.NumberOfTabs = myTabs.Count + 1;
+
+            return stash;
+        }
+
+        private Stash getAllTabs(string league, Stash stash)
+        {
+            for (int i = 1; i < stash.NumberOfTabs; i++)
+                stash.Add(GetStash(i, league, false));
 
             return stash;
         }

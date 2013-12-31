@@ -54,7 +54,7 @@ namespace Procurement.ViewModel
         }
         private void updateResults()
         {
-            Results = manager.Run(ApplicationState.Model.GetStash(ApplicationState.CurrentLeague).Get<Item>());
+            Results = manager.Run(ApplicationState.Stash[ApplicationState.CurrentLeague].Get<Item>());
             if (Results.Count > 0)
                 SelectedItem = Results.Values.First().First().MatchedItems[0];
         }
