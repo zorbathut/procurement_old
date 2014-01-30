@@ -236,13 +236,13 @@ namespace POEApi.Model
             return ret;
         }
 
-        public Stream GetImage(Tab tab)
+        public IEnumerable<Stream> GetImage(Tab tab)
         {
             onImageLoaded(POEEventState.BeforeEvent, tab.Name);
-            Stream ret = transport.GetImage(tab.srcC);
+            yield return transport.GetImage(tab.srcL);
+            yield return transport.GetImage(tab.srcC);
+            yield return transport.GetImage(tab.srcR);
             onImageLoaded(POEEventState.AfterEvent, tab.Name);
-
-            return ret;
         }
 
         private static string GetItemName(Item item)

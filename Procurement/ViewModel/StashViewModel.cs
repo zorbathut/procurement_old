@@ -11,6 +11,7 @@ using Procurement.Controls;
 using Procurement.View;
 using Procurement.ViewModel.Filters;
 using System;
+using System.IO;
 
 namespace Procurement.ViewModel
 {
@@ -279,26 +280,97 @@ namespace Procurement.ViewModel
             stash.RefreshTab();
         }
 
-        private Image getImage(Tab tab, bool mouseOver)
+        public static Image getImage(Tab tab, bool mouseOver)
         {
+            List<System.Drawing.Bitmap> images = new List<System.Drawing.Bitmap>();
+            System.Drawing.Bitmap finalImage = null;
+
             Image img = new Image();
             int offset = mouseOver ? 26 : 0;
 
-            string key = tab.srcC + mouseOver.ToString();
+            string key = tab.srcL + tab.srcC + tab.srcR + tab.Name + mouseOver.ToString();
+
             if (!imageCache.ContainsKey(key))
             {
-
-                using (var stream = ApplicationState.Model.GetImage(tab))
+                try
                 {
-                    var bitmap = new BitmapImage();
-                    bitmap.BeginInit();
-                    bitmap.StreamSource = stream;
-                    bitmap.CacheOption = BitmapCacheOption.OnLoad;
-                    bitmap.EndInit();
+                    int width = 0;
+                    int height = 0;
+                    int count = 0;
+                    float middleWidth = 0;
+                    foreach (Stream stream in ApplicationState.Model.GetImage(tab))
+                    {
+                        System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(stream);
 
-                    imageCache.Add(key, new CroppedBitmap(bitmap, new Int32Rect(0, offset, (int)bitmap.Width, 26)));
+                        if (count == 1)
+                        {
+                            using (System.Drawing.Graphics g = System.Drawing.Graphics.FromImage(new System.Drawing.Bitmap(200, 200)))
+                            {
+                                System.Drawing.SizeF measured = g.MeasureString(tab.Name, System.Drawing.SystemFonts.DefaultFont);
+                                width += (int)measured.Width;
+                                middleWidth = measured.Width;
+                            }
+                        }
+                        else
+                        {
+                            width += bitmap.Width;
+                        }
+                        height = bitmap.Height > height ? bitmap.Height : height;
+                        images.Add(bitmap);
+                        count++;
+                    }
+
+                    finalImage = new System.Drawing.Bitmap(width, height);
+                    using (System.Drawing.Graphics g = System.Drawing.Graphics.FromImage(finalImage))
+                    {
+                        //set background color
+                        g.Clear(System.Drawing.Color.Black);
+
+                        //go through each image and draw it on the final image
+                        int woffset = 0;
+                        count = 0;
+                        foreach (System.Drawing.Bitmap image in images)
+                        {
+                            int iwidth = image.Width;
+                            if (count == 1)
+                                iwidth = (int)middleWidth;
+                            g.DrawImage(image, new System.Drawing.Rectangle(woffset, 0, iwidth, image.Height));
+                            woffset += iwidth;
+                            if (count == 1)
+                                woffset -= 1;
+                            count++;
+                        }
+                        g.DrawString(tab.Name, System.Drawing.SystemFonts.DefaultFont, System.Drawing.Brushes.Yellow, 10, 6);
+                        g.DrawString(tab.Name, System.Drawing.SystemFonts.DefaultFont, System.Drawing.Brushes.Yellow, 10, 32);
+                    }
+
+                    using (MemoryStream stream = new MemoryStream())
+                    {
+                        finalImage.Save(stream, System.Drawing.Imaging.ImageFormat.Bmp);
+                        stream.Position = 0;
+                        var bitmap = new BitmapImage();
+                        bitmap.BeginInit();
+                        bitmap.StreamSource = stream;
+                        bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                        bitmap.EndInit();
+
+                        imageCache.Add(key, new CroppedBitmap(bitmap, new Int32Rect(0, offset, (int)bitmap.Width, 26)));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    if (finalImage != null)
+                        finalImage.Dispose();
+
+                    throw ex;
+                }
+                finally
+                {
+                    foreach (System.Drawing.Bitmap image in images)
+                        image.Dispose();
                 }
             }
+
             img.Source = imageCache[key];
             img.Tag = tab;
 

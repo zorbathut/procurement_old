@@ -9,6 +9,7 @@ using Procurement.ViewModel.Filters;
 using POEApi.Model;
 using System.Windows.Media.Imaging;
 using System.Windows;
+using Procurement.ViewModel;
 
 namespace Procurement.View
 {
@@ -74,23 +75,24 @@ namespace Procurement.View
 
         private Image getImage(Tab tab, bool mouseOver)
         {
-            Image img = new Image();
-            int offset = mouseOver ? 26 : 0;
+            return StashViewModel.getImage(tab, mouseOver);
+            //Image img = new Image();
+            //int offset = mouseOver ? 26 : 0;
 
-            using (var stream = ApplicationState.Model.GetImage(tab))
-            {
-                var bitmap = new BitmapImage();
-                bitmap.BeginInit();
-                bitmap.StreamSource = stream;
-                bitmap.CacheOption = BitmapCacheOption.OnLoad;
-                bitmap.EndInit();
+            //using (var stream = ApplicationState.Model.GetImage(tab))
+            //{
+            //    var bitmap = new BitmapImage();
+            //    bitmap.BeginInit();
+            //    bitmap.StreamSource = stream;
+            //    bitmap.CacheOption = BitmapCacheOption.OnLoad;
+            //    bitmap.EndInit();
 
-                var croppedImage = new CroppedBitmap(bitmap, new Int32Rect(0, offset, (int)bitmap.Width, 26));
-                img.Source = croppedImage;
-            }
-            img.Tag = tab;
+            //    var croppedImage = new CroppedBitmap(bitmap, new Int32Rect(0, offset, (int)bitmap.Width, 26));
+            //    img.Source = croppedImage;
+            //}
+            //img.Tag = tab;
 
-            return img;
+            //return img;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
