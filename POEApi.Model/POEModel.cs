@@ -206,7 +206,7 @@ namespace POEApi.Model
                 getImageWithEvents(item);
 
             foreach (var item in stash.Tabs)
-                getImageWithEvents("Tab Icon " + item.i, item.src);
+                getImageWithEvents("Tab Icon " + item.i, item.srcC);
         }
 
         public void GetImages(List<Item> items)
@@ -239,7 +239,7 @@ namespace POEApi.Model
         public Stream GetImage(Tab tab)
         {
             onImageLoaded(POEEventState.BeforeEvent, tab.Name);
-            Stream ret = transport.GetImage(tab.src);
+            Stream ret = transport.GetImage(tab.srcC);
             onImageLoaded(POEEventState.AfterEvent, tab.Name);
 
             return ret;

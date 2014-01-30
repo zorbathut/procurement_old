@@ -189,7 +189,9 @@ namespace POEApi.Model.JSONProxy
         public string n { get; set; }
         public int i { get; set; }
         public Colour colour { get; set; }
-        public string src { get; set; }
+        public string srcL { get; set; }
+        public string srcC { get; set; }
+        public string srcR { get; set; }
     }
 }
 

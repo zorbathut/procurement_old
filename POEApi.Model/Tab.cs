@@ -5,7 +5,9 @@
         public string Name { get; set; }
         public int i { get; set; }
         public Colour Colour { get; set; }
-        public string src { get; set; }
+        public string srcL { get; set; }
+        public string srcC { get; set; }
+        public string srcR { get; set; }
     }
 
     public class Colour

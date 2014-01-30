@@ -108,7 +108,7 @@ namespace POEApi.Model
 
         internal static List<Tab> GetTabs(List<JSONProxy.Tab> tabs)
         {
-            return tabs.Select(t => new Tab() { Colour = new Colour() { b = t.colour.b, g = t.colour.g, r = t.colour.r }, i = t.i, Name = t.n, src = t.src }).ToList();
+            return tabs.Select(t => new Tab() { Colour = new Colour() { b = t.colour.b, g = t.colour.g, r = t.colour.r }, i = t.i, Name = t.n, srcR = t.srcR, srcC = t.srcC, srcL = t.srcL }).ToList();
         }
     }
 }

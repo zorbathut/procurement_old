@@ -126,7 +126,7 @@ namespace Procurement.ViewModel
 
             var tabs = ApplicationState.Stash[ApplicationState.CurrentLeague].Tabs;
 
-            StashItems = tabs.Where(t => betterSpace.ContainsKey(t.i)).Select(t => new ExportStashInfo() { AvailableSpace = betterSpace[t.i], Name = t.Name, Url = t.src, ID = t.i }).ToList();
+            StashItems = tabs.Where(t => betterSpace.ContainsKey(t.i)).Select(t => new ExportStashInfo() { AvailableSpace = betterSpace[t.i], Name = t.Name, Url = t.srcC, ID = t.i }).ToList();
             StashItems.ForEach(s => s.FixName());
         }
 

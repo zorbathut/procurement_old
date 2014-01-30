@@ -284,7 +284,7 @@ namespace Procurement.ViewModel
             Image img = new Image();
             int offset = mouseOver ? 26 : 0;
 
-            string key = tab.src + mouseOver.ToString();
+            string key = tab.srcC + mouseOver.ToString();
             if (!imageCache.ContainsKey(key))
             {
 
