@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -50,12 +50,12 @@ namespace POEApi.Model
 
         private static double getGCPAmount(XElement orb)
         {
-            return double.Parse(orb.Attribute("orbamount").Value, CultureInfo.InvariantCulture);
+            return double.Parse(orb.Attribute("gcpamount").Value, CultureInfo.InvariantCulture);
         }
 
         private static double getOrbAmount(XElement orb)
         {
-            return double.Parse(orb.Attribute("gcpamount").Value, CultureInfo.InvariantCulture);
+            return double.Parse(orb.Attribute("orbamount").Value, CultureInfo.InvariantCulture);
         }
 
         private static Dictionary<string, string> getStandardNameValue(string root)
