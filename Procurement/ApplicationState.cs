@@ -2,6 +2,10 @@
 using System.ComponentModel;
 using System.Linq;
 using POEApi.Model;
+using System.Drawing;
+using System.IO;
+using System.Runtime.InteropServices;
+using System;
 
 namespace Procurement
 {
@@ -13,14 +17,14 @@ namespace Procurement
         public static Dictionary<string, Item> Inventory = new Dictionary<string, Item>();
         public static List<Character> Characters = new List<Character>();
         public static List<string> Leagues = new List<string>();
-
+        public static System.Drawing.Text.PrivateFontCollection FontCollection = new System.Drawing.Text.PrivateFontCollection();
         private static Character currentCharacter = null;
 
         public static Character CurrentCharacter
         {
             get { return currentCharacter; }
-            set 
-            { 
+            set
+            {
                 currentCharacter = value;
                 if (CharacterChanged != null)
                     CharacterChanged(Model, new PropertyChangedEventArgs("CurrentCharacter"));
@@ -34,8 +38,8 @@ namespace Procurement
         public static string CurrentLeague
         {
             get { return currentLeague; }
-            set 
-            { 
+            set
+            {
                 currentLeague = value;
                 Characters = Model.GetCharacters().Where(c => c.League == value).ToList();
                 CurrentCharacter = Characters.First();
@@ -59,6 +63,14 @@ namespace Procurement
 
             CurrentCharacter = Characters.First();
             CurrentLeague = CurrentCharacter.League;
+        }
+
+        public static void InitializeFont(byte[] fontBytes)
+        {
+            IntPtr data = Marshal.AllocCoTaskMem(fontBytes.Length);
+            Marshal.Copy(fontBytes, 0, data, fontBytes.Length);
+            FontCollection.AddMemoryFont(data, fontBytes.Length);
+            Marshal.FreeCoTaskMem(data);
         }
     }
 }

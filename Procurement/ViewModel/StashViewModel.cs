@@ -294,6 +294,7 @@ namespace Procurement.ViewModel
             {
                 try
                 {
+                    System.Drawing.Font font = new System.Drawing.Font(ApplicationState.FontCollection.Families[1], 12);
                     int width = 0;
                     int height = 0;
                     int count = 0;
@@ -306,7 +307,7 @@ namespace Procurement.ViewModel
                         {
                             using (System.Drawing.Graphics g = System.Drawing.Graphics.FromImage(new System.Drawing.Bitmap(200, 200)))
                             {
-                                System.Drawing.SizeF measured = g.MeasureString(tab.Name, System.Drawing.SystemFonts.DefaultFont);
+                                System.Drawing.SizeF measured = g.MeasureString(tab.Name, font);
                                 width += (int)measured.Width;
                                 middleWidth = measured.Width;
                             }
@@ -324,7 +325,7 @@ namespace Procurement.ViewModel
                     using (System.Drawing.Graphics g = System.Drawing.Graphics.FromImage(finalImage))
                     {
                         //set background color
-                        g.Clear(System.Drawing.Color.Black);
+                        g.Clear(System.Drawing.Color.DarkRed);
 
                         //go through each image and draw it on the final image
                         int woffset = 0;
@@ -337,11 +338,12 @@ namespace Procurement.ViewModel
                             g.DrawImage(image, new System.Drawing.Rectangle(woffset, 0, iwidth, image.Height));
                             woffset += iwidth;
                             if (count == 1)
-                                woffset -= 1;
+                                woffset -= 3; //The right image didn't align, similar to forums
                             count++;
                         }
-                        g.DrawString(tab.Name, System.Drawing.SystemFonts.DefaultFont, System.Drawing.Brushes.Yellow, 10, 6);
-                        g.DrawString(tab.Name, System.Drawing.SystemFonts.DefaultFont, System.Drawing.Brushes.Yellow, 10, 32);
+
+                        g.DrawString(tab.Name, font, System.Drawing.Brushes.Yellow, images[0].Width - 2, 6); //Top
+                        g.DrawString(tab.Name, font, System.Drawing.Brushes.Yellow, images[0].Width - 2, 32); //Mouse over version
                     }
 
                     using (MemoryStream stream = new MemoryStream())

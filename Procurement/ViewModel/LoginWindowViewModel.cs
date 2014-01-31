@@ -89,6 +89,8 @@ namespace Procurement.ViewModel
             ApplicationState.Model.StashLoading += new POEModel.StashLoadEventHandler(model_StashLoading);
             ApplicationState.Model.ImageLoading += new POEModel.ImageLoadEventHandler(model_ImageLoading);
             ApplicationState.Model.Throttled += new ThottledEventHandler(model_Throttled);
+            ApplicationState.InitializeFont(Properties.Resources.fontin_regular_webfont);
+            ApplicationState.InitializeFont(Properties.Resources.fontin_smallcaps_webfont);
         }
 
         void txtPassword_PasswordChanged(object sender, System.Windows.RoutedEventArgs e)
