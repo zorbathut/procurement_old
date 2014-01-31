@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Data;
-using Procurement.Controls;
-using System.Windows.Controls;
-using Procurement.ViewModel.Filters;
-using POEApi.Model;
-using System.Windows.Media.Imaging;
 using System.Windows;
-using Procurement.ViewModel;
+using System.Windows.Controls;
+using System.Windows.Data;
+using POEApi.Model;
+using Procurement.Controls;
+using Procurement.Utility;
+using Procurement.ViewModel.Filters;
 
 namespace Procurement.View
 {
@@ -50,7 +47,6 @@ namespace Procurement.View
             StashControl control = new StashControl() { TabNumber = inventoryId };
             Tab tab = ApplicationState.Stash[ApplicationState.CurrentLeague].Tabs.Find(t => t.i == inventoryId);
             Image tabImage = getImage(tab, true);
-            
 
             control.SetValue(StashControl.FilterProperty, new List<IFilter>() { new ItemFilter(item) });
             control.ForceUpdate();
@@ -75,24 +71,7 @@ namespace Procurement.View
 
         private Image getImage(Tab tab, bool mouseOver)
         {
-            return StashViewModel.getImage(tab, mouseOver);
-            //Image img = new Image();
-            //int offset = mouseOver ? 26 : 0;
-
-            //using (var stream = ApplicationState.Model.GetImage(tab))
-            //{
-            //    var bitmap = new BitmapImage();
-            //    bitmap.BeginInit();
-            //    bitmap.StreamSource = stream;
-            //    bitmap.CacheOption = BitmapCacheOption.OnLoad;
-            //    bitmap.EndInit();
-
-            //    var croppedImage = new CroppedBitmap(bitmap, new Int32Rect(0, offset, (int)bitmap.Width, 26));
-            //    img.Source = croppedImage;
-            //}
-            //img.Tag = tab;
-
-            //return img;
+            return StashHelper.GenerateTabImage(tab, mouseOver);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)

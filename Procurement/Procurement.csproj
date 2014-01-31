@@ -131,6 +131,7 @@
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utility\StashHelper.cs" />
     <Compile Include="ViewModel\DelegateCommand.cs" />
     <Compile Include="ViewModel\DisplayModeStrategy\DisplayModeFactory.cs" />
     <Compile Include="ViewModel\DisplayModeStrategy\DisplayModeStrategyBase.cs" />
