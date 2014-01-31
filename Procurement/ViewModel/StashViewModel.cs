@@ -294,7 +294,7 @@ namespace Procurement.ViewModel
             {
                 try
                 {
-                    System.Drawing.Font font = new System.Drawing.Font(ApplicationState.FontCollection.Families[1], 12);
+                    System.Drawing.Font font = new System.Drawing.Font(ApplicationState.FontCollection.Families[0], 12);
                     int width = 0;
                     int height = 0;
                     int count = 0;
