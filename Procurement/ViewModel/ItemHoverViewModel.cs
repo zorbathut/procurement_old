@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using POEApi.Model;
 
 namespace Procurement.ViewModel
@@ -20,6 +21,7 @@ namespace Procurement.ViewModel
         public List<string> ImplicitMods { get; private set; }
         public bool HasImplicitMods { get { return ImplicitMods != null && ImplicitMods.Count > 0; } }
         public string DescriptionText { get; private set; }
+        public string SecondaryDescriptionText { get; private set; }
         
         public ItemHoverViewModel(Item item)
         {
@@ -34,19 +36,35 @@ namespace Procurement.ViewModel
             this.ExplicitMods = item.Explicitmods;
             this.ImplicitMods = new List<string>();
             this.DescriptionText = item.DescrText;
-            if (item.SecDescrText != null)
-                this.DescriptionText += Environment.NewLine + item.SecDescrText;
+            
+            SecondaryDescriptionText = item.SecDescrText;
 
-            Gear gear = item as Gear;
+            var gear = item as Gear;
+
             if (gear != null)
             {
                 this.Requirements = gear.Requirements;
                 this.ImplicitMods = gear.Implicitmods;
+                
+                if(gear.FlavourText != null && gear.FlavourText.Count > 0)
+                {
+                    var builder = new StringBuilder();
+
+                    foreach (var text in ((Gear) (item)).FlavourText)
+                    {
+                        builder.Append(text);
+                    }
+
+                    DescriptionText = builder.ToString();
+                }
             }
 
-            Gem gem = item as Gem;
+            var gem = item as Gem;
+
             if (gem != null)
+            {
                 this.Requirements = gem.Requirements;
+            }
         }
     }
 }

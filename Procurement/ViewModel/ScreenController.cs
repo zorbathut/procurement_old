@@ -93,6 +93,8 @@ namespace Procurement.ViewModel
                 new Action(() => 
                 {
                      mainView.MainRegion.Children.Clear();
+                     if (view is StashView)
+                         screens[STASH_VIEW] = new StashView();
                      mainView.MainRegion.Children.Add(view as UserControl);
                 }));
         }

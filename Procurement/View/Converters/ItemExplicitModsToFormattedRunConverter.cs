@@ -16,7 +16,7 @@ namespace Procurement.View
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             string mod = value as string;
-            return new FlowDocument(new Paragraph(new Run(mod) { Foreground = Brushes.Turquoise, BaselineAlignment = BaselineAlignment.Center }));
+            return new FlowDocument(new Paragraph(new Run(mod) { Foreground = new SolidColorBrush { Color = Color.FromArgb(0xFF, 0x88, 0x88, 0xFF)}, BaselineAlignment = BaselineAlignment.Center }));
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)

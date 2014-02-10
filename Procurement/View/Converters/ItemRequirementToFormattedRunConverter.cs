@@ -15,23 +15,36 @@ namespace Procurement.View
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            Requirement requirement = value as Requirement;
+            var viewModel = value as ItemHoverViewModel;
 
-            Run name = new Run(requirement.Name) { Foreground = Brushes.Gray };
-            Run v = new Run(requirement.Value) { Foreground = Brushes.White };
+            if (viewModel == null || !viewModel.HasRequirements)
+            {
+                return null;
+            }
 
-            Paragraph paragraph = new Paragraph();
+            var paragraph = new Paragraph();
 
-            List<Run> runs = new List<Run>();
-            runs.Add(name);
-            runs.Add(new Run(" ") { Foreground = Brushes.Gray });
-            runs.Add(v);
+            foreach (var requirement in viewModel.Requirements)
+            {
+                var runs = new List<Run>
+                {
+                    new Run(requirement.Name) {Foreground = Brushes.Gray},
+                    new Run(" ") {Foreground = Brushes.Gray},
+                    new Run(requirement.Value) {Foreground = Brushes.White}
+                };
 
-            if (!requirement.NameFirst)
-                runs.Reverse();
+                if (!requirement.NameFirst)
+                    runs.Reverse();
 
-            paragraph.Inlines.Add(new Run("Requires ") { Foreground = Brushes.Gray });
-            paragraph.Inlines.AddRange(runs);
+                if (paragraph.Inlines.Count > 0)
+                {
+                    paragraph.Inlines.Add(new Run(", ") { Foreground = Brushes.Gray });
+                }
+
+                paragraph.Inlines.AddRange(runs);
+            }
+
+            paragraph.Inlines.InsertBefore(paragraph.Inlines.FirstInline, new Run("Requires ") { Foreground = Brushes.Gray });
 
             return new FlowDocument(paragraph);
         }
