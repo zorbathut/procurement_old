@@ -171,6 +171,7 @@
     <Compile Include="ViewModel\Filters\ForumExport\ItemRarityFilter.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ViewModel\Filters\ForumExport\LeveledGemFilter.cs" />
     <Compile Include="ViewModel\Filters\ForumExport\LightningResistance.cs" />
     <Compile Include="ViewModel\Filters\ForumExport\Link.cs">
       <SubType>Code</SubType>
@@ -212,6 +213,7 @@
     <Compile Include="ViewModel\Filters\ForumExport\AuraGemsFilter.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\AuraGemsVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\DualResVisitor.cs" />
+    <Compile Include="ViewModel\ForumExportVisitors\LeveledGemVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\LinksVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\MultipleBuyoutVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\SingleBuyoutVisitor.cs" />
