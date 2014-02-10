@@ -143,6 +143,7 @@
     <Compile Include="ViewModel\Filters\ForumExport\AllElementalResistances.cs" />
     <Compile Include="ViewModel\Filters\ForumExport\AndFilter.cs" />
     <Compile Include="ViewModel\Filters\ForumExport\AttackSpeed.cs" />
+    <Compile Include="ViewModel\Filters\ForumExport\AuraGemsFilter.cs" />
     <Compile Include="ViewModel\Filters\ForumExport\BuyoutFilter.cs" />
     <Compile Include="ViewModel\Filters\ForumExport\CastSpeed.cs" />
     <Compile Include="ViewModel\Filters\ForumExport\CategoryManager.cs">
@@ -167,6 +168,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ViewModel\Filters\ForumExport\GearTypeFilter.cs" />
+    <Compile Include="ViewModel\Filters\ForumExport\GemCategoryFilter.cs" />
     <Compile Include="ViewModel\Filters\ForumExport\ItemQuantityFilter.cs" />
     <Compile Include="ViewModel\Filters\ForumExport\ItemRarityFilter.cs">
       <SubType>Code</SubType>
@@ -210,14 +212,12 @@
     <Compile Include="ViewModel\Filters\ForumExport\TwoHandedFilter.cs" />
     <Compile Include="ViewModel\Filters\UserSearchFilter.cs" />
     <Compile Include="ViewModel\ForumExportViewModel.cs" />
-    <Compile Include="ViewModel\Filters\ForumExport\AuraGemsFilter.cs" />
-    <Compile Include="ViewModel\ForumExportVisitors\AuraGemsVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\DualResVisitor.cs" />
+    <Compile Include="ViewModel\ForumExportVisitors\GemVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\LeveledGemVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\LinksVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\MultipleBuyoutVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\SingleBuyoutVisitor.cs" />
-    <Compile Include="ViewModel\ForumExportVisitors\CurseGemsVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\DropOnlyGemVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\GearVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\IGNVistior.cs" />
@@ -228,7 +228,6 @@
     <Compile Include="ViewModel\ForumExportVisitors\PopularGemsVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\QualityGemVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\StashVisitor.cs" />
-    <Compile Include="ViewModel\ForumExportVisitors\SupportGemsVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\TripResVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\UniquesVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\VisitorBase.cs" />

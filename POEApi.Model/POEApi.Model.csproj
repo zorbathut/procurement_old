@@ -54,6 +54,7 @@
     <Compile Include="GearType\GearTypeRunner.cs" />
     <Compile Include="Gem.cs" />
     <Compile Include="Events\ImageLoadedEventArgs.cs" />
+    <Compile Include="GemCategory.cs" />
     <Compile Include="ImageComparer.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="ItemFactory.cs" />
