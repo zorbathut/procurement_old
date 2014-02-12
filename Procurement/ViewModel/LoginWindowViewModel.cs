@@ -105,7 +105,20 @@ namespace Procurement.ViewModel
 
             Task.Factory.StartNew(() =>
             {
-                SecureString password = formChanged ? this.view.txtPassword.SecurePassword : Settings.UserSettings["AccountPassword"].Decrypt();
+                SecureString password;
+                if (authOffLine)
+                {
+                    password = new System.Security.SecureString();    // we don't care about the password, we won't be using it
+                }
+                else if (formChanged)
+                {
+                    password = this.view.txtPassword.SecurePassword;
+                }
+                else
+                {
+                    password = Settings.UserSettings["AccountPassword"].Decrypt();
+                }
+
                 ApplicationState.Model.Authenticate(Email, password, authOffLine, useSession);
                 saveSettings(password);
 
