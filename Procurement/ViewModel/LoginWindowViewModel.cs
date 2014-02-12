@@ -72,7 +72,7 @@ namespace Procurement.ViewModel
         {
             this.view = view as LoginView;
 
-            UseSession = Settings.UserSettings.ContainsKey("UseSessionID") ? bool.Parse(Settings.UserSettings["UseSessionID"]) : false;
+            UseSession = Settings.UserSettings.ContainsKey("UseSessionID") ? bool.Parse(Settings.UserSettings["UseSessionID"]) : true;
 
             Email = Settings.UserSettings["AccountLogin"];
             this.formChanged = string.IsNullOrEmpty(Settings.UserSettings["AccountPassword"]);
